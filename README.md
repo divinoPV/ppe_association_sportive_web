@@ -11,15 +11,14 @@ CONTEXTE
 	
 ARCHITECTURE
 	
-    Connexion
-    =>
-    	Accueil
-        => Evénements
-		=> Fiche événements
-        => Mon profil
-        => Contact
-	=> Oubli de mot de passe
-	=> Inscription
+    - Connexion
+    - Accueil
+    	- Evénements
+		- Fiche événements
+        - Mon profil
+        - Contact
+	- Oubli de mot de passe
+	- Inscription
 	
 STACK TECHNIQUE
   
