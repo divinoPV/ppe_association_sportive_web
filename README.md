@@ -11,12 +11,12 @@ CONTEXTE
 	
 ARCHITECTURE
 	
-    - Connexion
-    - Accueil
-    	- Evénements
+	- Connexion
+	- Accueil
+		- Evénements
 			- Fiche événements
-        - Mon profil
-        - Contact
+	- Mon profil
+	- Contact
 	- Oubli de mot de passe
 	- Inscription
 	
