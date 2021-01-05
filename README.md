@@ -14,7 +14,7 @@ ARCHITECTURE
     - Connexion
     - Accueil
     	- Evénements
-		- Fiche événements
+			- Fiche événements
         - Mon profil
         - Contact
 	- Oubli de mot de passe
