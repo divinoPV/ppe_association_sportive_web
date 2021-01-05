@@ -1,0 +1,9 @@
+@charset "UTF-8";
+/*
+ Installer node.js pour avoir npm : "https://nodejs.org/fr/download/"
+ Installer sass : "npm install -g sass"
+ Créer la variable d'environnement pour sass dans le PATH
+ Command à exécuter dans le terminal : "sass public/static/sass/style.scss public/static/css/style.css --watch"
+ */
+
+/*# sourceMappingURL=style.css.map */
