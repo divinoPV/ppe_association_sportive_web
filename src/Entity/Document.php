@@ -43,7 +43,7 @@ class Document
     private \DateTime $modifier;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DocumentCategorie::class)
+     * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="document")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
     private DocumentCategorie $categorie;

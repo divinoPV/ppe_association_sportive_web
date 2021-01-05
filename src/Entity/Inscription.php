@@ -12,14 +12,14 @@ class Inscription
 {
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=Eleve::class)
-     * @ORM\JoinColumn(name="eleve", nullable=false, referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="inscription")
+     * @ORM\JoinColumn(name="user", nullable=false, referencedColumnName="id")
      */
-    private Eleve $eleve;
+    private User $user;
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=Evenement::class)
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="inscription")
      * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
      */
     private Evenement $evenement;
@@ -41,17 +41,6 @@ class Inscription
         return $this->creer;
     }
 
-    public function getEleve(): ?Eleve
-    {
-        return $this->eleve;
-    }
-
-    public function setEleve(Eleve $eleve): self
-    {
-        $this->eleve = $eleve;
-
-        return $this;
-    }
 
     public function getEvenement(): ?Evenement
     {
@@ -63,5 +52,21 @@ class Inscription
         $this->evenement = $evenement;
 
         return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }

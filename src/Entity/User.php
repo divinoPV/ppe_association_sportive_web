@@ -87,7 +87,7 @@ class User implements UserInterface
     private ?\DateTime $modifier;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
      */
     private $categorie;
 

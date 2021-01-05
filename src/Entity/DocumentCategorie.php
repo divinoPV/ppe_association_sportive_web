@@ -24,7 +24,7 @@ class DocumentCategorie
     private string $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="document")
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="categorie")
      */
     private Collection $document;
 
