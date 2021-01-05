@@ -8,6 +8,7 @@
 @import "../css/reset.css";
 //var
 $primary: #1e2a47;
+$grey: #c9cdd3;
 :root{
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -37,14 +38,27 @@ nav{
     & ul li{
         @include flex-center;
         & a{
-            color: #c9cdd3;
-        }
-        & a:hover{
-            text-decoration: underline #6b737c;
-            transition: text-decoration 1.2s ease-in-out;
+            color: $grey;
+            position: relative;
+            &::before{
+                background-color: $grey;
+                bottom: -.4rem;
+                content: "";
+                height: 1px;
+                left: 0;
+                position: absolute;
+                transition: all .3s ease-in-out;
+                visibility: hidden;
+                width: 0;
+            }
+            &:hover::before{
+                visibility: visible;
+                width: 100%;
+            }
         }
     }
-    & img{
+    & .logo{
+        filter: brightness(0) invert(1);
         height: 54px;
         width: 54px;
     }

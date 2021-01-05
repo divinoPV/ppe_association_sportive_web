@@ -38,12 +38,25 @@ nav ul li {
 }
 nav ul li a {
   color: #c9cdd3;
+  position: relative;
 }
-nav ul li a:hover {
-  text-decoration: underline #6b737c;
-  transition: text-decoration 1.2s ease-in-out;
+nav ul li a::before {
+  background-color: #c9cdd3;
+  bottom: -0.4rem;
+  content: "";
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+  width: 0;
 }
-nav img {
+nav ul li a:hover::before {
+  visibility: visible;
+  width: 100%;
+}
+nav .logo {
+  filter: brightness(0) invert(1);
   height: 54px;
   width: 54px;
 }
