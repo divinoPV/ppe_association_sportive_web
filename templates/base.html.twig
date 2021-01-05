@@ -1,12 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="Language" content="fr"/>
+        <title>Association Sportive - Saint Vincent{% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block meta_description %}{% endblock %}"/>
+        <meta name="keywords" content="association sportive, saint-vincent, Saint-Vincent, st-vincent{% block meta_keywords %}{% endblock %}">
+        <link rel="canonical" href="{% block meta_canonical %}{% endblock %}"/>
+        <meta http-equiv="content-type" content="text/html;"/>
+        <meta charset="utf-8"/>
+        <meta name="robots" content="{% block meta_robots %}{% endblock %}"/>
+        <meta name="copyright" content="© Monteiro Gonçalves Boganin 2020"/>
+        <meta name="publisher" content="Monteiro Gonçalves Boganin"/>
+        <meta name="google" content="notranslate,nositelinkssearchbox"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <!-- favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset("media/favicon/apple-touch-icon.png") }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset("media/favicon/favicon-32x32.png") }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset("media/favicon/favicon-16x16.png") }}">
+        <link rel="manifest" href="{{ asset("media/favicon/site.webmanifest") }}">
+        <link rel="mask-icon" href="{{ asset("media/favicon/safari-pinned-tab.svg") }}" color="#de2364">
+        <meta name="msapplication-TileColor" content="#b91d47">
+        <meta name="theme-color" content="#ffffff">
+        <!-- stylesheets -->
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('static/css/style.css') }}"/>
+        <!-- google Font -->
+        <!-- montserrat -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <header>
+            <nav>
+                <ul>
+                    <li>
+                        <img src="{{ asset("") }}" alt="Logo du site">
+                    </li>
+                    <li>
+                        <a href="{{ path("") }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path("") }}">Evénement</a>
+                    </li>
+                    <li class="login">
+                        <img src="{{ asset("") }}" alt="Utilisateur inconnu photo">
+                        <a href="{{ path("") }}">S'identifier</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        <footer>
+            {% block javascripts %}{% endblock %}
+            <!-- fontawesome kit's code -->
+            <script src="https://kit.fontawesome.com/57b72ee719.js"></script>
+        </footer>
     </body>
 </html>
