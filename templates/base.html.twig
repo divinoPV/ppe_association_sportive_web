@@ -32,18 +32,22 @@
         <header>
             <nav>
                 <ul>
-                    <li>
-                        <img src="{{ asset("") }}" alt="Logo du site">
-                    </li>
-                    <li>
-                        <a href="">Accueil</a>
-                    </li>
-                    <li>
-                        <a href="">Evénement</a>
+                    <li class="nav">
+                        <ul>
+                            <li>
+                                <img src="{{ asset("media/favicon/android-chrome-512x512.png") }}" alt="Logo du site"/>
+                            </li>
+                            <li>
+                                <a href="{#{{ path("") }}#}">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="{#{{ path("") }}#}">Evénement</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="login">
-                        <img src="{{ asset("") }}" alt="Utilisateur inconnu photo">
-                        <a href="{{ path("login") }}">S'identifier</a>
+                        <img src="{{ asset("media/images/users/attachment_115080175.jfif") }}" alt="Utilisateur inconnu photo">
+                        <a href="{#{{ path("") }}#}">S'identifier</a>
                     </li>
                 </ul>
             </nav>
