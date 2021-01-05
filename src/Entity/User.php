@@ -120,7 +120,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->nom;
+        return (string) $this->email;
     }
 
 

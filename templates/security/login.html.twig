@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container text-center mt-4">
+        <form action="{{ path('login') }}" method="post" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Veuillez-vous connecter</h1>
+
+            <label for="username" class="sr-only">Adresse email</label>
+            <input type="text" id="username" name="_username" class="form-control" placeholder="Nom" required autofocus value="{{ last_username }}">
+
+            <label for="password" class="sr-only"> Mot de passe</label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+            {% if error %}
+                <div class="alert alert-danger mt-4">
+                    {{ error.messageKey | trans(error.messagedata, 'security')}}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}
