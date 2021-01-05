@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.path.featured_evenement_images: /media/images/featured/evenements_image
+    app.path.featured_evenement_vignettes: /media/images/featured/vignettes
 
 services:
     # default configuration for services in *this* file

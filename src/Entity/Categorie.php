@@ -29,9 +29,9 @@ class Categorie
     private Collection $evenement;
 
     /**
-     * @ORM\OneToMany(targetEntity=Eleve::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
      */
-    private Collection $eleve;
+    private Collection $user;
 
     /**
      * @return int
@@ -89,30 +89,30 @@ class Categorie
     }
 
     /**
-     * @return Collection|Eleve[]
+     * @return Collection|User[]
      */
-    public function getEleve(): ?Collection
+    public function getUser(): ?Collection
     {
-        return $this->eleve;
+        return $this->user;
     }
 
-    public function addEleve(Eleve $eleve): self
+    public function addUser(User $user): self
     {
-        if (!$this->eleve->contains($eleve)) {
-            $this->eleve[] = $eleve;
-            $eleve->setCategorie($this);
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeEleve(Eleve $eleve): self
+    public function removeUser(User $user): self
     {
-        if ($this->eleve->contains($eleve)) {
-            $this->eleve->remove($eleve);
+        if ($this->user->contains($user)) {
+            $this->user->remove($user);
             // set the owning side to null (unless already changed)
-            if ($eleve->getCategorie() === $this) {
-                $eleve->setCategorie(null);
+            if ($user->getCategorie() === $this) {
+                $user->setCategorie(null);
             }
         }
 

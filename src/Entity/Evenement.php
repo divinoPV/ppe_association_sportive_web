@@ -66,7 +66,7 @@ class Evenement
     private ?string $vignette;
 
     /**
-     * @Vich\UploadableField(mapping="image", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="evenement_image")
      * @var File $imageFile
      */
     private File $imageFile;
@@ -78,19 +78,19 @@ class Evenement
     private File $vignetteFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sport::class)
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="sport", nullable=false, referencedColumnName="id")
      */
     private Sport $sport;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class)
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="type", nullable=false, referencedColumnName="id")
      */
     private Type $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class)
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
     private Categorie $categorie;
@@ -250,7 +250,7 @@ class Evenement
         }
     }
 
-    public function getVignetteile(): ?File
+    public function getVignetteFile(): ?File
     {
         return $this->imageFile;
     }
