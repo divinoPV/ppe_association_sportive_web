@@ -15,10 +15,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
     {
         $error= $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        if ($this->isCsrfTokenValid('authenticate', $request->get("_csrf_token")) && $request->get("_submit") && $this->getUser()->getRoles() === ['a']):
+
+            dd(1);
+            return $this->redirectToRoute('admin');
+        endif;
+
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error

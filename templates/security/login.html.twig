@@ -18,7 +18,7 @@
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="w-25 p-3 mb-3">
-                <button class="btn px-3" type="submit">Connexion</button>
+                    <button class="btn px-3" name="_submit" type="submit">Connexion</button>
                 </div>
                 {% if error %}
                     <div class="alert alert-danger mt-4">
@@ -31,7 +31,7 @@
             <h2 class="h2 p-3 mb-3">Pas encore de compte ?</h2>
             <span class="p-3 mb-3"> Vous êtes étudiant et vous n'avez pas encore de compte sur la plateforme</span>
             <div class="w-50 p-3 mt-4">
-                <a href="{{ path("registration") }}" class="btn btn-success px-3 rounded-pill" type="submit">Accèder au formualire d'inscription</a>
+                <a href="{{ path('registration') }}" class="btn btn-success px-3 rounded-pill" type="submit">Accèder au formualire d'inscription</a>
             </div>
         </div>
     </section>
