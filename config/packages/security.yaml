@@ -1,8 +1,7 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
+        from_database:
             entity:
                 class: App\Entity\User
                 property: email
@@ -13,8 +12,17 @@ security:
         main:
             anonymous: true
             lazy: true
-            provider: app_user_provider
+            provider: from_database
 
+            logout:
+                path: /logout
+                target: /
+
+            form_login:
+                login_path: login
+                check_path: login
+                default_target_path: /admin
+                csrf_token_generator: security.csrf.token_manager
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

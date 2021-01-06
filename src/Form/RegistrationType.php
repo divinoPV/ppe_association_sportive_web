@@ -24,7 +24,7 @@ class RegistrationType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('naissance',DateType::class,[
-                'format' => 'yyyy-MM-dd'
+                'widget' => 'single_text',
             ])
             ->add('categorie')
         ;
