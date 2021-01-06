@@ -45,7 +45,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private string $roles = 'e';
+    private string $role = 'e';
 
     /**
      * @var string The hashed plainPassword
@@ -83,6 +83,11 @@ class User implements UserInterface
     private ?string $prenom;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?string $forgettenPassword;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\NotBlank(
      *     message = "Veuillez selectionner votre date de naissance !"
@@ -106,7 +111,7 @@ class User implements UserInterface
      *     message = "Veuillez sélectionner une valeur !"
      * )
      */
-    private $categorie;
+    private Categorie $categorie;
 
     /**
      * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="user")
@@ -137,10 +142,24 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return $this->email;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
 
+    /**
+     * @param string|null $plainPassword
+     */
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
 
     /**
      * @see UserInterface
@@ -238,7 +257,7 @@ class User implements UserInterface
         return $this->categorie;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function setCategorie(Categorie $categorie): self
     {
         $this->categorie = $categorie;
 
@@ -248,19 +267,34 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRoles(): string
+    public function getRole(): string
     {
-        return $this->roles;
+        return $this->role;
     }
 
     /**
-     * @param string $roles
+     * @param string $role
      */
-    public function setRoles(string $roles): void
+    public function setRole(string $role): void
     {
-        $this->roles = $roles;
+        $this->role = $role;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getForgettenPassword(): ?string
+    {
+        return $this->forgettenPassword;
+    }
+
+    /**
+     * @param string|null $forgettenPassword
+     */
+    public function setForgettenPassword(?string $forgettenPassword): void
+    {
+        $this->forgettenPassword = $forgettenPassword;
+    }
     /**
      * @return Collection|Inscription[]
      */
@@ -273,7 +307,7 @@ class User implements UserInterface
     {
         if (!$this->inscription->contains($inscription)) {
             $this->inscription[] = $inscription;
-            $inscription->setEvenement($this);
+            $inscription->setUser($this);
         }
 
         return $this;
@@ -284,28 +318,11 @@ class User implements UserInterface
         if ($this->inscription->contains($inscription)) {
             $this->inscription->remove($inscription);
             // set the owning side to null (unless already changed)
-            if ($inscription->getEvenement() === $this) {
-                $inscription->setEvenement(null);
+            if ($inscription->getUser() === $this) {
+                $inscription->setUser(null);
             }
         }
 
         return $this;
     }
-
-    /**
-     * @return string|null
-     */
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param string|null $plainPassword
-     */
-    public function setPlainPassword(?string $plainPassword): void
-    {
-        $this->plainPassword = $plainPassword;
-    }
-
 }

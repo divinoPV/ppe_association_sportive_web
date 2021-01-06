@@ -67,7 +67,6 @@ class Inscription
      */
     public function setUser(User $user): void
     {
-
         if ($user->getRole() === 'e'):
             $this->user = $user;
         endif;
