@@ -169,7 +169,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -177,6 +177,15 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function setNewPassword(User $user, string $password): User
+    {
+        if ($this->getRoles() === 'a' && $user->getRole() === 'e'):
+            $user->setPlainPassword($password);
+        endif;
+
+        return $user;
     }
 
     /**
