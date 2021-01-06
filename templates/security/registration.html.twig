@@ -6,7 +6,6 @@
 
 {% block body %}
     <div class="container">
-<<<<<<< Updated upstream
         <h1 class="h1 mt-5 ">Inscription</h1>
         <p class="mt-5 mb-5 fs-5">
             Vous êtes étudiant et vous n'avez pas encore de compte sur la platforme ?
@@ -81,52 +80,6 @@
             <button type="submit" class="btn btn-register">valider</button>
             <a href="" class="ms-3">Vous avez déjà un compte ? Connectez-vous.</a>
         </div>
-=======
-    {{ form_start(form) }}
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        }) }}
-        {{ form_label(form.plainPassword.first) }}
-        {{ form_widget(form.plainPassword.first,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        })}}
-        {{ form_label(form.plainPassword.second) }}
-        {{ form_widget(form.plainPassword.second,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        }) }}
-        {{ form_label(form.nom) }}
-        {{ form_widget(form.nom,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        }) }}
-        {{ form_label(form.prenom) }}
-        {{ form_widget(form.prenom,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        }) }}
-        {{ form_label(form.naissance) }}
-        {{ form_widget(form.naissance,{
-            'attr': {
-                'class': 'form-control mt-2 mb-4'
-            }
-        }) }}
-        {{ form_label(form.categorie) }}
-        {{ form_widget(form.categorie,{
-            'attr': {
-                'class': 'form-control form-select mt-2 mb-4'
-            }
-        }) }}
-        <button type="submit" class="btn btn-primary">ajouter</button>
->>>>>>> Stashed changes
     {{ form_end(form) }}
     </div>
     {% block javascripts %}
