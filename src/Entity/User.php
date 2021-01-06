@@ -178,7 +178,7 @@ class User implements UserInterface
 
     public function setNewPassword(User $user, string $password): User
     {
-        if ($this->getRoles() === 'a' && $user->getRole() === 'e'):
+        if ($this->getRoles() === 'a' && $user->getRoles() === 'e'):
             $user->setPlainPassword($password);
         endif;
 
@@ -284,7 +284,7 @@ class User implements UserInterface
     /**
      * @param string $role
      */
-    public function setRoles(string $role): void
+    public function setRoles(array $role): void
     {
         $this->role = $role;
     }
