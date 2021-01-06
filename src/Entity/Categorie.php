@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +33,14 @@ class Categorie
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
      */
+
     private Collection $user;
+
+    public function __construct()
+    {
+        $this->user = new ArrayCollection();
+    }
+
 
     /**
      * @return int
@@ -92,6 +100,7 @@ class Categorie
     /**
      * @return Collection|User[]
      */
+
     public function getUser(): ?Collection
     {
         return $this->user;
@@ -101,6 +110,7 @@ class Categorie
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
+
             $user->setCategorie($this);
         }
 
@@ -111,7 +121,7 @@ class Categorie
     {
         if ($this->user->contains($user)) {
             $this->user->remove($user);
-            // set the owning side to null (unless already changed)
+
             if ($user->getCategorie() === $this) {
                 $user->setCategorie(null);
             }

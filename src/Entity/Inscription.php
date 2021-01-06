@@ -29,6 +29,7 @@ class Inscription
      */
     private \DateTime $creer;
 
+
     public function setCreatedAt(): self
     {
         $this->creer = new \DateTime();
@@ -40,7 +41,6 @@ class Inscription
     {
         return $this->creer;
     }
-
 
     public function getEvenement(): ?Evenement
     {
@@ -67,6 +67,9 @@ class Inscription
      */
     public function setUser(User $user): void
     {
-        $this->user = $user;
+
+        if ($user->getRole() === 'e'):
+            $this->user = $user;
+        endif;
     }
 }
