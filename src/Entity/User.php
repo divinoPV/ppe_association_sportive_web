@@ -50,6 +50,9 @@ class User implements UserInterface
     /**
      * @var string The hashed plainPassword
      * @ORM\Column(name="mdp", type="string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une valeur !"
+     * )
      */
     private string $password;
 
@@ -267,7 +270,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getRoles(): string
     {
         return $this->role;
     }
@@ -275,7 +278,7 @@ class User implements UserInterface
     /**
      * @param string $role
      */
-    public function setRole(string $role): void
+    public function setRoles(string $role): void
     {
         $this->role = $role;
     }

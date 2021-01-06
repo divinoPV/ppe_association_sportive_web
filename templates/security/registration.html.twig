@@ -1,9 +1,135 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block stylesheets %}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
 
 {% block body %}
+    <div class="container">
+<<<<<<< Updated upstream
+        <h1 class="h1 mt-5 ">Inscription</h1>
+        <p class="mt-5 mb-5 fs-5">
+            Vous êtes étudiant et vous n'avez pas encore de compte sur la platforme ?
+            Remplissez le formulaire ci-dessous afin d'obtenir vos identifiant de connexion.
+            Vous recevrez par la suite un email avec des identifiants temporaires.
+        </p>
     {{ form_start(form) }}
-    <button type="submit">ajouter</button>
+        {{ form_label(form.email) }}
+        <span class="text-danger">
+            {{ form_errors(form.email) }}
+        </span>
+        {{ form_widget(form.email,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4 w-50'
+            }
+        }) }}
+        {{ form_label(form.plainPassword.first) }}
+        <span class="text-danger">
+        {{ form_errors(form.plainPassword.first) }}
+        </span>
+        {{ form_widget(form.plainPassword.first,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4 w-50'
+            }
+        })}}
+        {{ form_label(form.plainPassword.second) }}
+        <span class="text-danger">
+        {{ form_errors(form.plainPassword.second) }}
+        </span>
+        {{ form_widget(form.plainPassword.second,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4 w-50'
+            }
+        }) }}
+        {{ form_label(form.nom) }}
+        <span class="text-danger">
+        {{ form_errors(form.nom) }}
+        </span>
+        {{ form_widget(form.nom,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4 w-50'
+            }
+        }) }}
+        {{ form_label(form.prenom) }}
+        <span class="text-danger">
+        {{ form_errors(form.prenom) }}
+        </span>
+        {{ form_widget(form.prenom,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4 w-50'
+            }
+        }) }}
+        {{ form_label(form.naissance) }}
+        <span class="text-danger">
+        {{ form_errors(form.naissance) }}
+        </span>
+        {{ form_widget(form.naissance,{
+            'attr': {
+                'class': 'mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.categorie) }}
+        <span class="danger">
+            {{ form_errors(form.categorie) }}
+        </span>
+        {{ form_widget(form.categorie,{
+            'attr': {
+                'class': 'form-control form-select mt-2 mb-4 w-50'
+            }
+        }) }}
+        <div class="d-flex align-items-center">
+            <button type="submit" class="btn btn-register">valider</button>
+            <a href="" class="ms-3">Vous avez déjà un compte ? Connectez-vous.</a>
+        </div>
+=======
+    {{ form_start(form) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.plainPassword.first) }}
+        {{ form_widget(form.plainPassword.first,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        })}}
+        {{ form_label(form.plainPassword.second) }}
+        {{ form_widget(form.plainPassword.second,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.prenom) }}
+        {{ form_widget(form.prenom,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.naissance) }}
+        {{ form_widget(form.naissance,{
+            'attr': {
+                'class': 'form-control mt-2 mb-4'
+            }
+        }) }}
+        {{ form_label(form.categorie) }}
+        {{ form_widget(form.categorie,{
+            'attr': {
+                'class': 'form-control form-select mt-2 mb-4'
+            }
+        }) }}
+        <button type="submit" class="btn btn-primary">ajouter</button>
+>>>>>>> Stashed changes
     {{ form_end(form) }}
+    </div>
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    {% endblock %}
 {% endblock %}

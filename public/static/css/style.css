@@ -70,4 +70,13 @@ nav .login img {
   width: 32px;
 }
 
+form button {
+  background-color: #5cb85c !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+}
+form .btn-register {
+  width: 150px;
+}
+
 /*# sourceMappingURL=style.css.map */
