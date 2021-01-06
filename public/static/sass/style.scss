@@ -4,3 +4,71 @@
  Créer la variable d'environnement pour sass dans le PATH
  Command à exécuter dans le terminal : "sass public/static/sass/style.scss public/static/css/style.css --watch"
  */
+//import
+@import "../css/reset.css";
+//var
+$primary: #1e2a47;
+$grey: #c9cdd3;
+:root{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+a{
+    text-decoration: none;
+}
+//flex-center
+@mixin flex-center{
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+//main-menu
+header{
+    background-color: $primary;
+    width: 100%;
+}
+nav{
+    font-size: 1.2rem;
+    padding: 2rem;
+    & ul{
+        @include flex-center;
+        flex-flow: row wrap;
+        gap: 3.5rem;
+    }
+    & ul li{
+        @include flex-center;
+        & a{
+            color: $grey;
+            position: relative;
+            &::before{
+                background-color: $grey;
+                bottom: -.4rem;
+                content: "";
+                height: 1px;
+                left: 0;
+                position: absolute;
+                transition: all .3s ease-in-out;
+                visibility: hidden;
+                width: 0;
+            }
+            &:hover::before{
+                visibility: visible;
+                width: 100%;
+            }
+        }
+    }
+    & .logo{
+        filter: brightness(0) invert(1);
+        height: 54px;
+        width: 54px;
+    }
+    & .login{
+        justify-self: flex-end;
+        gap: 1rem;
+        & img{
+            border-radius: 90%;
+            height: 32px;
+            width: 32px;
+        }
+    }
+}
