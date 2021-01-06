@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Categorie
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -117,5 +118,10 @@ class Categorie
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+       return $this->nom;
     }
 }

@@ -5,11 +5,16 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="l'email indiqué est déjà utiliser"
+ * )
  */
 class User implements UserInterface
 {
@@ -40,13 +45,13 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private string $roles;
+    private string $roles = 'e';
 
     /**
      * @var string The hashed plainPassword
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="mdp", type="string")
      */
-    private string $motDePasse;
+    private string $password;
 
     /**
      * @var string|null
@@ -59,20 +64,29 @@ class User implements UserInterface
      *     une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
      * )
      */
-    private ?string $plainPassword = null;
+    private ?string $plainPassword;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private ?string $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private ?string $prenom;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Veuillez selectionner votre date de naissance !"
+     * )
      */
     private ?\DateTime $naissance;
 
@@ -88,6 +102,9 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
+     *  @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private $categorie;
 
@@ -130,12 +147,12 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->motDePasse;
+        return (string) $this->password;
     }
 
-    public function setPassword(string $motDePasse): self
+    public function setPassword(string $password): self
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
 
         return $this;
     }
@@ -273,6 +290,22 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     */
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
     }
 
 }
