@@ -166,7 +166,7 @@ class User implements UserInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -174,6 +174,15 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    public function setNewPassword(User $user, string $password): User
+    {
+        if ($this->getRoles() === 'a' && $user->getRole() === 'e'):
+            $user->setPlainPassword($password);
+        endif;
+
+        return $user;
     }
 
     /**
@@ -267,7 +276,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getRoles(): string
     {
         return $this->role;
     }
@@ -275,7 +284,7 @@ class User implements UserInterface
     /**
      * @param string $role
      */
-    public function setRole(string $role): void
+    public function setRoles(string $role): void
     {
         $this->role = $role;
     }
