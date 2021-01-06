@@ -17,6 +17,7 @@ class RegistrationType extends AbstractType
         $builder
             ->add('email')
             ->add('plainPassword', RepeatedType::class,[
+                'invalid_message' => 'Veuillez indiquer le même mot de passe',
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'mot de passe'],
                 'second_options'=> ['label' => 'Confirmer votre mot de passe']

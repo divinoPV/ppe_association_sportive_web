@@ -6,7 +6,7 @@
     <section class="d-flex mt-5 mx-5 ">
         <div class="container ">
             <form action="{{ path('login') }}" method="post" class="mt-5">
-                <h2 class="h1">Connectez-vous</h2>
+                <h2 class="h2">Connectez-vous</h2>
                 <div class=" w-50 p-3 mb-3">
                     <label for="username" class="form-label">Adresse Email</label>
                     <input type="text" id="username" name="_username" class="form-control p-2 border" required autofocus value="{{ last_username }}">
@@ -14,14 +14,14 @@
                 <div class="w-50 p-3 mb-3">
                     <label for="password" class="form-label">Mot de passe</label>
                     <input type="password" id="password" name="_password" class="form-control p-2 border"  required>
-                    <a class="nav-item" href="{{ path("forgettenPassword") }}">Mot de passe oublié</a>
+                    <a class="nav-item" href="{{ path("forgettenPassword") }}">Mot de passe oublié ?</a>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="w-25 p-3 mb-3">
                     <button class="btn px-3" name="_submit" type="submit">Connexion</button>
                 </div>
                 {% if error %}
-                    <div class="alert alert-danger mt-4">
+                    <div class="alert alert-danger mt-4 w-50 ">
                         {{ error.messageKey | trans(error.messagedata, 'security')}}
                     </div>
                 {% endif %}

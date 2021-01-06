@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(
  *     fields={"email"},
- *     message="l'email indiqué est déjà utiliser"
+ *     message="L'email indiqué est déjà utiliser"
  * )
  */
 class User implements UserInterface
