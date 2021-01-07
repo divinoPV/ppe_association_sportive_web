@@ -15,16 +15,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    public function login(AuthenticationUtils $authenticationUtils, Request $request): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error= $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        if ($this->isCsrfTokenValid('authenticate', $request->get("_csrf_token")) && $request->get("_submit") && $this->getUser()->getRoles() === ['a']):
-
-            dd(1);
-            return $this->redirectToRoute('admin');
-        endif;
 
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
@@ -42,6 +36,7 @@ class SecurityController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $hash = $encoder->encodePassword($user, $user->getPlainPassword());
             $user
+                ->addRoles()
                 ->setPassword($hash)
                 ->setCreer(new \DateTime('now'))
                 ->setModifier(new \DateTime('now'))
@@ -53,6 +48,13 @@ class SecurityController extends AbstractController
         return $this->render('security/registration.html.twig',[
             'form' => $form->createView()
         ]);
+    }
+
+
+    #[Route("/logout", name: "logout")]
+    public function logout()
+    {
+        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
     #[Route('/forgettenPassword', name: 'forgettenPassword')]

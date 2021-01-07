@@ -45,7 +45,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private array $role = ['e'];
+    private array $roles;
 
     /**
      * @var string The hashed plainPassword
@@ -278,15 +278,26 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        return $this->role;
+        $this->roles[] = "ROLE_USER";
+
+        return $this->roles;
     }
 
     /**
-     * @param string $role
+     * @param string $roles
      */
-    public function setRoles(array $role): void
+    public function setRoles(string $roles): self
     {
-        $this->role = $role;
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    public function addRoles(): self
+    {
+        $this->roles[] = "ROLE_USER";
+
+        return $this;
     }
 
     /**
