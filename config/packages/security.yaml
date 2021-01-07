@@ -22,10 +22,11 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
+
             provider: app_user_provider
 
             logout:
-                path: /logout
+                path: logout
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
@@ -34,6 +35,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
 
 

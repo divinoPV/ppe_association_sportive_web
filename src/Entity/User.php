@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="L'email indiqué est déjà utiliser"
  * )
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -178,7 +178,7 @@ class User implements UserInterface
 
     public function setNewPassword(User $user, string $password): User
     {
-        if ($this->getRoles() === 'a' && $user->getRoles() === 'e'):
+        if ($this->getRoles() === "ROLE_ADMIN" && $user->getRoles() === "ROLE_USER"):
             $user->setPlainPassword($password);
         endif;
 
@@ -278,9 +278,10 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $this->roles[] = "ROLE_USER";
+        $roles = $this->roles;
+        $roles[] = "ROLE_USER";
 
-        return $this->roles;
+        return array_unique($roles);
     }
 
     /**
@@ -344,5 +345,22 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password) = unserialize($serialized, ['allowed_classes' => false]);
     }
 }
