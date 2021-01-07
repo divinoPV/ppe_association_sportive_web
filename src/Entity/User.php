@@ -85,7 +85,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?string $forgettenPassword;
+    private ?bool $forgettenPassword;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -301,17 +301,17 @@ class User implements UserInterface
     }
 
     /**
-     * @return string|null
+     * @return bool|null
      */
-    public function getForgettenPassword(): ?string
+    public function getForgettenPassword(): ?bool
     {
         return $this->forgettenPassword;
     }
 
     /**
-     * @param string|null $forgettenPassword
+     * @param bool|null $forgettenPassword
      */
-    public function setForgettenPassword(?string $forgettenPassword): void
+    public function setForgettenPassword(?bool $forgettenPassword): void
     {
         $this->forgettenPassword = $forgettenPassword;
     }
