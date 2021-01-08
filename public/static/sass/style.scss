@@ -16,6 +16,9 @@ $grey: #c9cdd3;
 a{
     text-decoration: none;
 }
+main{
+    height: 100vh;
+}
 //flex-center
 @mixin flex-center{
     align-items: center;
@@ -72,6 +75,7 @@ nav{
         }
     }
 }
+// form login and register
 form{
     & .btn-login{
         background-color: #5cb85c!important;
@@ -80,5 +84,46 @@ form{
     }
     & .btn-register{
         width: 150px;
+    }
+}
+// footer
+footer{
+    width: 100%;
+    background-color: #000000!important;
+    & .container{
+        padding: 50px 0;
+        & .row{
+            display: flex;
+            justify-content: space-between;
+            & .col {
+                & h2{
+                    color: #fff;
+                    margin-bottom: 20px;
+                }
+                & h2:nth-of-type(2){
+                    margin-bottom: 0;
+                    margin-top: 20px;
+                }
+                & p,a{
+                    color:#999999;
+                }
+                & span{
+                    display: flex;
+                    & i{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 20px;
+                        height: 40px;
+                        width: 40px;
+                        color: #999999;
+                        background-color: #1c1c1c;
+                    }
+                    & i:nth-of-type(2){
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
     }
 }

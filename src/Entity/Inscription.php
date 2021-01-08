@@ -65,10 +65,10 @@ class Inscription
     /**
      * @param User $user
      */
-    public function setUser(User $user): void
+    public function setUser(User $user): self
     {
-        if ($user->getRoles() === 'e'):
-            $this->user = $user;
-        endif;
+        $this->user = $user;
+
+        return $this;
     }
 }

@@ -67,9 +67,11 @@ class Document
     /**
      * @param string $nom
      */
-    public function setNom(string $nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
     /**
@@ -91,9 +93,11 @@ class Document
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -139,8 +143,10 @@ class Document
     /**
      * @param DocumentCategorie $categorie
      */
-    public function setCategorie(DocumentCategorie $categorie): void
+    public function setCategorie(DocumentCategorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
     }
 }

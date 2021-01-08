@@ -6,7 +6,7 @@ use App\Entity\Categorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures extends Fixture
+class CategorieFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
@@ -18,12 +18,13 @@ class AppFixtures extends Fixture
             "Junior garçcon"
         ];
 
-        foreach ($tabCateg as $categ){
+        foreach ($tabCateg as $id => $categ){
             $uneCateg = new Categorie();
 
             $uneCateg->setNom($categ);
             $manager->persist($uneCateg);
-            $manager->flush();
+            $this->addReference('categ'.$id, $uneCateg);
         }
+        $manager->flush();
     }
 }
