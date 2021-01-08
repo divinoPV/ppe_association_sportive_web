@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block body %}
+    <div class="container p-2">
+        <form action="{{ path("forgotten") }}" class="mt-5" method="post">
+            <div class="w-25 p-3 mb-3">
+                <label class="form-label required" for="fogetten_password_email_first">Votre adresse email</label>
+                {% if error %}
+                    <div class="alert alert-danger mt-4">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <input type="email"
+                       id="fogetten_password_email_first"
+                       name="fogetten_password_first"
+                       required="required"
+                       class="form-control mt-2 mb-4"
+                >
+            </div>
+            <div class="w-25 p-3 mb-3">
+                <label class="form-label required" for="fogetten_password_email_second">Répéter votre adresse email</label>
+                <input type="email"
+                       id="fogetten_password_email_second"
+                       name="fogetten_password_second"
+                       required="required"
+                       class="form-control mt-2 mb-4">
+            </div>
+            <div class="d-flex align-items-center">
+                <input type="submit" name="submit" class="btn btn-login px-3" value="Envoyer la demande"></input>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

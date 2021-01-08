@@ -85,7 +85,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $forgettenPassword;
+    private ?bool $forgottenPassword;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -304,15 +304,15 @@ class User implements UserInterface, \Serializable
     /**
      * @return bool|null
      */
-    public function getForgettenPassword(): ?bool
+    public function getforgottenPassword(): ?bool
     {
-        return $this->forgettenPassword;
+        return $this->forgottenPassword;
     }
 
     /**
-     * @param bool|null $forgettenPassword
+     * @param bool|null $forgottenPassword
      */
-    public function setForgettenPassword(?bool $forgettenPassword): void
+    public function setforgottenPassword(?bool $forgottenPassword): void
     {
         $this->forgettenPassword = $forgettenPassword;
     }
