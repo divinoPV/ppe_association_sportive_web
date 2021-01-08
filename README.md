@@ -3,15 +3,15 @@ Répertoire du projet association sportive web
 
 VERSION SYMFONY : 
 
-Symfony 5.2.1
+	Symfony 5.2.1
 
 REQUIS :
 
-PHP 8.0
-PhpMyAdmin 5.0.4
-Apache 2.4.46
-MySQL 8.0.22
-Sass 1.32
+	PHP 8.0
+	PhpMyAdmin 5.0.4
+	Apache 2.4.46
+	MySQL 8.0.22
+	Sass 1.32
 
 ATTENTION extension curl de php si votre serveur symfony est en https voir :
 	https://docs.bolt.cm/3.7/howto/curl-ca-certificates
