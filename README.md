@@ -27,6 +27,12 @@ INSTALLATION
 		- php bin\console d:fix:l -n
 		Si vous n'avez pas sass aller dans public\static\sass\style.scss et suivi le tuto
 		- sass public/static/sass/style.scss public/static/css/style.css --watch
+	- ajouter un fichier .env.local avec:
+		APP_ENV=dev
+		APP_SECRET= your secret
+		DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/ppe_asso_sportive_symfony?serverVersion=8.0.22&charset=utf8"
+		MAILER_DSN=gmail://USEREMAIL:PASSWORD@default
+		ATTENTION caractères spéciaux en syntaxe URL (ex : + -> %2B)
 	- créer un compte avec votre vrai adresse mail pour tester le mot de passe oublié
 	- changer votre role en base pour être admin (syntax ["ROLE_ADMIN"])
 	- aller sur \admin pour modifier les utilisateurs
