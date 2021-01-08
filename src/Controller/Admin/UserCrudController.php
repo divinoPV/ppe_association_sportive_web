@@ -6,6 +6,7 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
@@ -22,12 +23,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController implements EventSubscriberInterface
 {
+    private UserPasswordEncoderInterface $passwordEncoder;
+
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
-
-    private UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -60,7 +61,6 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
             yield EmailField::new('email'),
             yield ArrayField::new('roles'),
             yield TextField::new('plainPassword')
-                ->setRequired(true)
                 ->onlyOnForms()
                 ->setFormType(PasswordType::class),
             yield BooleanField::new('forgottenPassword'),
@@ -70,7 +70,7 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
         ];
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             BeforeEntityPersistedEvent::class => 'encodePassword',
@@ -82,9 +82,9 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
     public function encodePassword($event)
     {
         $user = $event->getEntityInstance();
-        if ($user->getPlainPassword()) {
+        if ($user->getPlainPassword()):
             $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
-        }
+        endif;
     }
 
 }
