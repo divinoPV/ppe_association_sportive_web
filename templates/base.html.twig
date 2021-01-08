@@ -46,10 +46,17 @@
                             </li>
                         </ul>
                     </li>
+                    {% if not app.user %}
                     <li class="login">
                         <img src="{{ asset("media/images/users/attachment_121087384.jfif") }}" alt="Utilisateur inconnu photo">
                         <a href="{{ path("login") }}">S'identifier</a>
                     </li>
+                    {% else %}
+                    <li class="login">
+                        <img src="{{ asset("media/images/users/attachment_121087384.jfif") }}" alt="Utilisateur inconnu photo">
+                        <a href="{{ path("logout") }}">Se déconnecter</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </nav>
         </header>
