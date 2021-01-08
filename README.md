@@ -1,9 +1,38 @@
 # ppe_association_sportive_web
 Répertoire du projet association sportive web
 
+VERSION SYMFONY : 
+
+	Symfony 5.2.1
+
+REQUIS :
+
+	PHP 8.0
+	PhpMyAdmin 5.0.4
+	Apache 2.4.46
+	MySQL 8.0.22
+	Sass 1.32
+
+ATTENTION extension curl de php si votre serveur symfony est en https voir :
+	https://docs.bolt.cm/3.7/howto/curl-ca-certificates
+
 INSTALLATION
 
 	- git clone https://github.com/divinoPV/ppe_association_sportive_web.git
+	- lancer le projet dans votre IDE
+	- ouvrir un terminal dans le dossier du projet et taper :
+		- composer install
+		- php bin\console d:d:c
+		- php bin\console d:s:u -f
+		- php bin\console d:fix:l -n
+		Si vous n'avez pas sass aller dans public\static\sass\style.scss et suivi le tuto
+		- sass public/static/sass/style.scss public/static/css/style.css --watch
+	- créer un compte avec votre vrai adresse mail pour tester le mot de passe oublié
+	- changer votre role en base pour être admin (syntax ["ROLE_ADMIN"])
+	- aller sur \admin pour modifier les utilisateurs
+	- déconnectez-vous et essayez mot de passe oublié (vous devez être le seul admin en base car notre système envoie un mail à un administrateur au hasard)
+	
+	Si vous avez une question vous pouvez me contacter à l'adresse suivante : hugomonteiro6021@gmail.com
 	
 CONTEXTE
 
