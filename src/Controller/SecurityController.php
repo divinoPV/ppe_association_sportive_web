@@ -101,7 +101,7 @@ class SecurityController extends AbstractController
                                 <p>Vous pouvez modifié ici : https://localhost:8000/admin</p>
                        EOT;
                 //On créé le mail
-                $transport = Transport::fromDsn("gmail://montestpoursf@gmail.com:Test1234%2B@default");
+                $transport = Transport::fromDsn($_ENV["MAILER_DSN"]);
                 $mailer = new Mailer($transport);
                 $email = (new TemplatedEmail())
                     ->from($user)
