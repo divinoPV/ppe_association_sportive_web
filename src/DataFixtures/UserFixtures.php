@@ -26,12 +26,12 @@ class UserFixtures extends Fixture
                 ->setEmail('eleve'.$i.'@gmail.com')
                 ->setNom('NomEleve'.$i)
                 ->setPrenom('PrenomEleve'.$i)
-                ->setRoles('USER_ROLE')
+                ->setRoles('ROLE_USER')
                 ->setCreer(new \DateTime('now'))
                 ->setNaissance(new \DateTime('now'))
                 ->setModifier(new \DateTime('now'))
                 ->setPassword($this->encoder->encodePassword($user, $password))
-                ->setForgettenPassword(false);
+                ->setForgottenPassword(false);
 
             /** @var Categorie $uneCateg */
             $uneCateg = $this->getReference('categ' . rand(0, 3));

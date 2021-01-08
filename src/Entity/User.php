@@ -297,7 +297,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return bool|null
      */
-    public function getforgottenPassword(): ?bool
+    public function getForgottenPassword(): ?bool
     {
         return $this->forgottenPassword;
     }
@@ -305,9 +305,11 @@ class User implements UserInterface, \Serializable
     /**
      * @param bool|null $forgottenPassword
      */
-    public function setforgottenPassword(?bool $forgottenPassword): void
+    public function setForgottenPassword(?bool $forgottenPassword): self
     {
         $this->forgottenPassword = $forgottenPassword;
+
+        return $this;
     }
     /**
      * @return Collection|Inscription[]

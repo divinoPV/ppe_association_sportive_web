@@ -106,6 +106,11 @@ class SecurityController extends AbstractController
                     ->from($user)
                     ->to($admin->getEmail())
                     ->subject("Changement de mot de passe")
+                    /*
+                        Obliger de mettre le template html dans le public car le site pointe
+                        dans le dossier public, la méthode htmlTemplate() est sécurisé et ne
+                        permet pas de remonter dans l'architecture et d'accéder au dossier template.
+                    */
                     ->htmlTemplate("contact_forgotten.html.twig")
                     ->context([
                         "e_mail" => $user,
