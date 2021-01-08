@@ -23,6 +23,7 @@
         <meta name="theme-color" content="#ffffff">
         <!-- stylesheets -->
         {% block stylesheets %}{% endblock %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('static/css/style.css') }}"/>
         <!-- google Font -->
         <!-- montserrat -->
@@ -38,12 +39,12 @@
                                 <img class="logo" src="{{ asset("media/favicon/android-chrome-512x512.png") }}" alt="Logo du site"/>
                             </li>
                             <li>
-                                <a href="{#{{ path("") }}#}">Accueil</a>
+                                <a href="{{ path('home') }}">Accueil</a>
                             </li>
                             <li>
                                 <a href="{#{{ path("") }}#}">Événement</a>
                             </li>
-                    </ul>
+                        </ul>
                     </li>
                     <li class="login">
                         <img src="{{ asset("media/images/users/attachment_121087384.jfif") }}" alt="Utilisateur inconnu photo">
@@ -56,9 +57,41 @@
             {% block body %}{% endblock %}
         </main>
         <footer>
-            div.container
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h2>Association Sportive Saint-Vincent</h2>
+                        <p>30 rue de Meaux,</p>
+                        <p>60300 Senlis</p>
+                        <h2>Association Saint-Vincent</h2>
+                        <a href="">https://www.lycee-stvincent.fr/</a>
+                    </div>
+                    <div class="col">
+                        <h2>Nous contacter</h2>
+                        <p>Tél : 03.66.66.66.66</p>
+                        <p>Fax : 03.66.66.66.66 </p>
+                        <a href="">Email : contact@lyceestvincent.fr</a>
+                        <a href="">Web : https://asso-sport.lyceestvincent.fr</a>
+                    </div>
+                    <div class="col">
+                        <h2>Accès rapide</h2>
+                        <p>> Accueil</p>
+                        <p>> Actualités</p>
+                        <p>> Evenements</p>
+                        <p>> Contact</p>
+                    </div>
+                    <div class="col">
+                        <h2>Suivez-nous</h2>
+                        <span>
+                            <i class="fab fa-twitter"></i>
+                            <i class="fab fa-facebook-f"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
             {% block javascripts %}{% endblock %}
             <!-- fontawesome kit's code -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://kit.fontawesome.com/57b72ee719.js"></script>
         </footer>
     </body>
