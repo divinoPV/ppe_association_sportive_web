@@ -35,7 +35,6 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::section('Utilisateurs'),
             yield MenuItem::subMenu('Profils', 'fa fa-tasks')->setSubItems([
                 MenuItem::linkToCrud('Utilsateurs', 'fas fa-project-diagram', User::class),
-                MenuItem::linkToCrud('Rénitialisation mot de passe', 'fas fa-layer-group', User::class),
             ]),
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),

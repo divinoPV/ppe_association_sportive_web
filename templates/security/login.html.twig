@@ -9,14 +9,18 @@
                     <input type="text" id="email" name="_username" class="form-control p-2 border" required autofocus value="{{ last_username }}">
                 </div>
                 <div class="w-50 p-3 mb-3">
-                    <a class="btn btn-login px-3" href="{{ path("forgotten") }}">Mot de passe oublié ?</a>
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" id="password" name="_password" class="form-control p-2 border" required>
+                    <div class="mt-3">
+                        <a class="nav-item" style="margin-top: .5rem;" href="{{ path("forgotten") }}">Mot de passe oublié ?</a>
+                    </div>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <div class="w-25 p-3 mb-3">
                     <button class="btn btn-login px-3" name="submit" type="submit">Connexion</button>
                 </div>
                 {% if error %}
-                    <div class="alert alert-danger mt-4 w-50 ">
+                    <div class="alert alert-danger mt-4 w-50">
                         {{ error.messageKey | trans(error.messagedata, 'security')}}
                     </div>
                 {% endif %}

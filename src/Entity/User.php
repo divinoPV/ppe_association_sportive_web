@@ -156,9 +156,11 @@ class User implements UserInterface, \Serializable
     /**
      * @param string|null $plainPassword
      */
-    public function setPlainPassword(?string $plainPassword): void
+    public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     /**
@@ -174,15 +176,6 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
-    }
-
-    public function setNewPassword(User $user, string $password): User
-    {
-        if ($this->getRoles() === "ROLE_ADMIN" && $user->getRoles() === "ROLE_USER"):
-            $user->setPlainPassword($password);
-        endif;
-
-        return $user;
     }
 
     /**
@@ -314,7 +307,7 @@ class User implements UserInterface, \Serializable
      */
     public function setforgottenPassword(?bool $forgottenPassword): void
     {
-        $this->forgettenPassword = $forgettenPassword;
+        $this->forgottenPassword = $forgottenPassword;
     }
     /**
      * @return Collection|Inscription[]

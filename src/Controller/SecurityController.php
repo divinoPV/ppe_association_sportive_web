@@ -119,6 +119,11 @@ class SecurityController extends AbstractController
                 //On confirme et on redirige
                 $this->addFlash("message", "Votre e-mail a bien été envoyé !");
 
+                $data->setForgottenPassword(true);
+
+                $em->persist($data);
+                $em->flush();
+
                 return $this->redirectToRoute("login");
             endif;
         endif;
