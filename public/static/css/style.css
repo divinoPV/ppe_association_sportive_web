@@ -16,7 +16,7 @@ a {
 }
 
 main {
-  height: 100vh;
+  min-height: max-content;
 }
 
 header {
@@ -74,7 +74,7 @@ nav .login img {
   width: 32px;
 }
 
-form button {
+form .btn-login {
   background-color: #5cb85c !important;
   color: #fff !important;
   border-radius: 12px !important;

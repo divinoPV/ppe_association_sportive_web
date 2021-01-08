@@ -85,7 +85,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $forgettenPassword;
+    private ?bool $forgottenPassword;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -156,9 +156,11 @@ class User implements UserInterface, \Serializable
     /**
      * @param string|null $plainPassword
      */
-    public function setPlainPassword(?string $plainPassword): void
+    public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
     }
 
     /**
@@ -174,15 +176,6 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
-    }
-
-    public function setNewPassword(User $user, string $password): User
-    {
-        if ($this->getRoles() === "ROLE_ADMIN" && $user->getRoles() === "ROLE_USER"):
-            $user->setPlainPassword($password);
-        endif;
-
-        return $user;
     }
 
     /**
@@ -304,17 +297,17 @@ class User implements UserInterface, \Serializable
     /**
      * @return bool|null
      */
-    public function getForgettenPassword(): ?bool
+    public function getforgottenPassword(): ?bool
     {
-        return $this->forgettenPassword;
+        return $this->forgottenPassword;
     }
 
     /**
-     * @param bool|null $forgettenPassword
+     * @param bool|null $forgottenPassword
      */
-    public function setForgettenPassword(?bool $forgettenPassword): void
+    public function setforgottenPassword(?bool $forgottenPassword): void
     {
-        $this->forgettenPassword = $forgettenPassword;
+        $this->forgottenPassword = $forgottenPassword;
     }
     /**
      * @return Collection|Inscription[]
