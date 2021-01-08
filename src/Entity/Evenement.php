@@ -119,9 +119,11 @@ class Evenement
     /**
      * @param string $nom
      */
-    public function setNom(string $nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
     /**
@@ -135,9 +137,11 @@ class Evenement
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
     }
 
     /**
@@ -151,9 +155,10 @@ class Evenement
     /**
      * @param \DateTime $debut
      */
-    public function setDebut(\DateTime $debut): void
+    public function setDebut(\DateTime $debut): self
     {
         $this->debut = $debut;
+        return $this;
     }
 
     /**
@@ -167,9 +172,11 @@ class Evenement
     /**
      * @param \DateTime $fin
      */
-    public function setFin(\DateTime $fin): void
+    public function setFin(\DateTime $fin): self
     {
         $this->fin = $fin;
+
+        return $this;
     }
 
     public function setCreatedAt(): self
@@ -207,9 +214,11 @@ class Evenement
     /**
      * @param int $nombrePlaces
      */
-    public function setNombrePlaces(int $nombrePlaces): void
+    public function setNombrePlaces(int $nombrePlaces): self
     {
         $this->nombrePlaces = $nombrePlaces;
+
+        return $this;
     }
 
     public function getImage(): ?string
@@ -275,9 +284,11 @@ class Evenement
     /**
      * @param Sport $sport
      */
-    public function setSport(Sport $sport): void
+    public function setSport(Sport $sport): self
     {
         $this->sport = $sport;
+
+        return $this;
     }
 
     /**
@@ -291,9 +302,11 @@ class Evenement
     /**
      * @param Type $type
      */
-    public function setType(Type $type): void
+    public function setType(Type $type): self
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -307,9 +320,11 @@ class Evenement
     /**
      * @param Categorie $categorie
      */
-    public function setCategorie(Categorie $categorie): void
+    public function setCategorie(Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
     }
 
     /**

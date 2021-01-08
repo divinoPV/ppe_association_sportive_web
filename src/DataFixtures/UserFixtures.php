@@ -38,6 +38,7 @@ class UserFixtures extends Fixture
 
             $user->setCategorie($uneCateg);
             $manager->persist($user);
+            $this->addReference('eleve'.$i, $user);
         }
         $manager->flush();
     }
