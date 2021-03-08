@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Categorie;
+use App\Entity\Document;
+use App\Entity\DocumentCategorie;
 use App\Entity\Evenement;
 use App\Entity\Sport;
 use App\Entity\Type;
@@ -49,6 +51,10 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Sport', 'fas fa-project-diagram', Sport::class),
                 MenuItem::linkToCrud('Type', 'fas fa-project-diagram', Type::class),
                 MenuItem::linkToCrud('Catégorie', 'fas fa-project-diagram', Categorie::class),
+            ]),
+            yield MenuItem::subMenu('Gestion document', 'fa fa-tasks')->setSubItems([
+                MenuItem::linkToCrud('Document', 'fas fa-project-diagram', Document::class),
+                MenuItem::linkToCrud('Catégorie des documents', 'fas fa-project-diagram', DocumentCategorie::class),
             ]),
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),

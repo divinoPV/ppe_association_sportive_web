@@ -72,7 +72,7 @@ class Evenement
     private File $imageFile;
 
     /**
-     * @Vich\UploadableField(mapping="vignette", fileNameProperty="vignette")
+     * @Vich\UploadableField(mapping="evenement_vignette", fileNameProperty="vignette")
      * @var File $vignetteFile
      */
     private File $vignetteFile;

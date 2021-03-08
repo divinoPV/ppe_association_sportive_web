@@ -25,7 +25,7 @@ class DocumentCrudController extends AbstractCrudController
             TextField::new('description'),
             TextField::new('creer')->hideOnForm(),
             TextField::new('modifier')->hideOnForm(),
-            AssociationField::new('DocumentCategory')->autocomplete()
+            AssociationField::new('categorie')->autocomplete()
         ];
     }
 
