@@ -6,11 +6,13 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -21,11 +23,25 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une valeur !"
+     * )
+     * @Assert\Length(
+     *     min=10,
+     *     minMessage = "Votre email doit comporter au minimum {{ limit }} caractères !",
+     *     max=180,
+     *     maxMessage = "Votre email ne doit pas dépasser {{ limit }} caractères !"
+     * )
+     *
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide !"
+     * )
      */
     private $email;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json")
      */
     private $roles = [];
 
@@ -35,12 +51,35 @@ class User
     private $password;
 
     /**
+     * @var string|null
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une valeur !"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[.\-+!*$@%_])([.\-+!*$@%_\w]{8,32})$/",
+     *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule,
+     *     une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
+     * )
+     */
+    private $plainPassword = null;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private $prenom;
 
@@ -51,6 +90,10 @@ class User
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez selectionner votre date de naissance !"
+     * )
      */
     private $naissance;
 
@@ -67,6 +110,10 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez sélectionner une valeur !"
+     * )
      */
     private $categorie;
 
@@ -99,12 +146,22 @@ class User
 
     public function getRoles(): ?array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        $roles[] = "ROLE_USER";
+
+        return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    public function addRoles(): self
+    {
+        $this->roles[] = "ROLE_USER";
 
         return $this;
     }
@@ -233,5 +290,37 @@ class User
         }
 
         return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->email,
+            $this->password
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
