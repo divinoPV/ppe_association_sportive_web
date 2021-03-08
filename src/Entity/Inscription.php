@@ -22,6 +22,18 @@ class Inscription
      */
     private $creer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="inscription")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="inscriptions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $evenement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,30 @@ class Inscription
     public function setCreer(\DateTimeInterface $creer): self
     {
         $this->creer = $creer;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getEvenement(): ?Evenement
+    {
+        return $this->evenement;
+    }
+
+    public function setEvenement(?Evenement $evenement): self
+    {
+        $this->evenement = $evenement;
 
         return $this;
     }

@@ -42,6 +42,12 @@ class Document
      */
     private $modifier;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="documents")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $documentCategorie;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +109,18 @@ class Document
     public function setModifier(\DateTimeInterface $modifier): self
     {
         $this->modifier = $modifier;
+
+        return $this;
+    }
+
+    public function getDocumentCategorie(): ?DocumentCategorie
+    {
+        return $this->documentCategorie;
+    }
+
+    public function setDocumentCategorie(?DocumentCategorie $documentCategorie): self
+    {
+        $this->documentCategorie = $documentCategorie;
 
         return $this;
     }
