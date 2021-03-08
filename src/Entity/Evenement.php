@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,34 @@ class Evenement
      * @ORM\Column(type="string", length=255)
      */
     private $vignette;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
+     */
+    private $inscriptions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sport;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $type;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categorie;
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +201,72 @@ class Evenement
     public function setVignette(string $vignette): self
     {
         $this->vignette = $vignette;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getInscriptions(): Collection
+    {
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+            $inscription->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscription(Inscription $inscription): self
+    {
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getEvenement() === $this) {
+                $inscription->setEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSport(): ?Sport
+    {
+        return $this->sport;
+    }
+
+    public function setSport(?Sport $sport): self
+    {
+        $this->sport = $sport;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
