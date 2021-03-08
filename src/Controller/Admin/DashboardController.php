@@ -2,6 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Categorie;
+use App\Entity\Evenement;
+use App\Entity\Sport;
+use App\Entity\Type;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -39,6 +43,12 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::section('Utilisateurs'),
             yield MenuItem::subMenu('Profils', 'fa fa-tasks')->setSubItems([
                 MenuItem::linkToCrud('Utilsateurs', 'fas fa-project-diagram', User::class),
+            ]),
+            yield MenuItem::subMenu('Gestion événement', 'fa fa-tasks')->setSubItems([
+                MenuItem::linkToCrud('Evénement', 'fas fa-project-diagram', Evenement::class),
+                MenuItem::linkToCrud('Sport', 'fas fa-project-diagram', Sport::class),
+                MenuItem::linkToCrud('Type', 'fas fa-project-diagram', Type::class),
+                MenuItem::linkToCrud('Catégorie', 'fas fa-project-diagram', Categorie::class),
             ]),
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),
