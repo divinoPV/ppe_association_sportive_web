@@ -22,7 +22,10 @@ use Twig\Loader\FilesystemLoader;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'login')]
+    /*#[Route('/login', name: 'login')]*/
+    /**
+     * @Route("/login", name="login")
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error= $authenticationUtils->getLastAuthenticationError();
@@ -38,7 +41,10 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/registration', name: 'registration')]
+    /*#[Route('/registration', name: 'registration')]*/
+    /**
+     * @Route("/registration", name="registration")
+     */
     public function registration(EntityManagerInterface $manager,
                                  Request $request,
                                  UserPasswordEncoderInterface $encoder
@@ -68,13 +74,19 @@ class SecurityController extends AbstractController
     }
 
 
-    #[Route("/logout", name: "logout")]
+    /*#[Route("/logout", name: "logout")]*/
+    /**
+     * @Route("/logout", name="logout")
+     */
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
-    #[Route('/forgotten', name: 'forgotten')]
+    /*#[Route('/forgotten', name: 'forgotten')]*/
+    /**
+     * @Route("/forgotten", name="forgotten")
+     */
     public function forgottenPassword(AuthenticationUtils $authenticationUtils,
                                       EntityManagerInterface $em,
                                       MailerInterface $mailer,
