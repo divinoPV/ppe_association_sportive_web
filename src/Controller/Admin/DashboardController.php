@@ -12,6 +12,7 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -25,7 +26,9 @@ class DashboardController extends AbstractDashboardController
         if($this->getUser()->getRoles() === 'ROLE_USER'){
             return $this->redirectToRoute('home');
         }else{
-            return parent::index();
+            $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
+
+            return $this->redirect($routeBuilder->setController(EvenementCrudController::class)->generateUrl());
         }
     }
 
@@ -47,8 +50,8 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Utilsateurs', 'fas fa-project-diagram', User::class),
             ]),
             yield MenuItem::subMenu('Gestion événement', 'fa fa-tasks')->setSubItems([
-                MenuItem::linkToCrud('Evénement', 'fas fa-project-diagram', Evenement::class),
-                MenuItem::linkToCrud('Sport', 'fas fa-project-diagram', Sport::class),
+                MenuItem::linkToCrud('Evénement', 'fas fa-calendar-alt', Evenement::class),
+                MenuItem::linkToCrud('Sport', 'fas fa-futbol', Sport::class),
                 MenuItem::linkToCrud('Type', 'fas fa-project-diagram', Type::class),
                 MenuItem::linkToCrud('Catégorie', 'fas fa-project-diagram', Categorie::class),
             ]),
