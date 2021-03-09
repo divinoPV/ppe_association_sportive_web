@@ -82,10 +82,11 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
     /** @internal */
     public function encodePassword($event)
     {
-        $user = $event->getEntityInstance();
-        if ($user->getPlainPassword()):
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPlainPassword()));
-        endif;
+        $instance= $event->getEntityInstance();
+        if (get_class($instance) === get_class(new User())) {
+            if ($instance->getPlainPassword()){
+                $instance->setPassword($this->passwordEncoder->encodePassword($instance, $instance->getPlainPassword()));
+            }
+        }
     }
-
 }

@@ -7,9 +7,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class EvenementCrudController extends AbstractCrudController
 {
@@ -25,6 +27,13 @@ class EvenementCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('nom', 'titre de l\'évenement'),
             TextEditorField::new('description', 'description de l\'évenement'),
+            ImageField::new('imageFile', 'ajouter une image')
+                ->setFormType(VichImageType::class)
+                ->setFormTypeOptions(['allow_delete' => false])
+                ->onlyOnForms(),
+            ImageField::new('image', 'image')
+                ->setBasePath($this->getParameter('app.path.featured_evenement_images'))
+                ->hideOnForm(),
             DateField::new('debut', 'début de l\'évenement'),
             DateField::new('fin', 'fin de l\'évenement'),
             DateField::new('creer', 'date création')->hideOnForm(),

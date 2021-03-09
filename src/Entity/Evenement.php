@@ -10,6 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=EvenementRepository::class)
+ * @Vich\Uploadable
  */
 class Evenement
 {
@@ -66,7 +67,7 @@ class Evenement
     private ?string $vignette;
 
     /**
-     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="evenement_image")
+     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
      * @var File $imageFile
      */
     private File $imageFile;
