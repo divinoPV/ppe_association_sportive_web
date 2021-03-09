@@ -19,7 +19,7 @@ class Evenement
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=256)
@@ -59,24 +59,24 @@ class Evenement
     /**
      * @ORM\Column(type="string", length=256)
      */
-    private ?string $image;
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="string", length=256)
      */
-    private ?string $vignette;
+    private ?string $vignette = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
-     * @var File $imageFile
+     * @var File|null $imageFile
      */
-    private File $imageFile;
+    private ?File $imageFile = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_vignette", fileNameProperty="vignette")
-     * @var File $vignetteFile
+     * @var File|null $vignetteFile
      */
-    private File $vignetteFile;
+    private ?File $vignetteFile;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
@@ -100,6 +100,11 @@ class Evenement
      * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
      */
     private Collection $inscription;
+
+    public function __construct()
+    {
+        $this->creer = new \DateTime();
+    }
 
     /**
      * @return int
@@ -251,11 +256,11 @@ class Evenement
         return $this->imageFile;
     }
 
-    public function setImageFile(File $image): void
+    public function setImageFile(File $imageFile): void
     {
-        $this->imageFile = $image;
+        $this->imageFile = $imageFile;
 
-        if ($image) {
+        if ($imageFile) {
             $this->setUpdatedAt();
         }
     }
@@ -265,11 +270,11 @@ class Evenement
         return $this->imageFile;
     }
 
-    public function setVignetteFile(File $vignette): void
+    public function setVignetteFile(File $vignetteFile): void
     {
-        $this->vignette = $vignette;
+        $this->vignetteFile = $vignetteFile;
 
-        if ($vignette) {
+        if ($vignetteFile) {
             $this->setUpdatedAt();
         }
     }

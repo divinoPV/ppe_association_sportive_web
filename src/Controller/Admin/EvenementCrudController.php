@@ -34,14 +34,23 @@ class EvenementCrudController extends AbstractCrudController
             ImageField::new('image', 'image')
                 ->setBasePath($this->getParameter('app.path.featured_evenement_images'))
                 ->hideOnForm(),
+
+            ImageField::new('vignetteFile', 'ajouter une vignette')
+                ->setFormType(VichImageType::class)
+                ->setFormTypeOptions(['allow_delete' => false])
+                ->onlyOnForms(),
+            ImageField::new('vignette', 'vignette')
+                ->setBasePath('/media/images/featured/vignettes')
+                ->hideOnForm(),
+
             DateField::new('debut', 'début de l\'évenement'),
             DateField::new('fin', 'fin de l\'évenement'),
             DateField::new('creer', 'date création')->hideOnForm(),
             DateField::new('modifier', 'date modification')->hideOnForm(),
             NumberField::new('nombrePlaces', 'nombre de place'),
-            AssociationField::new('categorie')->autocomplete(),
-            AssociationField::new('sport')->autocomplete(),
-            AssociationField::new('type')->autocomplete(),
+            AssociationField::new('categorie'),
+            AssociationField::new('sport'),
+            AssociationField::new('type'),
         ];
     }
 

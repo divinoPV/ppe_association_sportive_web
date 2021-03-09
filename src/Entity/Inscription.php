@@ -20,7 +20,7 @@ class Inscription
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="inscription")
-     * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
+     * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private Evenement $evenement;
 
