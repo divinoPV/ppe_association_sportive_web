@@ -56,7 +56,6 @@ class EvenementController extends AbstractController
         ):
             $criteria = $searchEventForm->getData();
             $events = $evenementRepository->searchEvenement($criteria);
-            dd($events);
         endif;
 
         return $this->render('evenement/index.html.twig', [
