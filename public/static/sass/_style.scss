@@ -1,0 +1,11 @@
+/*
+ Installer node.js pour avoir npm : "https://nodejs.org/fr/download/"
+ Installer sass : "npm install -g sass"
+ Créer la variable d'environnement pour sass dans le PATH
+ Command à exécuter dans le terminal : "sass public/static/sass/_style.scss public/static/css/style.css --watch"
+ */
+
+@import "reset/reset";
+@import "variable/variable";
+@import "mixin/mixin";
+@import "component/component";

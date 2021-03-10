@@ -1,0 +1,11 @@
+form {
+    & .btn-login {
+        background-color: #5cb85c !important;
+        color: #fff !important;
+        border-radius: 12px !important;
+    }
+
+    & .btn-register {
+        width: 150px;
+    }
+}
