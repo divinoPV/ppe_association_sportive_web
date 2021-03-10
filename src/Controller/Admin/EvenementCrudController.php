@@ -46,9 +46,9 @@ class EvenementCrudController extends AbstractCrudController
             DateField::new('creer', 'date création')->hideOnForm(),
             DateField::new('modifier', 'date modification')->hideOnForm(),
             NumberField::new('nombrePlaces', 'nombre de place'),
-            AssociationField::new('categorie')->autocomplete(),
-            AssociationField::new('sport')->autocomplete(),
-            AssociationField::new('type')->autocomplete(),
+            AssociationField::new('evenementCategorie'),
+            AssociationField::new('sport'),
+            AssociationField::new('type'),
         ];
     }
 

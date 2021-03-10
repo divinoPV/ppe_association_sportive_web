@@ -20,7 +20,7 @@ class Evenement
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=256)
@@ -60,12 +60,12 @@ class Evenement
     /**
      * @ORM\Column(type="string", length=256)
      */
-    private ?string $image;
+    private ?string $image = null;
 
     /**
      * @ORM\Column(type="string", length=256)
      */
-    private ?string $vignette;
+    private ?string $vignette = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
@@ -101,6 +101,11 @@ class Evenement
      * @ORM\JoinColumn(name="evenementCategorie", nullable=false, referencedColumnName="id")
      */
     private $evenementCategorie;
+
+    public function __construct()
+    {
+        $this->creer = new \DateTime();
+    }
 
     /**
      * @return int

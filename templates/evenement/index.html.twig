@@ -10,7 +10,7 @@
         {% for event in events %}
             <div class="element event-element">
                 <div class="e-image ee-image">
-                    <img class="image eei-image" src="{{ event.vignette }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
+                    <img class="image eei-image" src="{{ asset('/media/images/featured/vignettes/' ~ event.vignette) }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
                 </div>
                 <div class="e-content ee-content">
                     <span class="titre ec-titre eec-titre">{{ event.nom }}</span>
