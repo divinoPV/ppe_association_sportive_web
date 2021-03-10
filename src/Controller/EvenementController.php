@@ -12,7 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EvenementController extends AbstractController
 {
-    #[Route('/evenement', name: 'evenement')]
+    /*#[Route('/evenement', name: 'evenement')]*/
+    /**
+     * @Route("/evenement", name="evenement")
+     */
     public function index(EntityManagerInterface $manager,
                           Request $request
     ): Response
