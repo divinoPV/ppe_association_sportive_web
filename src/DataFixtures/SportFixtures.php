@@ -10,13 +10,32 @@ class SportFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i=0; $i<=9;$i++){
-            $sport = new Sport();
+        $sports = [
+            "Football",
+            "Basketball",
+            "Handball",
+            "Natation",
+            "Équitation",
+            "Tenis",
+            "Ping-pong",
+            "Squash",
+            "Rugby",
+            "Football Américain",
+            "Escalade",
+            "Cricket",
+            "Polo",
+            "Golf",
+            "Escrime",
+            "Gymnastique",
+            "Ski"
+        ];
 
-            $sport->setNom('sportSv'.$i);
-            $manager->persist($sport);
-            $this->addReference('sportSv'.$i, $sport);
-        }
+        foreach ($sports as $id => $sport):
+            $aSport = new Sport();
+            $aSport->setNom($sport);
+            $manager->persist($aSport);
+            $this->addReference('sport'.$id, $aSport);
+        endforeach;
 
         $manager->flush();
     }

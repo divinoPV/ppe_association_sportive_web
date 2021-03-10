@@ -2,8 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categorie;
 use App\Entity\Evenement;
+use App\Entity\EvenementCategorie;
 use App\Entity\Sport;
 use App\Entity\Type;
 use DateTime;
@@ -30,16 +30,16 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setVignette('vignette'.$i)
                 ->setNombrePlaces(25);
 
-            /** @var Categorie $uneCateg */
-            $uneCateg = $this->getReference('eventCateg'.rand(0, 6));
+            /** @var EvenementCategorie $categ */
+            $categ = $this->getReference('eventCateg'.rand(0, 6));
             /** @var Sport $sport */
-            $sport = $this->getReference('sportSv'.rand(0,9));
+            $sport = $this->getReference('sport'.rand(0,15));
             /** @var Type $type */
             $type = $this->getReference('type'.rand(0,2));
 
 
             $evenement
-                ->setEvenementCategorie($uneCateg)
+                ->setEvenementCategorie($categ)
                 ->setType($type)
                 ->setSport($sport);
 
