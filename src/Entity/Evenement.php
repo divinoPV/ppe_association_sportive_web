@@ -68,15 +68,15 @@ class Evenement
 
     /**
      * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
-     * @var File $imageFile
+     * @var File|null $imageFile
      */
-    private File $imageFile;
+    private ?File $imageFile = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_vignette", fileNameProperty="vignette")
-     * @var File $vignetteFile
+     * @var File|null $vignetteFile
      */
-    private File $vignetteFile;
+    private ?File $vignetteFile = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
@@ -265,11 +265,11 @@ class Evenement
         return $this->vignetteFile;
     }
 
-    public function setVignetteFile(File $vignette): void
+    public function setVignetteFile(File $vignetteFile): void
     {
-        $this->vignette = $vignette;
+        $this->vignetteFile = $vignetteFile;
 
-        if ($vignette) {
+        if ($vignetteFile) {
             $this->setUpdatedAt();
         }
     }

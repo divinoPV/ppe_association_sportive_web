@@ -34,9 +34,6 @@ class EvenementCrudController extends AbstractCrudController
             ImageField::new('image', 'image')
                 ->setBasePath($this->getParameter('app.path.featured_evenement_images'))
                 ->hideOnForm(),
-<<<<<<< Updated upstream
-=======
-
             ImageField::new('vignetteFile', 'ajouter une vignette')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions(['allow_delete' => false])
@@ -44,8 +41,6 @@ class EvenementCrudController extends AbstractCrudController
             ImageField::new('vignette', 'vignette')
                 ->setBasePath($this->getParameter('app.path.featured_evenement_vignettes'))
                 ->hideOnForm(),
-
->>>>>>> Stashed changes
             DateField::new('debut', 'début de l\'évenement'),
             DateField::new('fin', 'fin de l\'évenement'),
             DateField::new('creer', 'date création')->hideOnForm(),
