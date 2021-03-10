@@ -1,19 +1,34 @@
 {% extends 'base.html.twig' %}
 {% block title %}Événement{% endblock %}
 {% block body %}
-<div class="header">
-    <span>{{ count }} événement{% if count > 1 %}s{% endif %}</span>
-    {{ form(search_event_form) }}
+<div class="header event-header">
+    <span class="title event-title">{{ eventCount }} événement{% if eventCount > 1 %}s{% endif %}</span>
+    {{ form_start(search_event_form) }}
+    <div class="column">
+        {{ form_row(search_event_form.evenementCategorie) }}
+    </div>
+    <div class="column">
+        {{ form_row(search_event_form.sport) }}
+    </div>
+    <div class="column">
+        {{ form_row(search_event_form.actif) }}
+    </div>
+    <div class="column">
+        {{ form_row(search_event_form.send) }}
+    </div>
+    {{ form_end(search_event_form) }}
 </div>
 <div class="body event-body">
     <div class="group group-element event-group-element">
         {% for event in events %}
+            {% set nom = event.nom %}
             <div class="element event-element">
                 <div class="e-image ee-image">
-                    <img class="image eei-image" src="{{ asset('media/images/event/' ~ event.vignette)  }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
+                    <img class="image eei-image" src="{{ asset('media/images/event/' ~ event.vignette)  }}"
+                         alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
                 </div>
                 <div class="e-content ee-content">
-                    <span class="titre ec-titre eec-titre">{{ event.nom|trim('.') }}</span>
+                    <span class="titre ec-titre eec-titre">{{ nom|trim('.') }}</span>
                     <div class="subgroup ec-subgroup eec-subgroup">
                         <span class="date ecs-date eecs-date">
                             <i class="far fa-calendar-plus"></i>
@@ -24,7 +39,25 @@
                         </span>
                         <span class="ecs-registration eecs-registration">
                             <i class="fas fa-info-circle"></i>
-                             {{ event.nombrePlaces }}
+                            {% set haveOne = [] %}
+                            {% set nbrPlace = event.nombrePlaces %}
+                            {% for insc in inscriptionCount %}
+                                {% if insc.id == event.id %}
+                                    {% if insc.1 == event.nombrePlaces %}
+                                        {% trans %}Inscriptions terminées{% endtrans %}
+                                    {% else%}
+                                        {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
+                                        {% set nbrInscrit = insc.1 %}
+                                        {% trans %}
+                                            %nbrInscrit% %string% sur %nbrPlace%
+                                        {% endtrans %}
+                                    {% endif%}
+                                    {% set haveOne = haveOne|merge([event.id]) %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if haveOne is not null and event.id not in haveOne %}
+                                {% trans %}%nbrPlace% places disponibles !{% endtrans %}
+                            {% endif %}
                         </span>
                         <span class="ecs-category eecs-category">
                             {{ event.evenementCategorie.nom }}

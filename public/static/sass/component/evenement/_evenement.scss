@@ -1,3 +1,43 @@
+.event-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 34px auto 55px;
+    max-width: 1200px;
+
+    .event-title {
+        font-size: 3rem;
+        min-width: max-content;
+    }
+
+    form {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .column {
+            label {
+                font-size: 1.2rem;
+
+                &:after {
+                    content: ' :';
+                    margin-right: 13px;
+                }
+            }
+
+            select {
+                border-color: #a8adb2;
+                padding: 5px;
+            }
+
+            .event-button {
+                background-color: #007BFF;
+            }
+        }
+    }
+}
+
 .event-body {
     align-items: center;
     display: flex;
@@ -56,7 +96,7 @@
         }
 
         .eecs-sport {
-            background: #bde0ff;
+            background: #D2E7FD;
             border-radius: 8px;
             padding: 5px 8px;
         }

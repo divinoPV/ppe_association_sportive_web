@@ -97,14 +97,19 @@ class Evenement
     private Collection $inscription;
 
     /**
-     * @ORM\ManyToOne(targetEntity=EvenementCategorie::class, inversedBy="Evenement")
+     * @ORM\ManyToOne(targetEntity=EvenementCategorie::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="evenementCategorie", nullable=false, referencedColumnName="id")
      */
-    private $evenementCategorie;
+    private EvenementCategorie $evenementCategorie;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $actif;
 
     public function __construct()
     {
-        $this->creer = new \DateTime();
+        $this->creer = new DateTime();
     }
 
     /**
@@ -347,14 +352,26 @@ class Evenement
         return $this;
     }
 
-    public function getEvenementCategorie(): ?EvenementCategorie
+    public function getEvenementCategorie(): EvenementCategorie
     {
         return $this->evenementCategorie;
     }
 
-    public function setEvenementCategorie(?EvenementCategorie $evenementCategorie): self
+    public function setEvenementCategorie(EvenementCategorie $evenementCategorie): self
     {
         $this->evenementCategorie = $evenementCategorie;
+
+        return $this;
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
 
         return $this;
     }

@@ -17,12 +17,12 @@ class EvenementCategorie
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom;
+    private string $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="evenementCategorie")
@@ -52,7 +52,7 @@ class EvenementCategorie
     }
 
     /**
-     * @return Collection|Evenement[]
+     * @return Collection
      */
     public function getEvenement(): Collection
     {

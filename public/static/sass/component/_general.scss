@@ -11,3 +11,14 @@ a {
 main {
     min-height: max-content;
 }
+
+.button {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    padding: 11px 21px;
+    text-align: center;
+    text-decoration: none;
+}

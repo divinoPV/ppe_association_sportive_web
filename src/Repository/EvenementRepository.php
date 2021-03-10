@@ -19,6 +19,22 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
+    public function searchEvenement(Evenement $criteria)
+    {
+        return $this->createQueryBuilder('e')
+            ->leftJoin('App:Sport', 's')
+            ->leftJoin('App:EvenementCategorie', 'ec')
+            ->where('s.nom = :sport')
+            ->setParameter('sport', $criteria->getSport()->getNom())
+            ->andWhere('ec.nom = :cat')
+            ->setParameter('cat', $criteria->getEvenementCategorie()->getNom())
+            ->andWhere('e.actif = :actif')
+            ->setParameter('actif', $criteria->getActif())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Evenement[] Returns an array of Evenement objects
     //  */

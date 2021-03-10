@@ -73,6 +73,17 @@ main {
   min-height: max-content;
 }
 
+.button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+  padding: 11px 21px;
+  text-align: center;
+  text-decoration: none;
+}
+
 header {
   background-color: #1e2a47;
   width: 100%;
@@ -176,6 +187,38 @@ footer .container .row .col span i:nth-of-type(2) {
   margin-left: 5px;
 }
 
+.event-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 34px auto 55px;
+  max-width: 1200px;
+}
+.event-header .event-title {
+  font-size: 3rem;
+  min-width: max-content;
+}
+.event-header form {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.event-header form .column label {
+  font-size: 1.2rem;
+}
+.event-header form .column label:after {
+  content: " :";
+  margin-right: 13px;
+}
+.event-header form .column select {
+  border-color: #a8adb2;
+  padding: 5px;
+}
+.event-header form .column .event-button {
+  background-color: #007BFF;
+}
+
 .event-body {
   align-items: center;
   display: flex;
@@ -227,7 +270,7 @@ footer .container .row .col span i:nth-of-type(2) {
   font-weight: 700;
 }
 .ee-content .eec-subgroup .eecs-sport {
-  background: #bde0ff;
+  background: #D2E7FD;
   border-radius: 8px;
   padding: 5px 8px;
 }

@@ -34,7 +34,9 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setFin(new DateTime('now'))
                 ->setImage($number.'.jpg')
                 ->setVignette($number.'.jpg')
-                ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)));
+                ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)))
+                ->setActif((bool)random_int(0, 1))
+            ;
 
             /** @var EvenementCategorie $categ */
             $categ = $this->getReference('eventCateg'.rand(0, 6));
