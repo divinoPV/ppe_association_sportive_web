@@ -21,13 +21,13 @@ class EvenementCategorieFixtures extends Fixture
             "Journée associative"
         ];
 
-        foreach ($eventCateg as $id => $categ){
-            $uneCateg = new EvenementCategorie();
-            $uneCateg->setNom($categ);
+        foreach ($eventCateg as $id => $categ):
+            $aCateg = new EvenementCategorie();
+            $aCateg->setNom($categ);
+            $manager->persist($aCateg);
+            $this->addReference('eventCateg'.$id, $aCateg);
+        endforeach;
 
-            $manager->persist($uneCateg);
-            $this->addReference('eventCateg'.$id, $uneCateg);
-        }
         $manager->flush();
     }
 }
