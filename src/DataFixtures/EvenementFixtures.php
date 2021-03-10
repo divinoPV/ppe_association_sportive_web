@@ -10,18 +10,24 @@ use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+use Faker\Generator;
 
 class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
+    protected Generator $faker;
+
     public function load(ObjectManager $manager)
     {
+        $this->faker = Factory::create();
+
         for ($i = 1; $i < 25; $i++) {
 
             $evenement = new Evenement();
 
             $evenement
-                ->setNom('evenementSv'.$i)
-                ->setDescription('evenementScolaire'.$i)
+                ->setNom($this->faker->sentence(5))
+                ->setDescription($this->faker->sentence(34))
                 ->setCreatedAt()
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
