@@ -22,19 +22,19 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
         $this->faker = Factory::create();
 
         for ($i = 1; $i < 25; $i++) {
+            $number = rand(1, 7);
 
             $evenement = new Evenement();
-
             $evenement
-                ->setNom($this->faker->sentence(5))
-                ->setDescription($this->faker->sentence(34))
+                ->setNom($this->faker->sentence(rand(2, 9)))
+                ->setDescription($this->faker->sentence(rand(47, 159)))
                 ->setCreatedAt()
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
                 ->setFin(new DateTime('now'))
-                ->setImage($this->faker->word().'.png')
-                ->setVignette($this->faker->word().'.png')
-                ->setNombrePlaces(25);
+                ->setImage($number.'.jpg')
+                ->setVignette($number.'.jpg')
+                ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)));
 
             /** @var EvenementCategorie $categ */
             $categ = $this->getReference('eventCateg'.rand(0, 6));
