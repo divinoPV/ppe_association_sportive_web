@@ -10,18 +10,20 @@
         {% for event in events %}
             <div class="element event-element">
                 <div class="e-image ee-image">
-                    <img class="image eei-image" src="{{ event.vignette }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
+                    <img class="image eei-image" src="{{ asset('media/images/event/' ~ event.vignette)  }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
                 </div>
                 <div class="e-content ee-content">
-                    <span class="titre ec-titre eec-titre">{{ event.nom }}</span>
+                    <span class="titre ec-titre eec-titre">{{ event.nom|trim('.') }}</span>
                     <div class="subgroup ec-subgroup eec-subgroup">
                         <span class="date ecs-date eecs-date">
+                            <i class="far fa-calendar-plus"></i>
                             {{ event.debut|date("m/d/Y") }}
                             {% if event.fin is not null %}
                                 {{ event.fin|date("m/d/Y") }}
                             {% endif %}
                         </span>
                         <span class="ecs-registration eecs-registration">
+                            <i class="fas fa-info-circle"></i>
                              {{ event.nombrePlaces }}
                         </span>
                         <span class="ecs-category eecs-category">
@@ -31,6 +33,10 @@
                             {{ event.sport.nom }}
                         </span>
                     </div>
+                    <p class="description ec-description eec-description">
+                        {{ event.description }}
+                    </p>
+                    <a class="link ec-link eec-link" href="#">Voir l'événement ></a>
                 </div>
             </div>
         {% endfor %}
