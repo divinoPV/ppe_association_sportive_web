@@ -32,8 +32,8 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
                 ->setFin(new DateTime('now'))
-                ->setImage('photo'.$i)
-                ->setVignette('vignette'.$i)
+                ->setImage($this->faker->imageUrl(640, 480, 'sports'))
+                ->setVignette($this->faker->imageUrl(280, 280, 'sports'))
                 ->setNombrePlaces(25);
 
             /** @var EvenementCategorie $categ */
