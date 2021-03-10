@@ -262,7 +262,7 @@ class Evenement
 
     public function getVignetteFile(): ?File
     {
-        return $this->imageFile;
+        return $this->vignetteFile;
     }
 
     public function setVignetteFile(File $vignette): void
