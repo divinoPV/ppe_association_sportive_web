@@ -24,20 +24,12 @@
                         <span class="ecs-registration eecs-registration">
                              {{ event.nombrePlaces }}
                         </span>
-                        <div class="ecs-category eecs-category">
-                            {% for categ in event.categorie %}
-                                <span class="ecsc-nom eecsc-nom">
-                                    {{ categ.nom }}
-                                </span>
-                            {% endfor %}
-                        </div>
-                        <div class="ecs-sport eecs-sport">
-                            {% for aSport in event.sport %}
-                                <span class="ecss-nom eecss-nom">
-                                    {{ aSport.nom }}
-                                </span>
-                            {% endfor %}
-                        </div>
+                        <span class="ecs-category eecs-category">
+                            {{ event.evenementCategorie.nom }}
+                        </span>
+                        <span class="ecs-sport eecs-sport">
+                            {{ event.sport.nom }}
+                        </span>
                     </div>
                 </div>
             </div>

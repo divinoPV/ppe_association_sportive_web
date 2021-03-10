@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EvenementRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
@@ -34,22 +35,22 @@ class Evenement
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $debut;
+    private DateTime $debut;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $fin;
+    private DateTime $fin;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $creer;
+    private DateTime $creer;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $modifier;
+    private DateTime $modifier;
 
     /**
      * @ORM\Column(type="integer")
@@ -91,15 +92,15 @@ class Evenement
     private Type $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenement")
-     * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
-     */
-    private Categorie $categorie;
-
-    /**
      * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
      */
     private Collection $inscription;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=EvenementCategorie::class, inversedBy="Evenement")
+     * @ORM\JoinColumn(name="evenementCategorie", nullable=false, referencedColumnName="id")
+     */
+    private $evenementCategorie;
 
     /**
      * @return int
@@ -146,34 +147,34 @@ class Evenement
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDebut(): \DateTime
+    public function getDebut(): DateTime
     {
         return $this->debut;
     }
 
     /**
-     * @param \DateTime $debut
+     * @param DateTime $debut
      */
-    public function setDebut(\DateTime $debut): self
+    public function setDebut(DateTime $debut): self
     {
         $this->debut = $debut;
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getFin(): \DateTime
+    public function getFin(): DateTime
     {
         return $this->fin;
     }
 
     /**
-     * @param \DateTime $fin
+     * @param DateTime $fin
      */
-    public function setFin(\DateTime $fin): self
+    public function setFin(DateTime $fin): self
     {
         $this->fin = $fin;
 
@@ -182,24 +183,24 @@ class Evenement
 
     public function setCreatedAt(): self
     {
-        $this->creer = new \DateTime();
+        $this->creer = new DateTime();
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->creer;
     }
 
     public function setUpdatedAt(): self
     {
-        $this->modifier = new \DateTime();
+        $this->modifier = new DateTime();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->modifier;
     }
@@ -311,24 +312,6 @@ class Evenement
     }
 
     /**
-     * @return Categorie
-     */
-    public function getCategorie(): Categorie
-    {
-        return $this->categorie;
-    }
-
-    /**
-     * @param Categorie $categorie
-     */
-    public function setCategorie(Categorie $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Inscription[]
      */
     public function getInscription(): ?Collection
@@ -355,6 +338,18 @@ class Evenement
                 $inscription->setEvenement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEvenementCategorie(): ?EvenementCategorie
+    {
+        return $this->evenementCategorie;
+    }
+
+    public function setEvenementCategorie(?EvenementCategorie $evenementCategorie): self
+    {
+        $this->evenementCategorie = $evenementCategorie;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Entity\Sport;
 use App\Entity\Type;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -23,14 +24,14 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription('evenementScolaire'.$i)
                 ->setCreatedAt()
                 ->setUpdatedAt()
-                ->setDebut(new \DateTime('now'))
-                ->setFin(new \DateTime('now'))
+                ->setDebut(new DateTime('now'))
+                ->setFin(new DateTime('now'))
                 ->setImage('photo'.$i)
                 ->setVignette('vignette'.$i)
                 ->setNombrePlaces(25);
 
             /** @var Categorie $uneCateg */
-            $uneCateg = $this->getReference('categ'.rand(0, 3));
+            $uneCateg = $this->getReference('eventCateg'.rand(0, 6));
             /** @var Sport $sport */
             $sport = $this->getReference('sportSv'.rand(0,9));
             /** @var Type $type */
@@ -38,7 +39,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
 
 
             $evenement
-                ->setCategorie($uneCateg)
+                ->setEvenementCategorie($uneCateg)
                 ->setType($type)
                 ->setSport($sport);
 
@@ -52,7 +53,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             SportFixtures::class,
-            CategorieFixtures::class,
+            EvenementCategorieFixtures::class,
             TypeFixtures::class
         ];
     }
