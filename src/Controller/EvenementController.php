@@ -55,11 +55,11 @@ class EvenementController extends AbstractController
             $searchEventForm->isValid()
         ):
             $criteria = $searchEventForm->getData();
-            $events = $evenementRepository->searchEvenement($criteria);
+            $result = $evenementRepository->searchEvenement($criteria);
         endif;
 
         return $this->render('evenement/index.html.twig', [
-            'events' => $events,
+            'events' => $result ?? $events,
             'eventCount' => $eventCount,
             'inscriptionCount' => $inscriptionCount,
             'search_event_form' => $searchEventForm->createView()

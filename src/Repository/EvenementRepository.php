@@ -22,8 +22,8 @@ class EvenementRepository extends ServiceEntityRepository
     public function searchEvenement(Evenement $criteria)
     {
         return $this->createQueryBuilder('e')
-            ->join('App:Sport', 's')
-            ->join('App:EvenementCategorie', 'ec')
+            ->join('e.sport', 's')
+            ->join('e.evenementCategorie', 'ec')
             ->where('s.nom = :sport')
             ->setParameter('sport', $criteria->getSport()->getNom())
             ->andWhere('ec.nom = :cat')
