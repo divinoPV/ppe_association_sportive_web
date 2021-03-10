@@ -10,6 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=EvenementRepository::class)
+ * @Vich\Uploadable
  */
 class Evenement
 {
@@ -66,16 +67,16 @@ class Evenement
     private ?string $vignette;
 
     /**
-     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="evenement_image")
-     * @var File $imageFile
+     * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
+     * @var File|null $imageFile
      */
-    private File $imageFile;
+    private ?File $imageFile = null;
 
     /**
-     * @Vich\UploadableField(mapping="vignette", fileNameProperty="vignette")
-     * @var File $vignetteFile
+     * @Vich\UploadableField(mapping="evenement_vignette", fileNameProperty="vignette")
+     * @var File|null $vignetteFile
      */
-    private File $vignetteFile;
+    private ?File $vignetteFile = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
@@ -261,14 +262,14 @@ class Evenement
 
     public function getVignetteFile(): ?File
     {
-        return $this->imageFile;
+        return $this->vignetteFile;
     }
 
-    public function setVignetteFile(File $vignette): void
+    public function setVignetteFile(File $vignetteFile): void
     {
-        $this->vignette = $vignette;
+        $this->vignetteFile = $vignetteFile;
 
-        if ($vignette) {
+        if ($vignetteFile) {
             $this->setUpdatedAt();
         }
     }
