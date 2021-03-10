@@ -1,20 +1,47 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello EvenementController!{% endblock %}
-
+{% block title %}Événement{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/BTS2/ppe/asso_sportive_symfony/src/Controller/EvenementController.php'|file_link(0) }}">src/Controller/EvenementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/BTS2/ppe/asso_sportive_symfony/templates/evenement/index.html.twig'|file_link(0) }}">templates/evenement/index.html.twig</a></code></li>
-    </ul>
+<div class="header">
+    <span>{{ count }} événement{% if count > 1 %}s{% endif %}</span>
+    {{ form(search_event_form) }}
+</div>
+<div class="body event-body">
+    <div class="group group-element event-group-element">
+        {% for event in events %}
+            <div class="element event-element">
+                <div class="e-image ee-image">
+                    <img class="image eei-image" src="{{ event.vignette }}" alt="{% trans %}La vignette de l'événement #event.nom#{% endtrans %}">
+                </div>
+                <div class="e-content ee-content">
+                    <span class="titre ec-titre eec-titre">{{ event.nom }}</span>
+                    <div class="subgroup ec-subgroup eec-subgroup">
+                        <span class="date ecs-date eecs-date">
+                            {{ event.debut|date("m/d/Y") }}
+                            {% if event.fin is not null %}
+                                {{ event.fin|date("m/d/Y") }}
+                            {% endif %}
+                        </span>
+                        <span class="ecs-registration eecs-registration">
+                             {{ event.nombrePlaces }}
+                        </span>
+                        <div class="ecs-category eecs-category">
+                            {% for categ in event.categorie %}
+                                <span class="ecsc-nom eecsc-nom">
+                                    {{ categ.nom }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                        <div class="ecs-sport eecs-sport">
+                            {% for aSport in event.sport %}
+                                <span class="ecss-nom eecss-nom">
+                                    {{ aSport.nom }}
+                                </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
