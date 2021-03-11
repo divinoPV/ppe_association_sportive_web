@@ -1,0 +1,17 @@
+.home-header {
+  display: flex;
+  margin: 55px auto 25px;
+  max-width: 1200px;
+  flex-direction: column;
+
+  .home-title {
+    font-size: 3rem;
+    min-width: max-content;
+    color: #1e2a47;
+    margin-bottom: 50px;
+  }
+
+  .home-subtitle {
+    font-size: 2rem;
+  }
+}

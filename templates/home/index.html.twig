@@ -1,21 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 {% block meta_description %}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/BTS2/ppe/asso_sportive_symfony/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/BTS2/ppe/asso_sportive_symfony/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="header home-header">
+        <span class="title home-title">Accueil</span>
+        <p class="home-subtitle">Derniers événements </p>
+    </div>
+    <div class="body event-body">
+        <div class="group group-element event-group-element">
+            {% for event in events %}
+                {% set nom = event.nom %}
+                <div class="element event-element">
+                    <div class="e-image ee-image">
+                        <img class="image eei-image" src="{{ asset('media/images/featured/vignettes' ~ event.vignette)  }}"
+                             alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
+                    </div>
+                    <div class="e-content ee-content">
+                        <span class="titre ec-titre eec-titre">{{ nom|trim('.') }}</span>
+                        <div class="subgroup ec-subgroup eec-subgroup">
+                        <span class="date ecs-date eecs-date">
+                            <i class="far fa-calendar-plus"></i>
+                            {{ event.debut|date("m/d/Y") }}
+                            {% if event.fin is not null %}
+                                {{ event.fin|date("m/d/Y") }}
+                            {% endif %}
+                        </span>
+                            <span class="ecs-category eecs-category">
+                            {{ event.evenementCategorie.nom }}
+                        </span>
+                            <span class="ecs-sport eecs-sport">
+                            {{ event.sport.nom }}
+                        </span>
+                        </div>
+                        <p class="description ec-description eec-description">
+                            {{ event.description }}
+                        </p>
+                        <a class="link ec-link eec-link" href="#">Voir l'événement ></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
