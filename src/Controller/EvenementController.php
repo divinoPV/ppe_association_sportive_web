@@ -8,6 +8,7 @@ use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,19 +21,22 @@ class EvenementController extends AbstractController
      * @param EntityManagerInterface $manager
      * @param Request $request
      * @param EvenementRepository $evenementRepository
+     * @param PaginatorInterface $paginator
      * @return Response
      * @throws NoResultException
      * @throws NonUniqueResultException
      */
     public function index(EntityManagerInterface $manager,
                           Request $request,
-                          EvenementRepository $evenementRepository
+                          EvenementRepository $evenementRepository,
+                          PaginatorInterface $paginator
     ): Response
     {
         $eventQb = $manager
             ->createQueryBuilder()
             ->select('count(e.id)')
-            ->from('App:Evenement', 'e');
+            ->from('App:Evenement', 'e')
+        ;
         $eventCount = $eventQb->getQuery()->getSingleScalarResult();
 
         $inscriptionQB = $manager
@@ -45,9 +49,17 @@ class EvenementController extends AbstractController
         ;
         $inscriptionCount = $inscriptionQB->getQuery()->getResult();
 
-        $events = $manager
+        $datas = $this
+            ->getDoctrine()
             ->getRepository(Evenement::class)
-            ->findAll();
+            ->findAll()
+        ;
+
+        $events = $paginator->paginate(
+            $datas,
+            $request->query->getInt('page', 1),
+            5
+        );
 
         $searchEventForm = $this->createForm(EvenementSearchType::class);
 
