@@ -83,22 +83,22 @@
             {% if number != '' %}
                 <h2>{% trans %}%number% %string% à télécharger{% endtrans %}</h2>
                 <div class="document-table document-table-single document-table-single-event">
-                    <div class="row row-single row-single-event">
-                        <span class="name">Nom du document</span>
-                        <span class="date">Date d'ajout</span>
-                        <span class="category">Catégorie</span>
-                        <span class="weight">Poids</span>
-                        <span class="action">Action</span>
+                    <div class="document-row document-row-single document-row-single-event document-row-first odd">
+                        <span nom class="name">Nom du document</span>
+                        <span date class="date">Date d'ajout</span>
+                        <span cat class="category">Catégorie</span>
+                        <span poids class="weight">Poids</span>
+                        <span action class="action">Action</span>
                     </div>
                     {% for key, document in documents %}
                         {% if document.evenement.id == event.id %}
                             {% set classes = key is odd ? 'odd' : 'even' %}
-                            <div class="row row-single row-single-event {{ classes }}">
-                                <span class="name">{{ document.nom }}</span>
-                                <span class="date">{{ document.createdAt|date("m F Y") }}</span>
-                                <span class="category">{{ document.categorie.nom }}</span>
-                                <span class="weight">A venir dans le sprint 4{#{{ document.poids }}#}</span>
-                                <button class="button button-single button-single-event">Télécharger</button>
+                            <div class="document-row document-row-single document-row-single-event {{ classes }}">
+                                <span nom class="name">{{ document.nom }}</span>
+                                <span date class="date">{{ document.createdAt|date("m F Y") }}</span>
+                                <span cat class="category">{{ document.categorie.nom }}</span>
+                                <span poids class="weight">A venir dans le sprint 4{#{{ document.poids }}#}</span>
+                                <button action class="button button-single button-single-event button-telecharger">Télécharger</button>
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -110,5 +110,6 @@
     </div>
     <div class="footer footer-single footer-single-event">
         <a href="{{ path('evenement') }}">{% trans %}< Retour aux événements{% endtrans %}</a>
+        <button class="button button-single button-single-event button-inscription">Inscription</button>
     </div>
 {% endblock body %}

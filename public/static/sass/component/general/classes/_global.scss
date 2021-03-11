@@ -73,16 +73,63 @@
     object-fit: cover;
 }
 
-.description, .inscription {
-    @include display(flex, start, center, 21px);
-    flex-flow: column;
-    margin-top: 34px;
+.document {
+    width: 100%;
 
-    h2 {
-        font-size: $title-minor;
-        font-weight: 600;
+    .document-table {
+        @include display(grid, center, start);
+        grid-template-rows: 1fr;
+        grid-template-columns: max-content;
+        width: 100%;
+
+        .document-row-first {
+            span {
+                font-weight: 600;
+            }
+        }
+
+        .document-row {
+            @include display(grid, center);
+            column-gap: 34px;
+            grid-template-areas:
+                'nom date cat poids action'
+            ;
+            grid-template-columns: repeat(5, 180px);
+            justify-items: start;
+            height: 55px;
+
+            * {
+                margin-left: 13px;
+            }
+
+            [nom] {
+                grid-area: nom;
+            }
+
+            [date] {
+                grid-area: date;
+            }
+
+            [cat] {
+                grid-area: cat;
+            }
+
+            [poids] {
+                grid-area: poids;
+            }
+
+            [action] {
+                grid-area: action;
+            }
+
+            span {
+                width: max-content;
+            }
+        }
     }
+}
 
+.description, .inscription {
     p {
         color: $text-color-inferior;
         line-height: 1.5rem;
@@ -92,13 +139,32 @@
     }
 }
 
+.description, .inscription, .document {
+    @include display(flex, start, center, 21px);
+    flex-flow: column;
+    margin-top: 34px;
+
+    h2 {
+        font-size: $title-minor;
+        font-weight: 600;
+    }
+}
+
 .button {
     border: none;
     border-radius: 5px;
     color: white;
     display: inline-block;
     font-size: 16px;
-    padding: 11px 21px;
+    padding: 13px 21px;
     text-align: center;
     text-decoration: none;
+}
+
+.odd {
+    background: #f1f2f3;
+}
+
+.even {
+    background: darken(#f1f2f3, 10);
 }

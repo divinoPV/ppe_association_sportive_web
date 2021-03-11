@@ -161,18 +161,54 @@ a {
   object-fit: cover;
 }
 
-.description, .inscription {
-  align-items: start;
-  display: flex;
-  gap: 21px;
-  justify-content: center;
-  flex-flow: column;
-  margin-top: 34px;
+.document {
+  width: 100%;
 }
-.description h2, .inscription h2 {
-  font-size: 1.8rem;
+.document .document-table {
+  align-items: center;
+  display: grid;
+  gap: 0;
+  justify-content: start;
+  grid-template-rows: 1fr;
+  grid-template-columns: max-content;
+  width: 100%;
+}
+.document .document-table .document-row-first span {
   font-weight: 600;
 }
+.document .document-table .document-row {
+  align-items: center;
+  display: grid;
+  gap: 0;
+  justify-content: initial;
+  column-gap: 34px;
+  grid-template-areas: "nom date cat poids action";
+  grid-template-columns: repeat(5, 180px);
+  justify-items: start;
+  height: 55px;
+}
+.document .document-table .document-row * {
+  margin-left: 13px;
+}
+.document .document-table .document-row [nom] {
+  grid-area: nom;
+}
+.document .document-table .document-row [date] {
+  grid-area: date;
+}
+.document .document-table .document-row [cat] {
+  grid-area: cat;
+}
+.document .document-table .document-row [poids] {
+  grid-area: poids;
+}
+.document .document-table .document-row [action] {
+  grid-area: action;
+}
+.document .document-table .document-row span {
+  width: max-content;
+}
+
 .description p, .inscription p {
   color: #636367;
   line-height: 1.5rem;
@@ -181,15 +217,36 @@ a {
   word-break: break-word;
 }
 
+.description, .inscription, .document {
+  align-items: start;
+  display: flex;
+  gap: 21px;
+  justify-content: center;
+  flex-flow: column;
+  margin-top: 34px;
+}
+.description h2, .inscription h2, .document h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
 .button {
   border: none;
   border-radius: 5px;
   color: white;
   display: inline-block;
   font-size: 16px;
-  padding: 11px 21px;
+  padding: 13px 21px;
   text-align: center;
   text-decoration: none;
+}
+
+.odd {
+  background: #f1f2f3;
+}
+
+.even {
+  background: #d6d9db;
 }
 
 .head-single {
@@ -397,6 +454,18 @@ form .column .event-button {
 .ee-content .eec-description, .ee-content .eec-link {
   font-size: 1.3rem;
   margin-top: 13px;
+}
+
+.button-telecharger {
+  background: #6f87c2;
+}
+
+.button-inscription {
+  background: #0d5e42;
+}
+
+.footer-single {
+  margin-top: 55px;
 }
 
 .home-header {
