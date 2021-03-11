@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ event.nom }} - Événement -{% endblock %}
 {% block body %}
+    {% set nom = event.nom %}
     <div class="head head-single head-single-event">
-        <h1 class="title title-single title-single-event">{{ event.nom }}</h1>
+        <h1 class="title title-single title-single-event">{{ nom }}</h1>
         <div class="subtitle subtitle-single subtitle-single-event">
             <span class="date ecs-date eecs-date">
                 <i class="far fa-calendar-plus"></i>
@@ -37,11 +38,17 @@
             </span>
             <div class="info info-single info-single-event">
                 <span>Sport : {{ event.sport.nom }}</span>
-                <span>Type d'événement : {{ event.categorie.nom }}</span>
+                <span>Type d'événement : {{ event.type.nom }}</span>
+                <span>Catégorie : {{ event.categorie.nom }}</span>
             </div>
         </div>
     </div>
     <div class="body body-single body-single-event">
-
+        <img src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
+             alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
+        <div class="description description-single description-single-event">
+            <h2>Description</h2>
+            <p>{{ event.description }}</p>
+        </div>
     </div>
 {% endblock body %}
