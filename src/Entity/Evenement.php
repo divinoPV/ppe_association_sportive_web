@@ -103,8 +103,9 @@ class Evenement
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
+     * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
-    private $categorie;
+    private Categorie $categorie;
 
     public function __construct()
     {
@@ -357,12 +358,12 @@ class Evenement
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    public function getCategorie(): Categorie
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function setCategorie(Categorie $categorie): self
     {
         $this->categorie = $categorie;
 

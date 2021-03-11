@@ -27,7 +27,7 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="type")
      */
-    private /*ArrayCollection*/ $evenement;
+    private Collection $evenement;
 
     public function __construct()
     {

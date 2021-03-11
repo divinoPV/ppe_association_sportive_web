@@ -37,7 +37,10 @@
                         <p class="description ec-description eec-description">
                             {{ event.description }}
                         </p>
-                        <a class="link ec-link eec-link" href="#">Voir l'événement ></a>
+                        <a class="link ec-link eec-link" href="{{
+                        path('single_event',
+                            {'id': event.id})
+                        }}">Voir l'événement ></a>
                     </div>
                 </div>
             {% endfor %}
