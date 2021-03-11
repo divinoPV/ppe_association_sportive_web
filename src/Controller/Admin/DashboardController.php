@@ -47,17 +47,17 @@ class DashboardController extends AbstractDashboardController
 
             yield MenuItem::section('Utilisateurs'),
             yield MenuItem::subMenu('Profils', 'fa fa-tasks')->setSubItems([
-                MenuItem::linkToCrud('Utilsateurs', 'fas fa-project-diagram', User::class),
+                MenuItem::linkToCrud('Utilsateurs', 'fas fa-users', User::class),
             ]),
             yield MenuItem::subMenu('Gestion événement', 'fa fa-tasks')->setSubItems([
-                MenuItem::linkToCrud('Evénement', 'fas fa-calendar-alt', Evenement::class),
-                MenuItem::linkToCrud('Sport', 'fas fa-futbol', Sport::class),
-                MenuItem::linkToCrud('Type', 'fas fa-project-diagram', Type::class),
-                MenuItem::linkToCrud('Catégorie', 'fas fa-project-diagram', Categorie::class),
+                MenuItem::linkToCrud('Evénements', 'fas fa-calendar-alt', Evenement::class),
+                MenuItem::linkToCrud('Sports', 'fas fa-futbol', Sport::class),
+                MenuItem::linkToCrud('Types', 'fas fa-project-diagram', Type::class),
+                MenuItem::linkToCrud('Catégories', 'fas fa-project-diagram', Categorie::class),
             ]),
             yield MenuItem::subMenu('Gestion document', 'fa fa-tasks')->setSubItems([
-                MenuItem::linkToCrud('Document', 'fas fa-project-diagram', Document::class),
-                MenuItem::linkToCrud('Catégorie des documents', 'fas fa-project-diagram', DocumentCategorie::class),
+                MenuItem::linkToCrud('Documents', 'fas fa-file-pdf', Document::class),
+                MenuItem::linkToCrud('Document catégories', 'fas fa-project-diagram', DocumentCategorie::class),
             ]),
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),
