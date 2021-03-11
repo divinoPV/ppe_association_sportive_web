@@ -8,13 +8,13 @@ nav {
     padding: 2rem;
 
     & ul {
-        @include flex-center;
+        @include display(flex, center, space-around);
         flex-flow: row wrap;
         gap: 3.5rem;
     }
 
     & ul li {
-        @include flex-center;
+        @include display(flex, center, center);
 
         & a {
             color: $grey;
