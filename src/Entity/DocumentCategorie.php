@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\DocumentCategorieRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentCategorieRepository::class)
@@ -16,15 +17,16 @@ class DocumentCategorie
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=256)
+     * @Assert\NotBlank()
      */
     private string $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="categorie", orphanRemoval=true)
      */
     private Collection $document;
 

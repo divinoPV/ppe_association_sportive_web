@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategorieRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategorieRepository::class)
@@ -16,20 +17,23 @@ class Document
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=256)
+     * @Assert\NotBlank()
      */
     private string $nom;
 
     /**
      * @ORM\Column(type="string", length=256)
+     * @Assert\NotBlank()
      */
     private string $lien;
 
     /**
      * @ORM\Column(type="string", length=256)
+     * @Assert\NotBlank()
      */
     private string $description;
 
@@ -46,12 +50,14 @@ class Document
     /**
      * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="document")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private DocumentCategorie $categorie;
 
     /**
      * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="documents")
      * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     private Evenement $evenement;
 

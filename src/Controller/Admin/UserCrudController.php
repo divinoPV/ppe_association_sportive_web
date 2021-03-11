@@ -42,7 +42,7 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
             ->setEntityLabelInSingular('Utilisateur')
             ->setEntityLabelInPlural('Utilisateurs')
             ->setTimezone('Europe/Paris')
-            ->setPageTitle('index', 'Admin - Utilisateur')
+            ->setPageTitle('index', 'Admin - Utilisateurs')
             ->setPageTitle('detail', 'Admin - Détail Utilisateur')
             ->setPageTitle('edit', 'Admin - Editer Utilisateur')
             ->setPageTitle('new', 'Admin - Ajouter Utilisateur');

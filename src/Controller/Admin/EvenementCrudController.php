@@ -3,9 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Evenement;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -21,6 +23,16 @@ class EvenementCrudController extends AbstractCrudController
         return Evenement::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setEntityLabelInSingular('Evenement')
+            ->setEntityLabelInPlural('Evenements')
+            ->setTimezone('Europe/Paris')
+            ->setPageTitle('index', 'Admin - Evenements')
+            ->setPageTitle('edit', 'Admin - Editer Evenement')
+            ->setPageTitle('new', 'Admin - Ajouter Evenement');
+    }
 
     public function configureFields(string $pageName): iterable
     {
