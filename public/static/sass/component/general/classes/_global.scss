@@ -39,7 +39,8 @@
         }
 
         &.current {
-            color: $primary-lighten;
+            background: $text-color;
+            color: #fff;
         }
     }
 }

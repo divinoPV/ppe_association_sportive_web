@@ -121,7 +121,8 @@ a {
   color: #4b6ab3;
 }
 .pagination span.current {
-  color: #4b6ab3;
+  background: #181819;
+  color: #fff;
 }
 
 .title {
