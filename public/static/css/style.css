@@ -326,12 +326,17 @@ nav .login img {
   width: 32px;
 }
 
-form .btn-login {
+form.form-login-register {
+  flex-direction: column;
+  align-items: unset;
+  margin-bottom: 25px;
+}
+form.form-login-register .btn {
   background-color: #5cb85c !important;
   color: #fff !important;
   border-radius: 12px !important;
 }
-form .btn-register {
+form.form-login-register .btn-register {
   width: 150px;
 }
 
