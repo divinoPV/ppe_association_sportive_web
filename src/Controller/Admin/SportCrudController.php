@@ -21,7 +21,6 @@ class SportCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom'),
-
         ];
     }
 

@@ -14,7 +14,7 @@
                 {% set nom = event.nom %}
                 <div class="element event-element">
                     <div class="e-image ee-image">
-                        <img class="image eei-image" src="{{ asset('media/images/featured/vignettes' ~ event.vignette)  }}"
+                        <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
                              alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
                     </div>
                     <div class="e-content ee-content">
@@ -28,7 +28,7 @@
                             {% endif %}
                         </span>
                             <span class="ecs-category eecs-category">
-                            {{ event.evenementCategorie.nom }}
+                            {{ event.type.nom }}
                         </span>
                             <span class="ecs-sport eecs-sport">
                             {{ event.sport.nom }}

@@ -86,15 +86,15 @@ class Evenement
     private Sport $sport;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
-     */
-    private Collection $inscription;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="type", nullable=false, referencedColumnName="id")
      */
     private Type $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement" , orphanRemoval=true)
+     */
+    private Collection $inscription;
 
     /**
      * @ORM\Column(type="boolean")
