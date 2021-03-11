@@ -45,7 +45,6 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
             /** @var Categorie $categorie */
             $categorie = $this->getReference('categ'.rand(0,3));
 
-
             $evenement
                 ->setType($type)
                 ->setSport($sport)

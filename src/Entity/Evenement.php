@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EvenementRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
@@ -107,9 +108,15 @@ class Evenement
      */
     private Categorie $categorie;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="evenements")
+     */
+    private Collection $document;
+
     public function __construct()
     {
         $this->creer = new DateTime();
+        $this->document = new ArrayCollection();
     }
 
     /**
@@ -372,6 +379,36 @@ class Evenement
     public function setCategorie(Categorie $categorie): self
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Document[]
+     */
+    public function getDocument(): Collection
+    {
+        return $this->document;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->document->contains($document)) {
+            $this->document[] = $document;
+            $document->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        if ($this->document->removeElement($document)) {
+            // set the owning side to null (unless already changed)
+            if ($document->getEvenement() === $this) {
+                $document->setEvenement(null);
+            }
+        }
 
         return $this;
     }

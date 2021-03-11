@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,18 +36,24 @@ class Document
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $creer;
+    private DateTime $creer;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $modifier;
+    private DateTime $modifier;
 
     /**
      * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="document")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
     private DocumentCategorie $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="document")
+     * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
+     */
+    private Evenement $evenements;
 
     /**
      * @return int
@@ -66,6 +73,7 @@ class Document
 
     /**
      * @param string $nom
+     * @return Document
      */
     public function setNom(string $nom): self
     {
@@ -92,6 +100,7 @@ class Document
 
     /**
      * @param string $description
+     * @return Document
      */
     public function setDescription(string $description): self
     {
@@ -110,24 +119,24 @@ class Document
 
     public function setCreatedAt(): self
     {
-        $this->creer = new \DateTime();
+        $this->creer = new DateTime();
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->creer;
     }
 
     public function setUpdatedAt(): self
     {
-        $this->modifier = new \DateTime();
+        $this->modifier = new DateTime();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->modifier;
     }
@@ -142,6 +151,7 @@ class Document
 
     /**
      * @param DocumentCategorie $categorie
+     * @return Document
      */
     public function setCategorie(DocumentCategorie $categorie): self
     {
@@ -153,5 +163,17 @@ class Document
     public function __toString(): string
     {
         return $this->nom;
+    }
+
+    public function getEvenement(): Evenement
+    {
+        return $this->evenements;
+    }
+
+    public function setEvenement(Evenement $evenements): self
+    {
+        $this->evenements = $evenements;
+
+        return $this;
     }
 }

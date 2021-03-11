@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ event.nom }} - Événement -{% endblock %}
+{% block title %}{{ event.nom|trim('.') }} - Événement -{% endblock %}
 {% block body %}
     {% set nom = event.nom %}
     <div class="head head-single head-single-event">
@@ -50,5 +50,41 @@
             <h2>Description</h2>
             <p>{{ event.description }}</p>
         </div>
+        <div class="inscription inscription-single inscription-single-event">
+            <h2>Inscription</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolorem dolores illum rerum
+                voluptatem! A dolorem, eius facilis iure laudantium mollitia, quasi quidem quo repellat repellendus
+                sequi veritatis. Adipisci consectetur debitis doloremque dolorum facere illo illum impedit ipsum
+                mollitia nam placeat, possimus quae quia quod saepe suscipit, voluptate. Ab animi commodi corporis
+                debitis eius eveniet inventore ipsam libero maiores nisi, optio porro, quo, quod similique veniam
+                veritatis voluptatibus? Animi aut delectus ipsum! Accusamus alias aliquam amet animi aspernatur eos
+                error fugiat harum illo iure magni maxime nam nemo nesciunt, nisi odio officia pariatur quis ratione
+                vel. Culpa cum dolorem dolores dolorum, eos eveniet excepturi expedita hic ipsum, nisi non pariatur
+                porro quae quam repellat sit tempora temporibus veniam voluptatem voluptatibus! Animi architecto dolorum
+                et expedita, illum impedit ipsa, iste laborum nulla optio quasi repellat ut? Ad alias aliquam aliquid
+                animi aperiam assumenda corporis cupiditate delectus dolor dolore doloremque dolores ea eaque et eum ex
+                exercitationem harum hic in inventore ipsa, itaque minima minus mollitia natus nisi nobis obcaecati
+                omnis perferendis, qui, quibusdam quo reiciendis reprehenderit sunt totam velit voluptates. Accusamus
+                amet animi asperiores atque autem doloribus et, explicabo facere illum labore magnam nihil nobis
+                obcaecati odio perspiciatis sed vero voluptatum?</p>
+        </div>
+        <div class="document document-single document-single-event">
+            <h2>
+                {% set number = '' %}
+                {% for count in documentCount %}
+                    {% if count.id == event.id %}
+                        {% set number = count.1 %}
+                    {% endif %}
+                {% endfor %}
+                {% if number != '' %}
+                    {{ number }} document{% if number > 1 %}s{% endif %} à télécharger
+                {% else %}
+                     {% trans %}Aucun document à télécharger{% endtrans %}
+                {% endif %}
+            </h2>
+        </div>
+    </div>
+    <div class="footer footer-single footer-single-event">
+        <a href="{{ path('evenement') }}">{% trans %}< Retour aux événements{% endtrans %}</a>
     </div>
 {% endblock body %}
