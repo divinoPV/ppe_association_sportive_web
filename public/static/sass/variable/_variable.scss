@@ -1,2 +1,16 @@
+/** $COLOR */
 $primary: #1e2a47;
 $grey: #c9cdd3;
+$text-color: #181819;
+$text-color-inferior: lighten($text-color, 30);
+
+/** $FONT-SIZE */
+$title: 3rem;
+$title-inferior: 2.4rem;
+$title-minor: 1.8rem;
+$text-big: 1.3rem;
+$text-more: 1.1rem;
+$font-size: 13px;
+
+/** $FONT */
+$font-family: 'Montserrat', sans-serif;
