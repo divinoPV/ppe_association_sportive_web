@@ -59,18 +59,96 @@ table {
   border-spacing: 0;
 }
 
+/** $COLOR */
+/** $FONT-SIZE */
+/** $FONT */
+a {
+  text-decoration: none;
+}
+
 :root {
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   color: #181819;
 }
 
-a {
-  text-decoration: none;
+.head {
+  align-items: center;
+  display: flex;
+  gap: 21px;
+  justify-content: space-between;
+  margin-top: 34px;
+  margin-bottom: 55px;
 }
 
-main {
-  min-height: max-content;
+.body {
+  align-items: center;
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.head, .body {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.subtitle {
+  align-items: initial;
+  display: flex;
+  gap: 13px;
+  justify-content: center;
+  color: #636367;
+  flex-flow: column;
+  font-size: 1.1rem;
+}
+
+.info-primary {
+  align-items: center;
+  display: flex;
+  gap: 34px;
+  justify-content: initial;
+}
+
+.info {
+  align-items: initial;
+  display: flex;
+  gap: 8px;
+  justify-content: initial;
+  flex-flow: column;
+}
+.info i {
+  font-weight: 600;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.description, .inscription {
+  align-items: start;
+  display: flex;
+  gap: 21px;
+  justify-content: center;
+  flex-flow: column;
+  margin-top: 34px;
+}
+.description h2, .inscription h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.description p, .inscription p {
+  color: #636367;
+  line-height: 1.5rem;
+  text-align: justify;
+  text-align-last: start;
+  word-break: break-word;
 }
 
 .button {
@@ -82,6 +160,21 @@ main {
   padding: 11px 21px;
   text-align: center;
   text-decoration: none;
+}
+
+.head-single {
+  align-items: start;
+  flex-flow: column;
+  margin-bottom: 34px;
+}
+
+.info-primary-single {
+  margin-bottom: 13px;
+}
+
+.image-single {
+  max-height: 480px;
+  width: 100%;
 }
 
 header {
@@ -96,6 +189,7 @@ nav {
 nav ul {
   align-items: center;
   display: flex;
+  gap: 0;
   justify-content: space-around;
   flex-flow: row wrap;
   gap: 3.5rem;
@@ -103,7 +197,8 @@ nav ul {
 nav ul li {
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  gap: 0;
+  justify-content: center;
 }
 nav ul li a {
   color: #c9cdd3;
@@ -187,42 +282,30 @@ footer .container .row .col span i:nth-of-type(2) {
   margin-left: 5px;
 }
 
-.event-header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin: 34px auto 55px;
-  max-width: 1200px;
-}
-.event-header .event-title {
+.event-title {
   font-size: 3rem;
   min-width: max-content;
 }
-.event-header form {
+
+form {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
-.event-header form .column label {
+form .column label {
   font-size: 1.2rem;
 }
-.event-header form .column label:after {
+form .column label:after {
   content: " :";
   margin-right: 13px;
 }
-.event-header form .column select {
+form .column select {
   border-color: #a8adb2;
   padding: 5px;
 }
-.event-header form .column .event-button {
+form .column .event-button {
   background-color: #007BFF;
-}
-
-.event-body {
-  align-items: center;
-  display: flex;
-  justify-content: center;
 }
 
 .group-element {
