@@ -26,11 +26,6 @@ class Categorie
     private string $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie")
-     */
-    private Collection $evenement;
-
-    /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
      */
     private Collection $user;
@@ -75,13 +70,13 @@ class Categorie
      */
     public function getEvenement(): ?Collection
     {
-        return $this->evenement;
+        return $this->evenements;
     }
 
     public function addEvenement(Evenement $evenement): self
     {
-        if (!$this->evenement->contains($evenement)) {
-            $this->evenement[] = $evenement;
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements[] = $evenement;
             $evenement->setCategorie($this);
         }
 
@@ -90,8 +85,8 @@ class Categorie
 
     public function removeEvenement(Evenement $evenement): self
     {
-        if ($this->evenement->contains($evenement)) {
-            $this->evenement->remove($evenement);
+        if ($this->evenements->contains($evenement)) {
+            $this->evenements->remove($evenement);
             // set the owning side to null (unless already changed)
             if ($evenement->getCategorie() === $this) {
                 $evenement->setCategorie(null);

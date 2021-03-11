@@ -29,11 +29,11 @@ class EvenementController extends AbstractController
                           EvenementRepository $evenementRepository
     ): Response
     {
-        $eventQB = $manager
+        $eventQb = $manager
             ->createQueryBuilder()
             ->select('count(e.id)')
             ->from('App:Evenement', 'e');
-        $eventCount = $eventQB->getQuery()->getSingleScalarResult();
+        $eventCount = $eventQb->getQuery()->getSingleScalarResult();
 
         $inscriptionQB = $manager
             ->createQueryBuilder()
