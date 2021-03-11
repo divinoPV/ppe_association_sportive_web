@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Evenement;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -46,6 +47,7 @@ class EvenementCrudController extends AbstractCrudController
             DateField::new('creer', 'date création')->hideOnForm(),
             DateField::new('modifier', 'date modification')->hideOnForm(),
             NumberField::new('nombrePlaces', 'nombre de place'),
+            BooleanField::new('actif', 'actif')->renderAsSwitch(),
             AssociationField::new('evenementCategorie'),
             AssociationField::new('sport'),
             AssociationField::new('type'),
