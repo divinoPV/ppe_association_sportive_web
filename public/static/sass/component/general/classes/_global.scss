@@ -1,0 +1,74 @@
+.head {
+    @include display(flex, center, space-between, 21px);
+    margin-top: 34px;
+    margin-bottom: 55px;
+}
+
+.body {
+    @include display(flex, center, center);
+    flex-flow: column;
+}
+
+.head, .body {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+.title {
+    font-size: $title;
+}
+
+.subtitle {
+    @include display(flex, $justify: center, $gap: 13px);
+    color: $text-color-inferior;
+    flex-flow: column;
+    font-size: $text-more;
+}
+
+.info-primary {
+    @include display(flex, center, $gap: 34px);
+}
+
+.info {
+    @include display(flex, $gap: 8px);
+    flex-flow: column;
+
+    i {
+        font-weight: 600;
+    }
+}
+
+.image {
+    object-fit: cover;
+}
+
+.description, .inscription {
+    @include display(flex, start, center, 21px);
+    flex-flow: column;
+    margin-top: 34px;
+
+    h2 {
+        font-size: $title-minor;
+        font-weight: 600;
+    }
+
+    p {
+        color: $text-color-inferior;
+        line-height: 1.5rem;
+        text-align: justify;
+        text-align-last: start;
+        word-break: break-word;
+    }
+}
+
+.button {
+    border: none;
+    border-radius: 5px;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    padding: 11px 21px;
+    text-align: center;
+    text-decoration: none;
+}
