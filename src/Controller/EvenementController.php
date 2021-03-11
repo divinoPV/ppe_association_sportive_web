@@ -90,18 +90,30 @@ class EvenementController extends AbstractController
 
         $documentQB = $manager
             ->createQueryBuilder()
-            ->select('count(d.evenements), e.id')
+            ->select('count(d.evenement), e.id')
             ->from('App:Document', 'd')
             ->join('App:Evenement', 'e')
-            ->where('e.id = d.evenements')
-            ->groupBy('d.evenements')
+            ->where('e.id = d.evenement')
+            ->groupBy('d.evenement')
         ;
         $documentCount = $documentQB->getQuery()->getResult();
+
+        $documents = $manager
+            ->createQueryBuilder()
+            ->select('d')
+            ->from('App:Document', 'd')
+            ->join('App:Evenement', 'e')
+            ->join('App:DocumentCategorie', 'dc')
+            ->where('e.id = d.evenement')
+            ->where('dc.id = d.categorie')
+        ;
+        $documents = $documents->getQuery()->getResult();
 
         return $this->render('evenement/single.html.twig', [
             'event' => $evenementRepository->findBy(["id" => $id])[0],
             'inscriptionCount' => $inscriptionCount,
             'documentCount' => $documentCount,
+            'documents' => $documents,
         ]);
     }
 }

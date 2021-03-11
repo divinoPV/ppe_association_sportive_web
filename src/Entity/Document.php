@@ -50,10 +50,10 @@ class Document
     private DocumentCategorie $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="document")
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="documents")
      * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
      */
-    private Evenement $evenements;
+    private Evenement $evenement;
 
     /**
      * @return int
@@ -167,12 +167,12 @@ class Document
 
     public function getEvenement(): Evenement
     {
-        return $this->evenements;
+        return $this->evenement;
     }
 
-    public function setEvenement(Evenement $evenements): self
+    public function setEvenement(Evenement $evenement): self
     {
-        $this->evenements = $evenements;
+        $this->evenement = $evenement;
 
         return $this;
     }

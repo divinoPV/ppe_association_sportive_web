@@ -109,14 +109,14 @@ class Evenement
     private Categorie $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="evenements")
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="evenement")
      */
-    private Collection $document;
+    private Collection $documents;
 
     public function __construct()
     {
         $this->creer = new DateTime();
-        $this->document = new ArrayCollection();
+        $this->documents = new ArrayCollection();
     }
 
     /**
@@ -386,27 +386,27 @@ class Evenement
     /**
      * @return Collection|Document[]
      */
-    public function getDocument(): Collection
+    public function getDocument(): Collection|Document
     {
-        return $this->document;
+        return $this->documents;
     }
 
-    public function addDocument(Document $document): self
+    public function addDocument(Document $documents): self
     {
-        if (!$this->document->contains($document)) {
-            $this->document[] = $document;
-            $document->setEvenement($this);
+        if (!$this->documents->contains($documents)) {
+            $this->documents[] = $documents;
+            $documents->setEvenement($this);
         }
 
         return $this;
     }
 
-    public function removeDocument(Document $document): self
+    public function removeDocument(Document $documents): self
     {
-        if ($this->document->removeElement($document)) {
+        if ($this->documents->removeElement($documents)) {
             // set the owning side to null (unless already changed)
-            if ($document->getEvenement() === $this) {
-                $document->setEvenement(null);
+            if ($documents->getEvenement() === $this) {
+                $documents->setEvenement(null);
             }
         }
 
