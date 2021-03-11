@@ -32,9 +32,11 @@
                     <div class="subgroup ec-subgroup eec-subgroup">
                         <span class="date ecs-date eecs-date">
                             <i class="far fa-calendar-plus"></i>
-                            {{ event.debut|date("m/d/Y") }}
-                            {% if event.fin is not null %}
-                                {{ event.fin|date("m/d/Y") }}
+                            {% set debut = event.debut|date("m F Y") %}
+                            {% set fin = event.fin|date("m F Y") %}
+                            {{ debut }}
+                            {% if debut != fin %}
+                                au {{ fin }}
                             {% endif %}
                         </span>
                         <span class="ecs-registration eecs-registration">

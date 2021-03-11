@@ -68,14 +68,29 @@ class EvenementController extends AbstractController
 
     /**
      * @Route("/evenement/{id}", name="single_event")
-     * @param int $id
+     * @param EntityManagerInterface $manager
      * @param EvenementRepository $evenementRepository
+     * @param int $id
      * @return Response
      */
-    public function single(int $id, EvenementRepository $evenementRepository): Response
+    public function single(EntityManagerInterface $manager,
+                           EvenementRepository $evenementRepository,
+                           int $id
+    ): Response
     {
+        $inscriptionQB = $manager
+            ->createQueryBuilder()
+            ->select('count(i.evenement), e.id')
+            ->from('App:Inscription', 'i')
+            ->join('App:Evenement', 'e')
+            ->where('e.id = i.evenement')
+            ->groupBy('i.evenement')
+        ;
+        $inscriptionCount = $inscriptionQB->getQuery()->getResult();
+
         return $this->render('evenement/single.html.twig', [
             'event' => $evenementRepository->findBy(["id" => $id])[0],
+            'inscriptionCount' => $inscriptionCount,
         ]);
     }
 }
