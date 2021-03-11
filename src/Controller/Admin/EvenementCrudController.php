@@ -50,7 +50,7 @@ class EvenementCrudController extends AbstractCrudController
             BooleanField::new('actif', 'actif')->renderAsSwitch(),
             AssociationField::new('type'),
             AssociationField::new('sport'),
-            AssociationField::new('type'),
+            AssociationField::new('categorie'),
         ];
     }
 
