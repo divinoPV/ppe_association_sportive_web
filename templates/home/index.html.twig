@@ -5,8 +5,8 @@
 
 {% block body %}
     <div class="header home-header">
-        <span class="title home-title">Accueil</span>
-        <p class="home-subtitle">Derniers événements</p>
+        <span class="title home-title">{% trans %}Accueil{% endtrans %}</span>
+        <p class="home-subtitle">{% trans %}Derniers événements{% endtrans %}</p>
     </div>
     <div class="body event-body">
         <div class="group group-element event-group-element">
@@ -22,13 +22,37 @@
                         <div class="subgroup ec-subgroup eec-subgroup">
                         <span class="date ecs-date eecs-date">
                             <i class="far fa-calendar-plus"></i>
-                            {{ event.debut|date("m/d/Y") }}
-                            {% if event.fin is not null %}
-                                {{ event.fin|date("m/d/Y") }}
+                            {% set debut = event.debut|date("m F Y") %}
+                            {% set fin = event.fin|date("m F Y") %}
+                            {{ debut }}
+                            {% if debut != fin %}
+                                au {{ fin }}
                             {% endif %}
                         </span>
+                            <span class="ecs-registration eecs-registration">
+                            <i class="fas fa-info-circle"></i>
+                            {% set haveOne = [] %}
+                                {% set nbrPlace = event.nombrePlaces %}
+                                {% for insc in inscriptionCount %}
+                                    {% if insc.id == event.id %}
+                                        {% if insc.1 == event.nombrePlaces %}
+                                            {% trans %}Inscriptions terminées{% endtrans %}
+                                        {% else%}
+                                            {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
+                                            {% set nbrInscrit = insc.1 %}
+                                            {% trans %}
+                                                %nbrInscrit% %string% sur %nbrPlace%
+                                            {% endtrans %}
+                                        {% endif%}
+                                        {% set haveOne = haveOne|merge([event.id]) %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if haveOne is not null and event.id not in haveOne %}
+                                    {% trans %}%nbrPlace% places disponibles !{% endtrans %}
+                                {% endif %}
+                        </span>
                             <span class="ecs-category eecs-category">
-                            {{ event.type.nom }}
+                            {{ event.categorie.nom }}
                         </span>
                             <span class="ecs-sport eecs-sport">
                             {{ event.sport.nom }}
@@ -38,9 +62,9 @@
                             {{ event.description }}
                         </p>
                         <a class="link ec-link eec-link" href="{{
-                            path('single_event',
-                                {'id': event.id})
-                            }}">Voir l'événement >
+                        path('single_event',
+                            {'id': event.id})
+                        }}">Voir l'événement >
                         </a>
                     </div>
                 </div>
