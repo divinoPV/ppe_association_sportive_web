@@ -48,7 +48,7 @@
                                     {% if insc.1 == event.nombrePlaces %}
                                         {% trans %}Inscriptions terminées{% endtrans %}
                                     {% else%}
-                                        {% set string = insc.1 > 1 ? 'inscriptions' : 'inscription' %}
+                                        {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
                                         {% set nbrInscrit = insc.1 %}
                                         {% trans %}
                                             %nbrInscrit% %string% sur %nbrPlace%
