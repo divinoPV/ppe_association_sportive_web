@@ -33,20 +33,18 @@ class Categorie
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
      */
-
     private Collection $user;
 
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie")
      */
-    private $evenements;
+    private Collection $evenements;
 
     public function __construct()
     {
         $this->user = new ArrayCollection();
         $this->evenements = new ArrayCollection();
     }
-
 
     /**
      * @return int
@@ -142,7 +140,7 @@ class Categorie
     }
 
     /**
-     * @return Collection|Evenement[]
+     * @return Collection
      */
     public function getEvenements(): Collection
     {

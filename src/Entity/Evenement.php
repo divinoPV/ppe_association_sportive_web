@@ -130,6 +130,7 @@ class Evenement
 
     /**
      * @param string $nom
+     * @return Evenement
      */
     public function setNom(string $nom): self
     {
@@ -148,6 +149,7 @@ class Evenement
 
     /**
      * @param string $description
+     * @return Evenement
      */
     public function setDescription(string $description): self
     {
@@ -166,6 +168,7 @@ class Evenement
 
     /**
      * @param DateTime $debut
+     * @return Evenement
      */
     public function setDebut(DateTime $debut): self
     {
@@ -183,6 +186,7 @@ class Evenement
 
     /**
      * @param DateTime $fin
+     * @return Evenement
      */
     public function setFin(DateTime $fin): self
     {
@@ -225,6 +229,7 @@ class Evenement
 
     /**
      * @param int $nombrePlaces
+     * @return Evenement
      */
     public function setNombrePlaces(int $nombrePlaces): self
     {
@@ -295,6 +300,7 @@ class Evenement
 
     /**
      * @param Sport $sport
+     * @return Evenement
      */
     public function setSport(Sport $sport): self
     {
