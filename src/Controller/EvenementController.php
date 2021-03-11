@@ -65,4 +65,17 @@ class EvenementController extends AbstractController
             'search_event_form' => $searchEventForm->createView()
         ]);
     }
+
+    /**
+     * @Route("/evenement/{id}", name="single_event")
+     * @param int $id
+     * @param EvenementRepository $evenementRepository
+     * @return Response
+     */
+    public function single(int $id, EvenementRepository $evenementRepository): Response
+    {
+        return $this->render('evenement/single.html.twig', [
+            'event' => $evenementRepository->findBy(["id" => $id])[0],
+        ]);
+    }
 }

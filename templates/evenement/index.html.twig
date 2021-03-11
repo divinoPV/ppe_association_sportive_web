@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
-{% block title %}Événement{% endblock %}
+{% block title %}Événement -{% endblock %}
 {% block body %}
 <div class="header event-header">
-    <span class="title event-title">{{ eventCount }} événement{% if eventCount > 1 %}s{% endif %}</span>
+    <h1 class="title event-title">{{ eventCount }} événement{% if eventCount > 1 %}s{% endif %}</h1>
     {{ form_start(search_event_form) }}
     <div class="column">
         {{ form_row(search_event_form.evenementCategorie) }}
@@ -22,7 +22,7 @@
     <div class="group group-element event-group-element">
         {% for event in events %}
             {% set nom = event.nom %}
-            <div class="element event-element">
+            <div class="element event-element">²
                 <div class="e-image ee-image">
                     <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
                          alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
@@ -69,7 +69,10 @@
                     <p class="description ec-description eec-description">
                         {{ event.description }}
                     </p>
-                    <a class="link ec-link eec-link" href="#">Voir l'événement ></a>
+                    <a class="link ec-link eec-link" href="{{
+                    path('single_event',
+                        {'id': event.id})
+                    }}">Voir l'événement ></a>
                 </div>
             </div>
         {% endfor %}
