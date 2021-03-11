@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Serializable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="L'email indiqué est déjà utiliser"
  * )
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface, Serializable
 {
     /**
      * @ORM\Id
@@ -93,17 +96,17 @@ class User implements UserInterface, \Serializable
      *     message = "Veuillez selectionner votre date de naissance !"
      * )
      */
-    private ?\DateTime $naissance;
+    private ?DateTime $naissance;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTime $creer;
+    private ?DateTime $creer;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?\DateTime $modifier;
+    private ?DateTime $modifier;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
@@ -155,6 +158,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param string|null $plainPassword
+     * @return User
      */
     public function setPlainPassword(?string $plainPassword): self
     {
@@ -218,36 +222,36 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getNaissance(): ?\DateTimeInterface
+    public function getNaissance(): ?DateTimeInterface
     {
         return $this->naissance;
     }
 
-    public function setNaissance(?\DateTimeInterface $naissance): self
+    public function setNaissance(?DateTimeInterface $naissance): self
     {
         $this->naissance = $naissance;
 
         return $this;
     }
 
-    public function getCreer(): ?\DateTimeInterface
+    public function getCreer(): ?DateTimeInterface
     {
         return $this->creer;
     }
 
-    public function setCreer(?\DateTimeInterface $creer): self
+    public function setCreer(?DateTimeInterface $creer): self
     {
         $this->creer = $creer;
 
         return $this;
     }
 
-    public function getModifier(): ?\DateTimeInterface
+    public function getModifier(): ?DateTimeInterface
     {
         return $this->modifier;
     }
 
-    public function setModifier(?\DateTimeInterface $modifier): self
+    public function setModifier(?DateTimeInterface $modifier): self
     {
         $this->modifier = $modifier;
 
@@ -279,6 +283,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param string $roles
+     * @return User
      */
     public function setRoles(string $roles): self
     {
@@ -304,6 +309,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param bool|null $forgottenPassword
+     * @return User
      */
     public function setForgottenPassword(?bool $forgottenPassword): self
     {

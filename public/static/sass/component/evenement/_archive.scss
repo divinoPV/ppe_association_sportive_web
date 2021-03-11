@@ -1,31 +1,33 @@
-.event-title {
-    font-size: 3rem;
-    min-width: max-content;
-}
+.head-archive-event {
+    .event-title {
+        font-size: 3rem;
+        min-width: max-content;
+    }
 
-form {
-    align-items: center;
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
+    form {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
 
-    .column {
-        label {
-            font-size: 1.2rem;
+        .column {
+            label {
+                font-size: 1.2rem;
 
-            &:after {
-                content: ' :';
-                margin-right: 13px;
+                &:after {
+                    content: ' :';
+                    margin-right: 13px;
+                }
             }
-        }
 
-        select {
-            border-color: #a8adb2;
-            padding: 5px;
-        }
+            select {
+                border-color: #a8adb2;
+                padding: 5px;
+            }
 
-        .event-button {
-            background-color: #007BFF;
+            .event-button {
+                background-color: #007BFF;
+            }
         }
     }
 }

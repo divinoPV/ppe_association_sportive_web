@@ -374,29 +374,28 @@ footer .container .row .col span i:nth-of-type(2) {
   margin-left: 5px;
 }
 
-.event-title {
+.head-archive-event .event-title {
   font-size: 3rem;
   min-width: max-content;
 }
-
-form {
+.head-archive-event form {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
 }
-form .column label {
+.head-archive-event form .column label {
   font-size: 1.2rem;
 }
-form .column label:after {
+.head-archive-event form .column label:after {
   content: " :";
   margin-right: 13px;
 }
-form .column select {
+.head-archive-event form .column select {
   border-color: #a8adb2;
   padding: 5px;
 }
-form .column .event-button {
+.head-archive-event form .column .event-button {
   background-color: #007BFF;
 }
 
