@@ -9,10 +9,39 @@
     flex-flow: column;
 }
 
-.head, .body {
+.footer {
+    @include display(flex, center, start, 34px);
+    margin-bottom: 55px;
+}
+
+.head, .body, .footer {
     margin-left: auto;
     margin-right: auto;
     max-width: 1200px;
+}
+
+.pagination {
+    @include display(flex, center, center, 1px);
+
+    span {
+        border: 1px solid lighten(black, 80);
+        border-radius: 5px;
+        padding: 8px;
+
+        a {
+            color: $text-color;
+        }
+
+        &:hover {
+            a {
+                color: $primary-lighten;
+            }
+        }
+
+        &.current {
+            color: $primary-lighten;
+        }
+    }
 }
 
 .title {

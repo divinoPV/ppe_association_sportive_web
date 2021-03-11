@@ -89,10 +89,39 @@ a {
   flex-flow: column;
 }
 
-.head, .body {
+.footer {
+  align-items: center;
+  display: flex;
+  gap: 34px;
+  justify-content: start;
+  margin-bottom: 55px;
+}
+
+.head, .body, .footer {
   margin-left: auto;
   margin-right: auto;
   max-width: 1200px;
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 1px;
+  justify-content: center;
+}
+.pagination span {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 8px;
+}
+.pagination span a {
+  color: #181819;
+}
+.pagination span:hover a {
+  color: #4b6ab3;
+}
+.pagination span.current {
+  color: #4b6ab3;
 }
 
 .title {

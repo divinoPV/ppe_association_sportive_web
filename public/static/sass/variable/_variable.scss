@@ -1,5 +1,6 @@
 /** $COLOR */
 $primary: #1e2a47;
+$primary-lighten: lighten($primary, 30);
 $grey: #c9cdd3;
 $text-color: #181819;
 $text-color-inferior: lighten($text-color, 30);
