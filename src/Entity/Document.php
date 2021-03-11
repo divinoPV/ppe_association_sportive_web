@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\DocumentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
+ * @ORM\Entity(repositoryClass=DocumentRepository::class)
  */
 class Document
 {

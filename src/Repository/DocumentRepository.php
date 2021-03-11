@@ -19,6 +19,31 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
+    public function allDocument(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('d')
+            ->join('d.evenement', 'e')
+            ->join('d.categorie', 'dc')
+            ->where('e.id = d.evenement')
+            ->where('dc.id = d.categorie')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function countDocument(): array
+    {
+        return $this->createQueryBuilder('d')
+            ->select('count(d.evenement), e.id')
+            ->join('d.evenement', 'e')
+            ->where('e.id = d.evenement')
+            ->groupBy('d.evenement')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Document[] Returns an array of Document objects
     //  */

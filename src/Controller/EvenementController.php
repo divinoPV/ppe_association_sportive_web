@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Document;
 use App\Entity\Evenement;
+use App\Entity\Inscription;
 use App\Form\EvenementSearchType;
 use App\Repository\EvenementRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,45 +17,36 @@ class EvenementController extends AbstractController
 {
     /**
      * @Route("/evenement", name="evenement")
-     * @param EntityManagerInterface $manager
      * @param Request $request
      * @param EvenementRepository $evenementRepository
      * @param PaginatorInterface $paginator
      * @return Response
-     * @throws NoResultException
-     * @throws NonUniqueResultException
      */
-    public function index(EntityManagerInterface $manager,
-                          Request $request,
+    public function index(Request $request,
                           EvenementRepository $evenementRepository,
                           PaginatorInterface $paginator
     ): Response
     {
-        $eventQb = $manager
-            ->createQueryBuilder()
-            ->select('count(e.id)')
-            ->from('App:Evenement', 'e')
+        $countEvent = $this
+            ->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->countEvent()
         ;
-        $eventCount = $eventQb->getQuery()->getSingleScalarResult();
 
-        $inscriptionQB = $manager
-            ->createQueryBuilder()
-            ->select('count(i.evenement), e.id')
-            ->from('App:Inscription', 'i')
-            ->join('App:Evenement', 'e')
-            ->where('e.id = i.evenement')
-            ->groupBy('i.evenement')
+        $countInscription = $this
+            ->getDoctrine()
+            ->getRepository(Inscription::class)
+            ->inscriptionToEvent()
         ;
-        $inscriptionCount = $inscriptionQB->getQuery()->getResult();
 
-        $datas = $this
+        $data = $this
             ->getDoctrine()
             ->getRepository(Evenement::class)
             ->findAll()
         ;
 
         $events = $paginator->paginate(
-            $datas,
+            $data,
             $request->query->getInt('page', 1),
             5
         );
@@ -72,59 +62,42 @@ class EvenementController extends AbstractController
 
         return $this->render('evenement/index.html.twig', [
             'events' => $result ?? $events,
-            'eventCount' => $eventCount,
-            'inscriptionCount' => $inscriptionCount,
+            'eventCount' => $countEvent[0][1],
+            'inscriptionCount' => $countInscription,
             'search_event_form' => $searchEventForm->createView()
         ]);
     }
 
     /**
      * @Route("/evenement/{id}", name="single_event")
-     * @param EntityManagerInterface $manager
      * @param EvenementRepository $evenementRepository
      * @param int $id
      * @return Response
      */
-    public function single(EntityManagerInterface $manager,
-                           EvenementRepository $evenementRepository,
-                           int $id
-    ): Response
+    public function single(EvenementRepository $evenementRepository, int $id): Response
     {
-        $inscriptionQB = $manager
-            ->createQueryBuilder()
-            ->select('count(i.evenement), e.id')
-            ->from('App:Inscription', 'i')
-            ->join('App:Evenement', 'e')
-            ->where('e.id = i.evenement')
-            ->groupBy('i.evenement')
+        $countInscription = $this
+            ->getDoctrine()
+            ->getRepository(Inscription::class)
+            ->inscriptionToEvent()
         ;
-        $inscriptionCount = $inscriptionQB->getQuery()->getResult();
 
-        $documentQB = $manager
-            ->createQueryBuilder()
-            ->select('count(d.evenement), e.id')
-            ->from('App:Document', 'd')
-            ->join('App:Evenement', 'e')
-            ->where('e.id = d.evenement')
-            ->groupBy('d.evenement')
+        $countDocument = $this
+            ->getDoctrine()
+            ->getRepository(Document::class)
+            ->countDocument()
         ;
-        $documentCount = $documentQB->getQuery()->getResult();
 
-        $documents = $manager
-            ->createQueryBuilder()
-            ->select('d')
-            ->from('App:Document', 'd')
-            ->join('App:Evenement', 'e')
-            ->join('App:DocumentCategorie', 'dc')
-            ->where('e.id = d.evenement')
-            ->where('dc.id = d.categorie')
+        $documents = $this
+            ->getDoctrine()
+            ->getRepository(Document::class)
+            ->allDocument()
         ;
-        $documents = $documents->getQuery()->getResult();
 
         return $this->render('evenement/single.html.twig', [
             'event' => $evenementRepository->findBy(["id" => $id])[0],
-            'inscriptionCount' => $inscriptionCount,
-            'documentCount' => $documentCount,
+            'inscriptionCount' => $countInscription,
+            'documentCount' => $countDocument,
             'documents' => $documents,
         ]);
     }

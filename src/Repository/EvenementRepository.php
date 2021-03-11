@@ -19,7 +19,7 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
-    public function searchEvenement(Evenement $criteria)
+    public function searchEvenement(Evenement $criteria): array
     {
         return $this->createQueryBuilder('e')
             ->join('e.sport', 's')
@@ -34,14 +34,24 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    public function lastEvenements()
+
+    public function countEvent(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function lastEvenements(): array
     {
         return $this->createQueryBuilder('e')
             ->orderBy('e.debut','ASC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
 
