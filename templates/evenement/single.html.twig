@@ -5,47 +5,51 @@
     <div class="head head-single head-single-event">
         <h1 class="title title-single title-single-event">{{ nom }}</h1>
         <div class="subtitle subtitle-single subtitle-single-event">
-            <span class="date ecs-date eecs-date">
+            <div class="info-primary info-primary-single info-primary-single-event">
+                <span class="date date-single date-single-event">
                 <i class="far fa-calendar-plus"></i>
                 {% set debut = event.debut|date("m F Y") %}
-                {% set fin = event.fin|date("m F Y") %}
-                {{ debut }}
-                {% if debut != fin %}
-                    au {{ fin }}
-                {% endif %}
+                    {% set fin = event.fin|date("m F Y") %}
+                    {{ debut }}
+                    {% if debut != fin %}
+                        au {{ fin }}
+                    {% endif %}
             </span>
-            <span class="ecs-registration eecs-registration">
+                <span class="registration">
                 <i class="fas fa-info-circle"></i>
                 {% set haveOne = [] %}
-                {% set nbrPlace = event.nombrePlaces %}
-                {% for insc in inscriptionCount %}
-                    {% if insc.id == event.id %}
-                        {% if insc.1 == event.nombrePlaces %}
-                            {% trans %}Inscriptions terminées{% endtrans %}
-                        {% else%}
-                            {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
-                            {% set nbrInscrit = insc.1 %}
-                            {% trans %}
-                                %nbrInscrit% %string% sur %nbrPlace%
-                            {% endtrans %}
-                        {% endif%}
-                        {% set haveOne = haveOne|merge([event.id]) %}
+                    {% set nbrPlace = event.nombrePlaces %}
+                    {% for insc in inscriptionCount %}
+                        {% if insc.id == event.id %}
+                            {% if insc.1 == event.nombrePlaces %}
+                                {% trans %}Inscriptions terminées{% endtrans %}
+                            {% else %}
+                                {% set string = insc.1 > 1 ? 'inscriptions' : 'inscription' %}
+                                {% set nbrInscrit = insc.1 %}
+                                {% trans %}
+                                    %nbrInscrit% %string% sur %nbrPlace%
+                                {% endtrans %}
+                            {% endif %}
+                            {% set haveOne = haveOne|merge([event.id]) %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if haveOne is not null and event.id not in haveOne %}
+                        {% trans %}%nbrPlace% places disponibles !{% endtrans %}
                     {% endif %}
-                {% endfor %}
-                {% if haveOne is not null and event.id not in haveOne %}
-                    {% trans %}%nbrPlace% places disponibles !{% endtrans %}
-                {% endif %}
             </span>
+            </div>
             <div class="info info-single info-single-event">
-                <span>Sport : {{ event.sport.nom }}</span>
-                <span>Type d'événement : {{ event.type.nom }}</span>
-                <span>Catégorie : {{ event.categorie.nom }}</span>
+                <span><i>Sport</i> : {{ event.sport.nom }}</span>
+                <span><i>Type d'événement</i> : {{ event.type.nom }}</span>
+                <span><i>Catégorie</i> : {{ event.categorie.nom }}</span>
             </div>
         </div>
     </div>
     <div class="body body-single body-single-event">
-        <img src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
-             alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
+        <img alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}"
+             class="image image-single image-single-event"
+             src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
+        >
         <div class="description description-single description-single-event">
             <h2>Description</h2>
             <p>{{ event.description }}</p>

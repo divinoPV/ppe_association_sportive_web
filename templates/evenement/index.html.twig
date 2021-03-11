@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Événement -{% endblock %}
 {% block body %}
-<div class="header event-header">
+<div class="head head-archive head-archive-event">
     <h1 class="title event-title">{{ eventCount }} événement{% if eventCount > 1 %}s{% endif %}</h1>
     {{ form_start(search_event_form) }}
     <div class="column">
@@ -48,7 +48,7 @@
                                     {% if insc.1 == event.nombrePlaces %}
                                         {% trans %}Inscriptions terminées{% endtrans %}
                                     {% else%}
-                                        {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
+                                        {% set string = insc.1 > 1 ? 'inscriptions' : 'inscription' %}
                                         {% set nbrInscrit = insc.1 %}
                                         {% trans %}
                                             %nbrInscrit% %string% sur %nbrPlace%
