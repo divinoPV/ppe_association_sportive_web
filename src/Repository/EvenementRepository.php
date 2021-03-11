@@ -34,6 +34,16 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    public function lastEvenements()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.debut','ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     // /**
     //  * @return Evenement[] Returns an array of Evenement objects
