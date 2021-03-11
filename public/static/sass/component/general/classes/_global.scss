@@ -173,3 +173,7 @@
 .even {
     background: darken(#f1f2f3, 10);
 }
+
+.custom-switch {
+    @include display(flex, center);
+}

@@ -254,6 +254,13 @@ a {
   background: #d6d9db;
 }
 
+.custom-switch {
+  align-items: center;
+  display: flex;
+  gap: 0;
+  justify-content: initial;
+}
+
 .head-single {
   align-items: start;
   flex-flow: column;
@@ -354,6 +361,7 @@ footer .container .row {
 footer .container .row .col h2 {
   color: #fff;
   margin-bottom: 20px;
+  font-size: 1.2rem;
 }
 footer .container .row .col h2:nth-of-type(2) {
   margin-bottom: 0;
@@ -412,6 +420,7 @@ footer .container .row .col span i:nth-of-type(2) {
 }
 .head-archive-event form .column .event-button {
   background-color: #007BFF;
+  padding: 8px 21px;
 }
 
 .group-element {
