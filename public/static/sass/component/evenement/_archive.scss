@@ -1,0 +1,117 @@
+.event-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 34px auto 55px;
+    max-width: 1200px;
+
+    .event-title {
+        font-size: 3rem;
+        min-width: max-content;
+    }
+
+    form {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .column {
+            label {
+                font-size: 1.2rem;
+
+                &:after {
+                    content: ' :';
+                    margin-right: 13px;
+                }
+            }
+
+            select {
+                border-color: #a8adb2;
+                padding: 5px;
+            }
+
+            .event-button {
+                background-color: #007BFF;
+            }
+        }
+    }
+}
+
+.event-body {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.group-element {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 89px;
+    max-width: 1200px;
+    row-gap: 55px;
+}
+
+.event-element {
+    display: grid;
+    column-gap: 21px;
+    grid-template-areas:
+        "image content";
+    grid-template-columns: 25% 1fr;
+
+    .ee-image {
+        align-items: center;
+        display: flex;
+        grid-area: image;
+
+        img {
+            height: 100%;
+            max-width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .ee-content {
+        display: flex;
+        flex-flow: column;
+        grid-area: content;
+        row-gap: 8px;
+    }
+}
+
+.ee-content {
+    .eec-titre {
+        font-size: 2.2rem;
+    }
+
+    .eec-subgroup {
+        align-items: center;
+        color: #484a4c;
+        column-gap: 21px;
+        display: flex;
+        justify-content: start;
+
+        .eecs-category {
+            font-weight: 700;
+        }
+
+        .eecs-sport {
+            background: #D2E7FD;
+            border-radius: 8px;
+            padding: 5px 8px;
+        }
+    }
+
+    .eec-description {
+        color: #303133;
+        line-height: 2rem;
+        text-align: justify;
+        text-align-last: center;
+        word-break: break-word;
+    }
+
+    .eec-description, .eec-link {
+        font-size: 1.3rem;
+        margin-top: 13px;
+    }
+}
