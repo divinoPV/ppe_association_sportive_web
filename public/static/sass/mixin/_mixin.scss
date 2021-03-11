@@ -1,5 +1,11 @@
-@mixin flex-center {
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
+@mixin display(
+    $display: flex,
+    $align: initial,
+    $justify: initial,
+    $gap: 0
+) {
+    align-items: $align;
+    display: $display;
+    gap: $gap;
+    justify-content: $justify;
 }
