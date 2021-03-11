@@ -110,6 +110,7 @@ class User implements UserInterface, Serializable
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
+     * @ORM\JoinColumn(name="categorie", referencedColumnName="id", onDelete="SET NULL")
      *  @Assert\NotBlank(
      *     message = "Veuillez sélectionner une valeur !"
      * )

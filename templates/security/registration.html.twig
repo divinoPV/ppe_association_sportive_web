@@ -7,7 +7,11 @@
             Remplissez le formulaire ci-dessous afin d'obtenir vos identifiant de connexion.
             Vous recevrez par la suite un email avec des identifiants temporaires.
         </p>
-    {{ form_start(form) }}
+    {{ form_start(form,{
+        'attr': {
+            'class': 'form-login-register'
+        }
+    }) }}
         {{ form_label(form.email) }}
         <span class="text-danger">
             {{ form_errors(form.email) }}
