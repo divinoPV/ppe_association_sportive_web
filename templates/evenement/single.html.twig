@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ event.nom|trim('.') }} - Événement -{% endblock %}
+{% set nom = event.nom|trim('.') %}
+{% block title %}{{ nom }} - Événement -{% endblock %}
 {% block body %}
-    {% set nom = event.nom %}
     <div class="head head-single head-single-event">
         <h1 class="title title-single title-single-event">{{ nom }}</h1>
         <div class="subtitle subtitle-single subtitle-single-event">
@@ -69,19 +69,39 @@
                 obcaecati odio perspiciatis sed vero voluptatum?</p>
         </div>
         <div class="document document-single document-single-event">
-            <h2>
-                {% set number = '' %}
-                {% for count in documentCount %}
-                    {% if count.id == event.id %}
-                        {% set number = count.1 %}
-                    {% endif %}
-                {% endfor %}
-                {% if number != '' %}
-                    {{ number }} document{% if number > 1 %}s{% endif %} à télécharger
-                {% else %}
-                     {% trans %}Aucun document à télécharger{% endtrans %}
+            {% set number = '' %}
+            {% for count in documentCount %}
+                {% if count.id == event.id %}
+                    {% set number = count.1 %}
                 {% endif %}
-            </h2>
+            {% endfor %}
+            {% set string = number > 1 ? 'documents' : 'document' %}
+            {% if number != '' %}
+                <h2>{% trans %}%number% %string% à télécharger{% endtrans %}</h2>
+                <div class="document-table document-table-single document-table-single-event">
+                    <div class="row row-single row-single-event">
+                        <span class="name">Nom du document</span>
+                        <span class="date">Date d'ajout</span>
+                        <span class="category">Catégorie</span>
+                        <span class="weight">Poids</span>
+                        <span class="action">Action</span>
+                    </div>
+                    {% for key, document in documents %}
+                        {% if document.evenement.id == event.id %}
+                            {% set classes = key is odd ? 'odd' : 'even' %}
+                            <div class="row row-single row-single-event {{ classes }}">
+                                <span class="name">{{ document.nom }}</span>
+                                <span class="date">{{ document.createdAt|date("m F Y") }}</span>
+                                <span class="category">{{ document.categorie.nom }}</span>
+                                <span class="weight">A venir dans le sprint 4{#{{ document.poids }}#}</span>
+                                <button class="button button-single button-single-event">Télécharger</button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                 {% trans %}Aucun document à télécharger{% endtrans %}
+            {% endif %}
         </div>
     </div>
     <div class="footer footer-single footer-single-event">
