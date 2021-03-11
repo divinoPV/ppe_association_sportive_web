@@ -22,7 +22,7 @@
     <div class="group group-element event-group-element">
         {% for event in events %}
             {% set nom = event.nom %}
-            <div class="element event-element">²
+            <div class="element event-element">
                 <div class="e-image ee-image">
                     <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
                          alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
