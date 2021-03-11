@@ -35,8 +35,13 @@
                     {% trans %}%nbrPlace% places disponibles !{% endtrans %}
                 {% endif %}
             </span>
+            <div class="info info-single info-single-event">
+                <span>Sport : {{ event.sport.nom }}</span>
+                <span>Type d'événement : {{ event.categorie.nom }}</span>
+            </div>
         </div>
     </div>
     <div class="body body-single body-single-event">
+
     </div>
 {% endblock body %}

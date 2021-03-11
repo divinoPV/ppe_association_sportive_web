@@ -10,7 +10,6 @@ class CategorieFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-
         $tabCateg = [
             "Cadet",
             "Cadette",
@@ -20,7 +19,6 @@ class CategorieFixtures extends Fixture
 
         foreach ($tabCateg as $id => $categ){
             $uneCateg = new Categorie();
-
             $uneCateg->setNom($categ);
             $manager->persist($uneCateg);
             $this->addReference('categ'.$id, $uneCateg);

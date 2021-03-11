@@ -2,10 +2,10 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Categorie;
 use App\Entity\Evenement;
-use App\Entity\EvenementCategorie;
-use App\Entity\Sport;
 use App\Entity\Type;
+use App\Entity\Sport;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -38,18 +38,19 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setActif((bool)random_int(0, 1))
             ;
 
-            /** @var EvenementCategorie $categ */
-            $categ = $this->getReference('eventCateg'.rand(0, 6));
             /** @var Sport $sport */
             $sport = $this->getReference('sport'.rand(0,15));
             /** @var Type $type */
-            $type = $this->getReference('type'.rand(0,2));
+            $type = $this->getReference('type'.rand(0,6));
+            /** @var Categorie $categorie */
+            $categorie = $this->getReference('categ'.rand(0,3));
 
 
             $evenement
-                ->setEvenementCategorie($categ)
                 ->setType($type)
-                ->setSport($sport);
+                ->setSport($sport)
+                ->setCategorie($categorie)
+            ;
 
             $manager->persist($evenement);
             $this->addReference('evenement'.$i, $evenement);
@@ -61,8 +62,8 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             SportFixtures::class,
-            EvenementCategorieFixtures::class,
-            TypeFixtures::class
+            TypeFixtures::class,
+            CategorieFixtures::class
         ];
     }
 }

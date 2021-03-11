@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,46 +17,44 @@ class Type
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
-     * @ORM\Column(type="string", length=256)
+     * @ORM\Column(type="string", length=255)
      */
     private string $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="type")
      */
-    private Collection $evenement;
+    private /*ArrayCollection*/ $evenement;
 
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function __construct()
+    {
+        $this->evenement = new ArrayCollection();
+    }
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getNom(): string
+    public function getNom(): ?string
     {
         return $this->nom;
     }
 
-    /**
-     * @param string $nom
-     */
-    public function setNom(string $nom): void
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
     }
 
     /**
-     * @return Collection|Evenement[]
+     * @return Collection
      */
-    public function getEvenement(): ?Collection
+    public function getEvenement(): Collection
     {
         return $this->evenement;
     }
@@ -72,8 +71,7 @@ class Type
 
     public function removeEvenement(Evenement $evenement): self
     {
-        if ($this->evenement->contains($evenement)) {
-            $this->evenement->remove($evenement);
+        if ($this->evenement->removeElement($evenement)) {
             // set the owning side to null (unless already changed)
             if ($evenement->getType() === $this) {
                 $evenement->setType(null);
@@ -83,7 +81,7 @@ class Type
         return $this;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->nom;
     }

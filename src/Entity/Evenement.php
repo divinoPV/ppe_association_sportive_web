@@ -86,26 +86,25 @@ class Evenement
     private Sport $sport;
 
     /**
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
+     */
+    private Collection $inscription;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="type", nullable=false, referencedColumnName="id")
      */
     private Type $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement")
-     */
-    private Collection $inscription;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=EvenementCategorie::class, inversedBy="evenement")
-     * @ORM\JoinColumn(name="evenementCategorie", nullable=false, referencedColumnName="id")
-     */
-    private EvenementCategorie $evenementCategorie;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private bool $actif;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
+     */
+    private $categorie;
 
     public function __construct()
     {
@@ -304,24 +303,6 @@ class Evenement
     }
 
     /**
-     * @return Type
-     */
-    public function getType(): Type
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param Type $type
-     */
-    public function setType(Type $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Inscription[]
      */
     public function getInscription(): ?Collection
@@ -352,14 +333,14 @@ class Evenement
         return $this;
     }
 
-    public function getEvenementCategorie(): EvenementCategorie
+    public function getType(): Type
     {
-        return $this->evenementCategorie;
+        return $this->type;
     }
 
-    public function setEvenementCategorie(EvenementCategorie $evenementCategorie): self
+    public function setType(Type $type): self
     {
-        $this->evenementCategorie = $evenementCategorie;
+        $this->type = $type;
 
         return $this;
     }
@@ -372,6 +353,18 @@ class Evenement
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

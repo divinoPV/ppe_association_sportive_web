@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\DataFixtures;
 
 use App\Entity\Type;
@@ -10,19 +11,22 @@ class TypeFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $typeEven =[
-            'public',
-            'privée',
-            'interne'
+        $type = [
+            "Activité Sportive",
+            "Compétiton",
+            "Compétition amateur",
+            "Championat",
+            "Tournoi",
+            "Journée découverte",
+            "Journée associative"
         ];
 
-        for($i=0; $i<=2; $i++){
-            $type = new Type();
-            $type->setNom($typeEven[$i]);
-
-            $manager->persist($type);
-            $this->addReference('type'.$i, $type);
-        }
+        foreach ($type as $id => $aType):
+            $typeElement = new Type();
+            $typeElement->setNom($aType);
+            $manager->persist($typeElement);
+            $this->addReference('type'.$id, $typeElement);
+        endforeach;
 
         $manager->flush();
     }

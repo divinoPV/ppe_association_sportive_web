@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Evenement;
-use App\Entity\EvenementCategorie;
 use App\Entity\Sport;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,8 +26,8 @@ class EvenementSearchType extends AbstractType
                 },
                 'choice_label' => 'nom',
             ])
-            ->add('evenementCategorie', EntityType::class, [
-                'class' => EvenementCategorie::class,
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.nom', 'ASC');
