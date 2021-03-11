@@ -56,6 +56,7 @@
         </div>
         <div class="inscription inscription-single inscription-single-event">
             <h2>Inscription</h2>
+            {# Création du champs description inscription sprint 3 #}
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolorem dolores illum rerum
                 voluptatem! A dolorem, eius facilis iure laudantium mollitia, quasi quidem quo repellat repellendus
                 sequi veritatis. Adipisci consectetur debitis doloremque dolorum facere illo illum impedit ipsum
@@ -104,7 +105,7 @@
                     {% endfor %}
                 </div>
             {% else %}
-                 {% trans %}Aucun document à télécharger{% endtrans %}
+                 <h2>{% trans %}Aucun document à télécharger{% endtrans %}</h2>
             {% endif %}
         </div>
     </div>
