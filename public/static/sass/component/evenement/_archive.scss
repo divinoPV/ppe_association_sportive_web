@@ -5,16 +5,22 @@
     }
 
     form {
-        align-items: center;
-        display: flex;
-        justify-content: space-evenly;
+        @include display(flex, center, space-evenly);
         width: 100%;
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group, .column label {
+            @include display(flex, center);
+        }
 
         .column {
             label {
                 font-size: 1.2rem;
 
-                &:after {
+                &:not(.switch-custom):after {
                     content: ' :';
                     margin-right: 13px;
                 }

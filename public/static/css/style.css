@@ -386,13 +386,23 @@ footer .container .row .col span i:nth-of-type(2) {
 .head-archive-event form {
   align-items: center;
   display: flex;
+  gap: 0;
   justify-content: space-evenly;
   width: 100%;
+}
+.head-archive-event form .form-group {
+  margin-bottom: 0;
+}
+.head-archive-event form .form-group, .head-archive-event form .column label {
+  align-items: center;
+  display: flex;
+  gap: 0;
+  justify-content: initial;
 }
 .head-archive-event form .column label {
   font-size: 1.2rem;
 }
-.head-archive-event form .column label:after {
+.head-archive-event form .column label:not(.switch-custom):after {
   content: " :";
   margin-right: 13px;
 }
