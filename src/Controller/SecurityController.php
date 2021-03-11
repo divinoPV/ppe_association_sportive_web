@@ -4,19 +4,20 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bridge\Twig\Mime\BodyRenderer;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -25,13 +26,15 @@ class SecurityController extends AbstractController
     /*#[Route('/login', name: 'login')]*/
     /**
      * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $error= $authenticationUtils->getLastAuthenticationError();
+        $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        if($this->getUser()){
+        if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
@@ -44,6 +47,10 @@ class SecurityController extends AbstractController
     /*#[Route('/registration', name: 'registration')]*/
     /**
      * @Route("/registration", name="registration")
+     * @param EntityManagerInterface $manager
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
     public function registration(EntityManagerInterface $manager,
                                  Request $request,
@@ -54,21 +61,20 @@ class SecurityController extends AbstractController
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPlainPassword());
             $user
                 ->setRoles('ROLE_USER')
                 ->setPassword($hash)
-                ->setCreer(new \DateTime('now'))
-                ->setModifier(new \DateTime('now'))
-            ;
+                ->setCreer(new DateTime('now'))
+                ->setModifier(new DateTime('now'));
             $manager->persist($user);
             $manager->flush();
 
             return $this->redirectToRoute('home',);
         }
 
-        return $this->render('security/registration.html.twig',[
+        return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -77,19 +83,22 @@ class SecurityController extends AbstractController
     /*#[Route("/logout", name: "logout")]*/
     /**
      * @Route("/logout", name="logout")
+     * @throws Exception
      */
     public function logout()
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        throw new Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
     /*#[Route('/forgotten', name: 'forgotten')]*/
     /**
      * @Route("/forgotten", name="forgotten")
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
+     * @throws TransportExceptionInterface
      */
-    public function forgottenPassword(AuthenticationUtils $authenticationUtils,
-                                      EntityManagerInterface $em,
-                                      MailerInterface $mailer,
+    public function forgottenPassword(EntityManagerInterface $em,
                                       Request $request
     ): Response
     {
@@ -128,8 +137,7 @@ class SecurityController extends AbstractController
                     ->context([
                         "e_mail" => $user,
                         "message" => $message
-                    ])
-                ;
+                    ]);
 
                 $loader = new FilesystemLoader("emails\\");
                 $twigEnv = new Environment($loader);

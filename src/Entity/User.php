@@ -111,7 +111,7 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
      * @ORM\JoinColumn(name="categorie", referencedColumnName="id", onDelete="SET NULL")
-     *  @Assert\NotBlank(
+     * @Assert\NotBlank(
      *     message = "Veuillez sélectionner une valeur !"
      * )
      */
@@ -318,6 +318,7 @@ class User implements UserInterface, Serializable
 
         return $this;
     }
+
     /**
      * @return Collection|Inscription[]
      */

@@ -23,9 +23,9 @@ class DashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        if($this->getUser()->getRoles() === 'ROLE_USER'){
+        if ($this->getUser()->getRoles() === 'ROLE_USER') {
             return $this->redirectToRoute('home');
-        }else{
+        } else {
             $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
 
             return $this->redirect($routeBuilder->setController(EvenementCrudController::class)->generateUrl());

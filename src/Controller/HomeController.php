@@ -13,19 +13,19 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
-    public function index(EntityManagerInterface $manager ): Response
+    public function index(EntityManagerInterface $manager): Response
     {
         $events = $manager
             ->getRepository(Evenement::class)
-            ->lastEvenements()
-        ;
+            ->lastEvenements();
 
         $countInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->inscriptionToEvent()
-        ;
+            ->inscriptionToEvent();
 
         return $this->render('home/index.html.twig', [
             'events' => $events,

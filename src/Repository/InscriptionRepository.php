@@ -27,8 +27,7 @@ class InscriptionRepository extends ServiceEntityRepository
             ->where('e.id = i.evenement')
             ->groupBy('i.evenement')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     // /**

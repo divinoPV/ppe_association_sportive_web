@@ -31,8 +31,7 @@ class EvenementRepository extends ServiceEntityRepository
             ->andWhere('e.actif = :actif')
             ->setParameter('actif', $criteria->getActif())
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function countEvent(): array
@@ -40,18 +39,16 @@ class EvenementRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('e')
             ->select('count(e.id)')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function lastEvenements(): array
     {
         return $this->createQueryBuilder('e')
-            ->orderBy('e.debut','ASC')
+            ->orderBy('e.debut', 'ASC')
             ->setMaxResults(3)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 

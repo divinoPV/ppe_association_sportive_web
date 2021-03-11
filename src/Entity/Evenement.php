@@ -395,7 +395,7 @@ class Evenement
     }
 
     /**
-     * @return Collection|Document[]
+     * @return Collection
      */
     public function getDocument(): Collection
     {

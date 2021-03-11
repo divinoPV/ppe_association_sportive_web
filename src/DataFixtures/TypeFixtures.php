@@ -25,7 +25,7 @@ class TypeFixtures extends Fixture
             $typeElement = new Type();
             $typeElement->setNom($aType);
             $manager->persist($typeElement);
-            $this->addReference('type'.$id, $typeElement);
+            $this->addReference('type' . $id, $typeElement);
         endforeach;
 
         $manager->flush();

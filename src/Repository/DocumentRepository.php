@@ -28,8 +28,7 @@ class DocumentRepository extends ServiceEntityRepository
             ->where('e.id = d.evenement')
             ->where('dc.id = d.categorie')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function countDocument(): array
@@ -40,8 +39,7 @@ class DocumentRepository extends ServiceEntityRepository
             ->where('e.id = d.evenement')
             ->groupBy('d.evenement')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     // /**

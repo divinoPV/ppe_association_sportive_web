@@ -17,11 +17,11 @@ class CategorieFixtures extends Fixture
             "Junior garçcon"
         ];
 
-        foreach ($tabCateg as $id => $categ){
+        foreach ($tabCateg as $id => $categ) {
             $uneCateg = new Categorie();
             $uneCateg->setNom($categ);
             $manager->persist($uneCateg);
-            $this->addReference('categ'.$id, $uneCateg);
+            $this->addReference('categ' . $id, $uneCateg);
         }
         $manager->flush();
     }

@@ -32,31 +32,30 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
                 ->setFin(new DateTime('now'))
-                ->setImage($number.'.jpg')
-                ->setVignette($number.'.jpg')
+                ->setImage($number . '.jpg')
+                ->setVignette($number . '.jpg')
                 ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)))
-                ->setActif((bool)random_int(0, 1))
-            ;
+                ->setActif((bool)random_int(0, 1));
 
             /** @var Sport $sport */
-            $sport = $this->getReference('sport'.rand(0,15));
+            $sport = $this->getReference('sport' . rand(0, 15));
             /** @var Type $type */
-            $type = $this->getReference('type'.rand(0,6));
+            $type = $this->getReference('type' . rand(0, 6));
             /** @var Categorie $categorie */
-            $categorie = $this->getReference('categ'.rand(0,3));
+            $categorie = $this->getReference('categ' . rand(0, 3));
 
             $evenement
                 ->setType($type)
                 ->setSport($sport)
-                ->setCategorie($categorie)
-            ;
+                ->setCategorie($categorie);
 
             $manager->persist($evenement);
-            $this->addReference('evenement'.$i, $evenement);
+            $this->addReference('evenement' . $i, $evenement);
         }
 
         $manager->flush();
     }
+
     public function getDependencies(): array
     {
         return [

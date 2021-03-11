@@ -30,20 +30,17 @@ class EvenementController extends AbstractController
         $countEvent = $this
             ->getDoctrine()
             ->getRepository(Evenement::class)
-            ->countEvent()
-        ;
+            ->countEvent();
 
         $countInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->inscriptionToEvent()
-        ;
+            ->inscriptionToEvent();
 
         $data = $this
             ->getDoctrine()
             ->getRepository(Evenement::class)
-            ->findAll()
-        ;
+            ->findAll();
 
         $events = $paginator->paginate(
             $data,
@@ -79,20 +76,17 @@ class EvenementController extends AbstractController
         $countInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->inscriptionToEvent()
-        ;
+            ->inscriptionToEvent();
 
         $countDocument = $this
             ->getDoctrine()
             ->getRepository(Document::class)
-            ->countDocument()
-        ;
+            ->countDocument();
 
         $documents = $this
             ->getDoctrine()
             ->getRepository(Document::class)
-            ->allDocument()
-        ;
+            ->allDocument();
 
         return $this->render('evenement/single.html.twig', [
             'event' => $evenementRepository->findBy(["id" => $id])[0],

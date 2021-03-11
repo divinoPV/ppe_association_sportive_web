@@ -34,7 +34,7 @@ class SportFixtures extends Fixture
             $aSport = new Sport();
             $aSport->setNom($sport);
             $manager->persist($aSport);
-            $this->addReference('sport'.$id, $aSport);
+            $this->addReference('sport' . $id, $aSport);
         endforeach;
 
         $manager->flush();

@@ -41,8 +41,7 @@ class EvenementSearchType extends AbstractType
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'button event-button'],
                 'label' => 'Afficher'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

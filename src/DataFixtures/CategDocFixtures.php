@@ -10,12 +10,12 @@ class CategDocFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i <= 10; $i++){
+        for ($i = 0; $i <= 10; $i++) {
             $categDoc = new DocumentCategorie();
 
-            $categDoc->setNom('categDoc'.$i);
+            $categDoc->setNom('categDoc' . $i);
             $manager->persist($categDoc);
-            $this->addReference('categDoc'.$i,$categDoc);
+            $this->addReference('categDoc' . $i, $categDoc);
         }
 
         $manager->flush();

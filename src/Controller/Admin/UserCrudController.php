@@ -6,13 +6,11 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -79,12 +77,14 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
         ];
     }
 
-    /** @internal */
+    /** @param $event
+     * @internal
+     */
     public function encodePassword($event)
     {
-        $instance= $event->getEntityInstance();
+        $instance = $event->getEntityInstance();
         if (get_class($instance) === get_class(new User())) {
-            if ($instance->getPlainPassword()){
+            if ($instance->getPlainPassword()) {
                 $instance->setPassword($this->passwordEncoder->encodePassword($instance, $instance->getPlainPassword()));
             }
         }
