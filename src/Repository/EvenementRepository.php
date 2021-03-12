@@ -23,11 +23,11 @@ class EvenementRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->join('e.sport', 's')
-            ->join('e.type', 'ec')
+            ->join('e.categorie', 'ec')
             ->where('s.nom = :sport')
             ->setParameter('sport', $criteria->getSport()->getNom())
             ->andWhere('ec.nom = :cat')
-            ->setParameter('cat', $criteria->getType()->getNom())
+            ->setParameter('cat', $criteria->getCategorie()->getNom())
             ->andWhere('e.actif = :actif')
             ->setParameter('actif', $criteria->getActif())
             ->getQuery()

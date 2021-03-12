@@ -22,6 +22,7 @@ class EvenementController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      */
+
     public function index(Request $request,
                           EvenementRepository $evenementRepository,
                           PaginatorInterface $paginator
@@ -54,7 +55,13 @@ class EvenementController extends AbstractController
             $searchEventForm->isValid()
         ):
             $criteria = $searchEventForm->getData();
-            $result = $evenementRepository->searchEvenement($criteria);
+            $data = $evenementRepository->searchEvenement($criteria);
+
+            $result = $paginator->paginate(
+                $data,
+                $request->query->getInt('page', 1),
+                5
+            );
         endif;
 
         return $this->render('evenement/index.html.twig', [

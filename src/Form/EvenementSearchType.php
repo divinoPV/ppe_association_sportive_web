@@ -36,6 +36,7 @@ class EvenementSearchType extends AbstractType
             ])
             ->add('actif', CheckboxType::class, [
                 'label_attr' => ['class' => 'switch-custom'],
+                'required' => false,
             ])
             ->add('send', SubmitType::class, [
                 'attr' => ['class' => 'button event-button'],

@@ -32,7 +32,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
                 ->setFin(new DateTime('now'))
-                ->setImage($number . '.jpg')
+                ->setImage($number . '.png')
                 ->setVignette($number . '.jpg')
                 ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)))
                 ->setActif((bool)random_int(0, 1));

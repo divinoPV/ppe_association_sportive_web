@@ -26,25 +26,21 @@ class Evenement
 
     /**
      * @ORM\Column(type="string", length=256)
-     * @Assert\NotBlank()
      */
     private string $nom;
 
     /**
      * @ORM\Column(type="string", length=612)
-     * @Assert\NotBlank()
      */
     private string $description;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank()
      */
     private DateTime $debut;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank()
      */
     private DateTime $fin;
 
@@ -60,13 +56,11 @@ class Evenement
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
      */
     private int $nombrePlaces;
 
     /**
      * @ORM\Column(type="string", length=256)
-     * @Assert\NotBlank()
      */
     private ?string $image = null;
 
@@ -77,7 +71,6 @@ class Evenement
 
     /**
      * @ORM\Column(type="string", length=256)
-     * @Assert\NotBlank()
      */
     private ?string $vignette = null;
 
@@ -94,14 +87,12 @@ class Evenement
     private ?File $vignetteFile = null;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="sport", nullable=false, referencedColumnName="id")
      */
     private Sport $sport;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenement")
      * @ORM\JoinColumn(name="type", nullable=false, referencedColumnName="id")
      */
@@ -113,7 +104,7 @@ class Evenement
     private Collection $inscription;
 
     /**
-     * @Assert\NotBlank()
+     *
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
