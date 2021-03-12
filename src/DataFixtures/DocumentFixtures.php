@@ -28,7 +28,7 @@ class DocumentFixtures extends Fixture implements DependentFixtureInterface
                 ->setLien('lien document n°' . $i);
 
             /** @var Evenement $evenement */
-            $evenement = $this->getReference('evenement' . rand(1, 24));
+            $evenement = $this->getReference('evenement' . rand(1, EvenementFixtures::EVENT_NBR));
             $document->setEvenement($evenement);
 
             $manager->persist($document);

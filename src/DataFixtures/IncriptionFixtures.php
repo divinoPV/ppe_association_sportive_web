@@ -19,7 +19,7 @@ class IncriptionFixtures extends Fixture implements DependentFixtureInterface
             /** @var User $user */
             $user = $this->getReference('eleve' . rand(1, 24));
             /** @var Evenement $evenement */
-            $evenement = $this->getReference('evenement' . rand(1, 24));
+            $evenement = $this->getReference('evenement' . rand(1, EvenementFixtures::EVENT_NBR));
 
             $inscription
                 ->setCreatedAt()

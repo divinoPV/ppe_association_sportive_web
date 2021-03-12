@@ -15,13 +15,15 @@ use Faker\Generator;
 
 class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const EVENT_NBR = 354;
+
     protected Generator $faker;
 
     public function load(ObjectManager $manager)
     {
         $this->faker = Factory::create();
 
-        for ($i = 1; $i < 25; $i++) {
+        for ($i = 1; $i < EvenementFixtures::EVENT_NBR; $i++) {
             $number = rand(1, 7);
 
             $evenement = new Evenement();
