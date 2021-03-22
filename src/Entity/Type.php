@@ -29,11 +29,11 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="type", orphanRemoval=true)
      */
-    private Collection $evenement;
+    private Collection $evenements;
 
     public function __construct()
     {
-        $this->evenement = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -58,25 +58,25 @@ class Type
      */
     public function getEvenement(): Collection
     {
-        return $this->evenement;
+        return $this->evenements;
     }
 
-    public function addEvenement(Evenement $evenement): self
+    public function addEvenement(Evenement $evenements): self
     {
-        if (!$this->evenement->contains($evenement)) {
-            $this->evenement[] = $evenement;
-            $evenement->setType($this);
+        if (!$this->evenements->contains($evenements)) {
+            $this->evenements[] = $evenements;
+            $evenements->setType($this);
         }
 
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): self
+    public function removeEvenement(Evenement $evenements): self
     {
-        if ($this->evenement->removeElement($evenement)) {
+        if ($this->evenements->removeElement($evenements)) {
             // set the owning side to null (unless already changed)
-            if ($evenement->getType() === $this) {
-                $evenement->setType(null);
+            if ($evenements->getType() === $this) {
+                $evenements->setType(null);
             }
         }
 

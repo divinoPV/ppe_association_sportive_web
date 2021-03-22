@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -87,13 +86,13 @@ class Evenement
     private ?File $vignetteFile = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenement")
+     * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenements")
      * @ORM\JoinColumn(name="sport", nullable=false, referencedColumnName="id")
      */
     private Sport $sport;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenement")
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="evenements")
      * @ORM\JoinColumn(name="type", nullable=false, referencedColumnName="id")
      */
     private Type $type;
