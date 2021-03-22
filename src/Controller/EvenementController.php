@@ -49,7 +49,10 @@ class EvenementController extends AbstractController
             5
         );
 
-        $searchEventForm = $this->createForm(EvenementSearchType::class);
+        $searchEventForm = $this->createForm(EvenementSearchType::class, null, [
+            'action' => $this->generateUrl('evenement'),
+            'method' => 'GET',
+        ]);
 
         if ($searchEventForm->handleRequest($request)->isSubmitted() &&
             $searchEventForm->isValid()
