@@ -23,11 +23,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $j = 0;
-        for ($i = 1; $i <= self::USER_LIST; $i++) {
+        $password = "'Azerty123&@.";
 
+        for ($i = 1; $i <= self::USER_LIST; $i++) {
             $j = $j < sizeof(CategorieFixtures::CATEG_LIST) - 1 ? $j + 1 : $j = 0;
             $user = new User();
-            $password = "'Azerty123&@.";
             $user
                 ->setEmail('eleve' . $i . '@gmail.com')
                 ->setNom('NomEleve' . $i)
@@ -46,6 +46,22 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($user);
             $this->addReference('eleve' . $i, $user);
         }
+        $admin = new User();
+        $admin
+            ->setEmail('admin@gmail.com')
+            ->setNom('adminNom')
+            ->setPrenom('adminPrenom')
+            ->setRoles('ROLE_ADMIN')
+            ->setCreer(new DateTime('now'))
+            ->setNaissance(new DateTime('now'))
+            ->setModifier(new DateTime('now'))
+            ->setPassword($this->encoder->encodePassword($admin, $password))
+            ->setForgottenPassword(false);
+        /** @var Categorie $uneCateg */
+        $uneCateg = $this->getReference("categ" . rand(0, 3));
+        $admin->setCategorie($uneCateg);
+        $manager->persist($admin);
+
         $manager->flush();
     }
 
