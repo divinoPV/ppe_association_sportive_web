@@ -8,9 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategDocFixtures extends Fixture
 {
+    public const CATEG_DOC_LIST = 10;
+
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i <= self::CATEG_DOC_LIST; $i++) {
             $categDoc = new DocumentCategorie();
 
             $categDoc->setNom('categDoc' . $i);

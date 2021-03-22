@@ -6,11 +6,13 @@ use App\Entity\Categorie;
 use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const USER_LIST = 25;
     private UserPasswordEncoderInterface $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -20,9 +22,12 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 1; $i < 25; $i++) {
+        $j = 0;
+        for ($i = 1; $i <= self::USER_LIST; $i++) {
+
+            $j = $j < sizeof(CategorieFixtures::CATEG_LIST) - 1 ? $j + 1 : $j = 0;
             $user = new User();
-            $password = '123';
+            $password = "'Azerty123&@.";
             $user
                 ->setEmail('eleve' . $i . '@gmail.com')
                 ->setNom('NomEleve' . $i)
@@ -35,7 +40,7 @@ class UserFixtures extends Fixture
                 ->setForgottenPassword(false);
 
             /** @var Categorie $uneCateg */
-            $uneCateg = $this->getReference('categ' . rand(0, 3));
+            $uneCateg = $this->getReference("categ$j");
 
             $user->setCategorie($uneCateg);
             $manager->persist($user);

@@ -11,15 +11,21 @@ use Doctrine\Persistence\ObjectManager;
 
 class IncriptionFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const INSCRIPTION_LIST = 24;
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i <= 24; $i++) {
+        $nbeInscription = 0;
+        $nbeUser = 0;
+        for ($i = 0; $i <= self::INSCRIPTION_LIST; $i++) {
+            $nbeInscription = $nbeInscription < EvenementFixtures::EVENT_LIST? $nbeInscription + 1 : $nbeInscription = 0;
+            $nbeUser = $nbeUser < UserFixtures::USER_LIST ? $nbeUser + 1 : $nbeUser = 0;
+
             $inscription = new Inscription();
 
             /** @var User $user */
-            $user = $this->getReference('eleve' . rand(1, 24));
+            $user = $this->getReference('eleve' . $nbeUser);
             /** @var Evenement $evenement */
-            $evenement = $this->getReference('evenement' . rand(1, EvenementFixtures::EVENT_NBR));
+            $evenement = $this->getReference('evenement' . $nbeInscription);
 
             $inscription
                 ->setCreatedAt()

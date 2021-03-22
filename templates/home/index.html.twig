@@ -31,25 +31,6 @@
                         </span>
                             <span class="ecs-registration eecs-registration">
                             <i class="fas fa-info-circle"></i>
-                            {% set haveOne = [] %}
-                                {% set nbrPlace = event.nombrePlaces %}
-                                {% for insc in inscriptionCount %}
-                                    {% if insc.id == event.id %}
-                                        {% if insc.1 == event.nombrePlaces %}
-                                            {% trans %}Inscriptions terminées{% endtrans %}
-                                        {% else%}
-                                            {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
-                                            {% set nbrInscrit = insc.1 %}
-                                            {% trans %}
-                                                %nbrInscrit% %string% sur %nbrPlace%
-                                            {% endtrans %}
-                                        {% endif%}
-                                        {% set haveOne = haveOne|merge([event.id]) %}
-                                    {% endif %}
-                                {% endfor %}
-                                {% if haveOne is not null and event.id not in haveOne %}
-                                    {% trans %}%nbrPlace% places disponibles !{% endtrans %}
-                                {% endif %}
                         </span>
                             <span class="ecs-category eecs-category">
                             {{ event.categorie.nom }}
@@ -59,7 +40,7 @@
                         </span>
                         </div>
                         <p class="description ec-description eec-description">
-                            {{ event.description }}
+                            {{ event.description|e('html') }}
                         </p>
                         <a class="link ec-link eec-link" href="{{
                         path('single_event',

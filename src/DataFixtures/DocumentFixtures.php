@@ -11,13 +11,22 @@ use Doctrine\Persistence\ObjectManager;
 
 class DocumentFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const DOC_LIST = 10;
+
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 10; $i++) {
+        $nbeEvent = 0;
+        $nbeCategDoc = 0;
+
+        for ($i = 0; $i < self::DOC_LIST; $i++) {
+
+            $nbeEvent = $nbeEvent < EvenementFixtures::EVENT_LIST ? $nbeEvent + 1 : $nbeEvent = 0;
+            $nbeCategDoc = $nbeCategDoc < CategDocFixtures::CATEG_DOC_LIST ? $nbeCategDoc + 1 : $nbeCategDoc = 0;
+
             $document = new Document();
 
             /** @var DocumentCategorie $categ */
-            $categ = $this->getReference('categDoc' . rand(0, 10));
+            $categ = $this->getReference('categDoc' . $nbeCategDoc);
 
             $document
                 ->setNom('document' . $i)
@@ -28,7 +37,7 @@ class DocumentFixtures extends Fixture implements DependentFixtureInterface
                 ->setLien('lien document n°' . $i);
 
             /** @var Evenement $evenement */
-            $evenement = $this->getReference('evenement' . rand(1, EvenementFixtures::EVENT_NBR));
+            $evenement = $this->getReference('evenement' . $nbeEvent);
             $document->setEvenement($evenement);
 
             $manager->persist($document);

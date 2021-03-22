@@ -15,7 +15,7 @@ use Faker\Generator;
 
 class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const EVENT_NBR = 354;
+    public const EVENT_LIST = 354;
 
     protected Generator $faker;
 
@@ -23,8 +23,14 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
     {
         $this->faker = Factory::create();
 
-        for ($i = 1; $i < EvenementFixtures::EVENT_NBR; $i++) {
-            $number = rand(1, 7);
+        $nbeSport = 0;
+        $nbeType = 0;
+        $nbeCateg = 0;
+        for ($i = 1; $i < EvenementFixtures::EVENT_LIST; $i++) {
+            $number = rand(1, 6);
+            $nbeSport = $nbeSport < sizeof(SportFixtures::SPORT_LIST) - 1 ? $nbeSport + 1 : $nbeSport = 0;
+            $nbeType = $nbeType < sizeof(TypeFixtures::TYPE_LIST) - 1 ? $nbeType + 1 : $nbeType = 0;
+            $nbeCateg = $nbeCateg < sizeof(CategorieFixtures::CATEG_LIST) - 1 ? $nbeCateg + 1 : $nbeCateg = 0;
 
             $evenement = new Evenement();
             $evenement
@@ -34,17 +40,17 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
                 ->setUpdatedAt()
                 ->setDebut(new DateTime('now'))
                 ->setFin(new DateTime('now'))
-                ->setImage($number . '.png')
+                ->setImage($number . '.jpg')
                 ->setVignette($number . '.jpg')
                 ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)))
                 ->setActif((bool)random_int(0, 1));
 
             /** @var Sport $sport */
-            $sport = $this->getReference('sport' . rand(0, 15));
+            $sport = $this->getReference('sport' . $nbeSport);
             /** @var Type $type */
-            $type = $this->getReference('type' . rand(0, 6));
+            $type = $this->getReference('type' . $nbeType);
             /** @var Categorie $categorie */
-            $categorie = $this->getReference('categ' . rand(0, 3));
+            $categorie = $this->getReference("categ$nbeCateg");
 
             $evenement
                 ->setType($type)

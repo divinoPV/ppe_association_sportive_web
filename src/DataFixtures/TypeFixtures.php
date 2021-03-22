@@ -9,19 +9,19 @@ use Doctrine\Persistence\ObjectManager;
 
 class TypeFixtures extends Fixture
 {
+    public const TYPE_LIST = [
+        "Activité Sportive",
+        "Compétiton",
+        "Compétition amateur",
+        "Championat",
+        "Tournoi",
+        "Journée découverte",
+        "Journée associative"
+    ];
+
     public function load(ObjectManager $manager)
     {
-        $type = [
-            "Activité Sportive",
-            "Compétiton",
-            "Compétition amateur",
-            "Championat",
-            "Tournoi",
-            "Journée découverte",
-            "Journée associative"
-        ];
-
-        foreach ($type as $id => $aType):
+        foreach (self::TYPE_LIST as $id => $aType):
             $typeElement = new Type();
             $typeElement->setNom($aType);
             $manager->persist($typeElement);
