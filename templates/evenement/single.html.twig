@@ -1,8 +1,15 @@
 {% extends 'base.html.twig' %}
+
+{# Ascesseur en écriture #}
+{% set template = 'event' %}
+{% set type_template = 'single' %}
 {% set nom = event.nom|trim('.') %}
+
 {% block title %}{{ nom }} - Événement -{% endblock %}
+
 {% block body %}
-    <div class="head head-single head-single-event">
+    {{ initTemplate(template, type_template) }}
+    <div class="{{ generateClass("head") }}">
         <h1 class="title title-single title-single-event">{{ nom }}</h1>
         <div class="subtitle subtitle-single subtitle-single-event">
             <div class="info-primary info-primary-single info-primary-single-event">
