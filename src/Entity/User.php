@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\UtilisateurRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\Collection;
@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass=UtilisateurRepository::class)
  * @UniqueEntity(
  *     fields={"email"},
  *     message="L'email indiqué est déjà utiliser"
@@ -101,12 +101,12 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $creer;
+    private ?DateTime $creerA;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $modifier;
+    private ?DateTime $modifierA;
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
@@ -237,24 +237,24 @@ class User implements UserInterface, Serializable
 
     public function getCreer(): ?DateTimeInterface
     {
-        return $this->creer;
+        return $this->creerA;
     }
 
-    public function setCreer(?DateTimeInterface $creer): self
+    public function setCreer(?DateTimeInterface $creerA): self
     {
-        $this->creer = $creer;
+        $this->creerA = $creerA;
 
         return $this;
     }
 
     public function getModifier(): ?DateTimeInterface
     {
-        return $this->modifier;
+        return $this->modifierA;
     }
 
-    public function setModifier(?DateTimeInterface $modifier): self
+    public function setModifier(?DateTimeInterface $modifierA): self
     {
-        $this->modifier = $modifier;
+        $this->modifierA = $modifierA;
 
         return $this;
     }

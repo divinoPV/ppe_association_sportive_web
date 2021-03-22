@@ -18,7 +18,7 @@ class IncriptionFixtures extends Fixture implements DependentFixtureInterface
         $nbeUser = 0;
         for ($i = 0; $i <= self::INSCRIPTION_LIST; $i++) {
             $nbeInscription = $nbeInscription < EvenementFixtures::EVENT_LIST? $nbeInscription + 1 : $nbeInscription = 0;
-            $nbeUser = $nbeUser < UserFixtures::USER_LIST ? $nbeUser + 1 : $nbeUser = 0;
+            $nbeUser = $nbeUser < UtilisateurFixtures::USER_LIST ? $nbeUser + 1 : $nbeUser = 0;
 
             $inscription = new Inscription();
 
@@ -41,7 +41,7 @@ class IncriptionFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             EvenementFixtures::class,
-            UserFixtures::class
+            UtilisateurFixtures::class
         ];
     }
 }

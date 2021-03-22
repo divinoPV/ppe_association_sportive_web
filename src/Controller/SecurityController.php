@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
+use App\Form\InscriptionType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -58,7 +58,7 @@ class SecurityController extends AbstractController
     ): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationType::class, $user);
+        $form = $this->createForm(InscriptionType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

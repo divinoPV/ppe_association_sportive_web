@@ -10,7 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserFixtures extends Fixture implements DependentFixtureInterface
+class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
 {
     public const USER_LIST = 25;
     private UserPasswordEncoderInterface $encoder;
