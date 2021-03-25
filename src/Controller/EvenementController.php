@@ -7,6 +7,7 @@ use App\Entity\Evenement;
 use App\Entity\Inscription;
 use App\Form\EvenementSearchType;
 use App\Repository\EvenementRepository;
+use App\Repository\InscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -116,13 +117,20 @@ final class EvenementController extends AbstractController
     /**
      * @Route("/{id}/registration", name=self::ROUTE_REGISTRATION)
      * @param EvenementRepository $evenementRepository
+     * @param InscriptionRepository $inscriptionRepository
      * @param int $id
      * @return Response
      */
-    public function registration(EvenementRepository $evenementRepository, int $id): Response
+    public function registration(EvenementRepository $evenementRepository,
+                                 InscriptionRepository $inscriptionRepository,
+                                 int $id): Response
     {
+        $event = $evenementRepository->findBy(["id" => $id])[0];
+        $checkInscription = $inscriptionRepository->findBy(["evenement" => $id, "user"])[0];
+        dd($event);
+
         return $this->render(self::TEMPLATE . '/registration.html.twig', [
-            'event' => $evenementRepository->findBy(["id" => $id])[0],
+            'event' => $event,
         ]);
     }
 }
