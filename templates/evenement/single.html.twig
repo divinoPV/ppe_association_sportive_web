@@ -108,13 +108,15 @@
     <div class="footer footer-single footer-single-event">
         <a class="back back-single back-single-event"
            href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
-        <a class="button button-single button-single-event button-inscription"
-            href="{{
-                path(template ~ '_registration',
-                {'id': event.id})
+        <a class="button button-single button-single-event button-inscription {{ hasRegister == false ?: "disabled" }}"
+            href="{{ hasRegister == false
+                ? path(template ~ '_registration', {'id': event.id})
+                : '#'
            }}"
-        >
-            Inscription
+        >Inscription
         </a>
+        {% if hasRegister == true %}
+            <span>Vous êtes bien inscrit à cet événement.</span>
+        {% endif %}
     </div>
 {% endblock body %}
