@@ -116,7 +116,7 @@ final class EvenementController extends AbstractController
             ->getRepository(Inscription::class)
             ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
 
-        $hasRegister > 0 ? $hasRegister = true : $hasRegister = false;
+        !empty($hasRegister) ? $hasRegister = true : $hasRegister = false;
 
         return $this->render('evenement/single.html.twig', [
             'event' => $event,
@@ -149,7 +149,7 @@ final class EvenementController extends AbstractController
             ->getRepository(Inscription::class)
             ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
 
-        if ($checkInscription > 0):
+        if (empty($checkInscription)):
             $insc = new Inscription();
             $insc->setUtilisateur($this->container->get('security.token_storage')->getToken()->getUser())
                 ->setEvenement($event)
