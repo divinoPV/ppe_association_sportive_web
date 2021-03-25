@@ -11,7 +11,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -38,34 +37,32 @@ class EvenementCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom', 'titre de l\'évenement')->setRequired(true),
-            TextEditorField::new('description', 'description de l\'évenement')->setRequired(true),
+            TextField::new('description', 'description de l\'évenement')->setRequired(true)
+                ->hideOnIndex(),
             ImageField::new('imageFichier', 'ajouter une image')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions(['allow_delete' => false])
-                ->onlyOnForms()
-                ->setRequired(true),
+                ->onlyOnForms(),
             ImageField::new('image', 'image')
                 ->setBasePath($this->getParameter('app.path.featured_evenement_images'))
-                ->hideOnForm()
-                ->setRequired(true),
+                ->hideOnForm(),
             ImageField::new('vignetteFichier', 'ajouter une vignette')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions(['allow_delete' => false])
-                ->onlyOnForms()
-                ->setRequired(true),
+                ->onlyOnForms(),
             ImageField::new('vignette', 'vignette')
                 ->setBasePath($this->getParameter('app.path.featured_evenement_vignettes'))
-                ->hideOnForm()
-                ->setRequired(true),
+                ->hideOnForm(),
             DateField::new('debuterLe', 'début de l\'évenement')->setRequired(true),
             DateField::new('finirLe', 'fin de l\'évenement')->setRequired(true),
-            DateField::new('creerLe', 'date création')->hideOnForm(),
-            DateField::new('modifierLe', 'date modification')->hideOnForm(),
             NumberField::new('nombrePlaces', 'nombre de place')->setRequired(true),
             BooleanField::new('actif', 'actif')->renderAsSwitch(),
-            AssociationField::new('type')->setRequired(true),
-            AssociationField::new('sport')->setRequired(true),
-            AssociationField::new('categorie')->setRequired(true),
+            AssociationField::new('type')->setRequired(true)
+                ->hideOnIndex(),
+            AssociationField::new('sport')->setRequired(true)
+                ->hideOnIndex(),
+            AssociationField::new('categorie')->setRequired(true)
+                ->hideOnIndex(),
         ];
     }
 
