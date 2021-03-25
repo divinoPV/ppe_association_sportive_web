@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% set template = 'evenement' %}
-{% set type_template = 'archive' %}
+{% set template = "evenement" %}
+{% set type_template = "registration" %}
 {% set nom = event.nom|trim('.') %}
 
 {% block title %}S'inscrire à {{ nom }} - Événement -{% endblock title %}
 
 {% block body %}
+    {{ initTemplate(template, type_template) }}
+    <div class="{{ generateClass("head") }}">
+        <h1 class="{{ generateClass("title") }}">Inscription à {{ nom }}</h1>
+        <span class="{{ generateClass("message") }}">{{ message }}</span>
+    </div>
 {% endblock body %}

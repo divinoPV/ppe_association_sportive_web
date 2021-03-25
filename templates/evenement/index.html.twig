@@ -76,11 +76,14 @@
                     <p class="description ec-description eec-description">
                         {{ event.description }}
                     </p>
-                    <a class="link ec-link eec-link" href="{{
-                        path(template ~ '_single',
-                            {'id': event.id})
-                        }}">Voir l'événement >
+                    <a class="link ec-link eec-link {{ hasRegister == false ?: "disabled" }}"
+                        href="{{
+                            path(template ~ '_single',{'id': event.id}) }}"
+                    >Voir l'événement >
                     </a>
+                    {% if hasRegister == true %}
+                        <span>Vous êtes bien inscrit à cet événement.</span>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
