@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
-{% block title %}Événement -{% endblock %}
+
+{% set template = 'evenement' %}
+{% set type_template = 'archive' %}
+
+{% block title %}Événement -{% endblock title %}
+
 {% block body %}
 <div class="head head-archive head-archive-event">
     <h1 class="title event-title">{{ eventCount }} événement{% if eventCount > 1 %}s{% endif %}</h1>
@@ -72,7 +77,7 @@
                         {{ event.description }}
                     </p>
                     <a class="link ec-link eec-link" href="{{
-                        path('single_event',
+                        path(template ~ '_single',
                             {'id': event.id})
                         }}">Voir l'événement >
                     </a>

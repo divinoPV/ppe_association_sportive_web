@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{# Ascesseur en écriture #}
-{% set template = 'event' %}
+{% set template = 'evenement' %}
 {% set type_template = 'single' %}
 {% set nom = event.nom|trim('.') %}
 
-{% block title %}{{ nom }} - Événement -{% endblock %}
+{% block title %}{{ nom }} - Événement -{% endblock title %}
 
 {% block body %}
     {{ initTemplate(template, type_template) }}
@@ -55,7 +54,7 @@
     <div class="body body-single body-single-event">
         <img alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}"
              class="image image-single image-single-event"
-             src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
+             src="{{ asset('media/images/featured/vignettes/' ~ event.vignette) }}"
         >
         <div class="description description-single description-single-event">
             <h2>Description</h2>
@@ -64,21 +63,9 @@
         <div class="inscription inscription-single inscription-single-event">
             <h2>Inscription</h2>
             {# Création du champs description inscription sprint 3 #}
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis dolorem dolores illum rerum
-                voluptatem! A dolorem, eius facilis iure laudantium mollitia, quasi quidem quo repellat repellendus
-                sequi veritatis. Adipisci consectetur debitis doloremque dolorum facere illo illum impedit ipsum
-                mollitia nam placeat, possimus quae quia quod saepe suscipit, voluptate. Ab animi commodi corporis
-                debitis eius eveniet inventore ipsam libero maiores nisi, optio porro, quo, quod similique veniam
-                veritatis voluptatibus? Animi aut delectus ipsum! Accusamus alias aliquam amet animi aspernatur eos
-                error fugiat harum illo iure magni maxime nam nemo nesciunt, nisi odio officia pariatur quis ratione
-                vel. Culpa cum dolorem dolores dolorum, eos eveniet excepturi expedita hic ipsum, nisi non pariatur
-                porro quae quam repellat sit tempora temporibus veniam voluptatem voluptatibus! Animi architecto dolorum
-                et expedita, illum impedit ipsa, iste laborum nulla optio quasi repellat ut? Ad alias aliquam aliquid
-                animi aperiam assumenda corporis cupiditate delectus dolor dolore doloremque dolores ea eaque et eum ex
-                exercitationem harum hic in inventore ipsa, itaque minima minus mollitia natus nisi nobis obcaecati
-                omnis perferendis, qui, quibusdam quo reiciendis reprehenderit sunt totam velit voluptates. Accusamus
-                amet animi asperiores atque autem doloribus et, explicabo facere illum labore magnam nihil nobis
-                obcaecati odio perspiciatis sed vero voluptatum?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus accusantium cumque doloremque et
+                illum ipsam minima pariatur perferendis quas voluptatem! At, atque, autem beatae commodi est eum
+                excepturi magnam molestias omnis provident quia rem saepe sint suscipit unde vero voluptatum.</p>
         </div>
         <div class="document document-single document-single-event">
             {% set number = '' %}
@@ -105,19 +92,29 @@
                                 <span nom class="name">{{ document.nom }}</span>
                                 <span date class="date">{{ document.createdAt|date("m F Y") }}</span>
                                 <span cat class="category">{{ document.categorie.nom }}</span>
-                                <span poids class="weight">A venir dans le sprint 4{#{{ document.poids }}#}</span>
-                                <button action class="button button-single button-single-event button-telecharger">Télécharger</button>
+                                <span poids class="weight">A venir dans le sprint 4{# {{ document.poids }} #}</span>
+                                <button action class="button button-single button-single-event button-telecharger">
+                                    Télécharger
+                                </button>
                             </div>
                         {% endif %}
                     {% endfor %}
                 </div>
             {% else %}
-                 <h2>{% trans %}Aucun document à télécharger{% endtrans %}</h2>
+                <h2>{% trans %}Aucun document à télécharger{% endtrans %}</h2>
             {% endif %}
         </div>
     </div>
     <div class="footer footer-single footer-single-event">
-        <a class="back back-single back-single-event" href="{{ path('evenement') }}">{% trans %}< Retour aux événements{% endtrans %}</a>
-        <button class="button button-single button-single-event button-inscription">Inscription</button>
+        <a class="back back-single back-single-event"
+           href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
+        <a class="button button-single button-single-event button-inscription"
+            href="{{
+                path(template ~ '_registration',
+                {'id': event.id})
+           }}"
+        >
+            Inscription
+        </a>
     </div>
 {% endblock body %}
