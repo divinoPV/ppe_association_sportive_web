@@ -44,7 +44,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $this->_em->flush();
     }
 
-    public function findUsersByRole($role)
+    public function findUserByRole($role)
     {
         $qb = $this->createQueryBuilder('u');
         $qb->select('u')

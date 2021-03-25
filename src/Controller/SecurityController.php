@@ -4,26 +4,21 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\InscriptionType;
+use App\Service\Mail\EmailSender;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Symfony\Bridge\Twig\Mime\BodyRenderer;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\Mailer;
-use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
 
 class SecurityController extends AbstractController
 {
-    /*#[Route('/login', name: 'login')]*/
     /**
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
@@ -44,7 +39,6 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /*#[Route('/registration', name: 'registration')]*/
     /**
      * @Route("/registration", name="registration")
      * @param EntityManagerInterface $manager
@@ -80,8 +74,6 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
-    /*#[Route("/logout", name: "logout")]*/
     /**
      * @Route("/logout", name="logout")
      * @throws Exception
@@ -91,22 +83,19 @@ class SecurityController extends AbstractController
         throw new Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
 
-    /*#[Route('/forgotten', name: 'forgotten')]*/
     /**
      * @Route("/forgotten", name="forgotten")
      * @param EntityManagerInterface $em
      * @param Request $request
+     * @param MailerInterface $mailer
      * @return Response
-     * @throws TransportExceptionInterface
      */
-    public function forgottenPassword(EntityManagerInterface $em,
-                                      Request $request
-    ): Response
+    public function forgottenPassword(EntityManagerInterface $em, Request $request, MailerInterface $mailer ): Response
     {
         $title = " - Mot de passe oublié";
 
         if (!empty($request->get("submit"))):
-            $admin = $em->getRepository(User::class)->findUsersByRole("ROLE_ADMIN");
+            $admin = $em->getRepository(User::class)->findUserByRole('ROLE_ADMIN');
             $user = $request->get("fogetten_password_first");
             $data = $em->getRepository(User::class)->findOneBy([
                 "email" => $user
@@ -114,42 +103,22 @@ class SecurityController extends AbstractController
 
             if ($request->get("fogetten_password_first") !== $request->get("fogetten_password_second")):
                 $error = "Les adresses ne correpondent pas !";
+
             elseif (empty($data)):
                 $error = "L'adresse mail n'est lié à aucun compte !";
-            else:
-                $message = <<<EOT
-                                <p>Message automatique pour la demande de changement de mot passe.</p>
-                                </br>
-                                <p>Vous pouvez modifié ici : https://localhost:8000/admin</p>
-                       EOT;
-                //On créé le mail
-                $transport = Transport::fromDsn($_ENV["MAILER_DSN"]);
-                $mailer = new Mailer($transport);
-                $email = (new TemplatedEmail())
-                    ->from($user)
-                    ->to($admin->getEmail())
-                    ->subject("Changement de mot de passe")
-                    /*
-                        Obliger de mettre le template html dans le public car le site pointe
-                        dans le dossier public, la méthode htmlTemplate() est sécurisé et ne
-                        permet pas de remonter dans l'architecture et d'accéder au dossier template.
-                    */
-                    ->htmlTemplate("contact_forgotten.html.twig")
-                    ->context([
-                        "e_mail" => $user,
-                        "message" => $message
-                    ]);
 
-                $loader = new FilesystemLoader("emails\\");
-                $twigEnv = new Environment($loader);
-                $twigBodyRenderer = new BodyRenderer($twigEnv);
-                $twigBodyRenderer->render($email);
-                //On envoie le mail
-                $mailer->send($email);
-                //On confirme et on redirige
+            else:
+                $option = [
+                    'sujet' => 'Demande de modification de mot de passe',
+                    'utilisateur' => $user,
+                    'administrateur' => $admin
+                ];
+
+                EmailSender::sendMail($mailer, $user, $admin->getEmail(), 'email/contact_forgotten.html.twig', $option);
+
                 $this->addFlash("message", "Votre e-mail a bien été envoyé !");
 
-                $data->setForgottenPassword(true);
+                $data->setMdpOublier(true);
 
                 $em->persist($data);
                 $em->flush();
