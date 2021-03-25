@@ -53,17 +53,18 @@
                                     {% if insc.1 == event.nombrePlaces %}
                                         {% trans %}Inscriptions terminées{% endtrans %}
                                     {% else%}
-                                        {% set string = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
+                                        {% set stringInscrit = insc.1 > 1 ? 'inscrits' : 'inscrit' %}
                                         {% set nbrInscrit = insc.1 %}
                                         {% trans %}
-                                            %nbrInscrit% %string% sur %nbrPlace%
+                                            %nbrInscrit% %stringInscrit% sur %nbrPlace%
                                         {% endtrans %}
                                     {% endif%}
                                     {% set haveOne = haveOne|merge([event.id]) %}
                                 {% endif %}
                             {% endfor %}
                             {% if haveOne is not null and event.id not in haveOne %}
-                                {% trans %}%nbrPlace% places disponibles !{% endtrans %}
+                                {% set stringPlace = nbrPlace > 1 ? 'places' : 'place' %}
+                                {% trans %}%nbrPlace% %stringPlace% disponibles !{% endtrans %}
                             {% endif %}
                         </span>
                         <span class="ecs-category eecs-category">

@@ -21,27 +21,30 @@
                         au {{ fin }}
                     {% endif %}
             </span>
-                <span class="registration">
+                <span class="{{ generateClass("registration") }}">
                 <i class="fas fa-info-circle"></i>
                 {% set haveOne = [] %}
-                    {% set nbrPlace = event.nombrePlaces %}
-                    {% for insc in inscriptionCount %}
-                        {% if insc.id == event.id %}
-                            {% if insc.1 == event.nombrePlaces %}
-                                {% trans %}Inscriptions terminées{% endtrans %}
-                            {% else %}
-                                {% set string = insc.1 > 1 ? 'inscriptions' : 'inscription' %}
-                                {% set nbrInscrit = insc.1 %}
-                                {% trans %}
-                                    %nbrInscrit% %string% sur %nbrPlace%
-                                {% endtrans %}
-                            {% endif %}
-                            {% set haveOne = haveOne|merge([event.id]) %}
+                {% set completed = false %}
+                {% set nbrPlace = event.nombrePlaces %}
+                {% for insc in inscriptionCount %}
+                    {% if insc.id == event.id %}
+                        {% if insc.1 == event.nombrePlaces %}
+                            {% trans %}Inscriptions terminées{% endtrans %}
+                            {% set completed = true %}
+                        {% else %}
+                            {% set string = insc.1 > 1 ? 'inscriptions' : 'inscription' %}
+                            {% set nbrInscrit = insc.1 %}
+                            {% trans %}
+                                %nbrInscrit% %string% sur %nbrPlace%
+                            {% endtrans %}
                         {% endif %}
-                    {% endfor %}
-                    {% if haveOne is not null and event.id not in haveOne %}
-                        {% trans %}%nbrPlace% places disponibles !{% endtrans %}
+                        {% set haveOne = haveOne|merge([event.id]) %}
                     {% endif %}
+                {% endfor %}
+                {% if haveOne is not null and event.id not in haveOne %}
+                    {% set stringPlace = nbrPlace > 1 ? 'places' : 'place' %}
+                    {% trans %}%nbrPlace% %stringPlace% disponibles !{% endtrans %}
+                {% endif %}
             </span>
             </div>
             <div class="info info-single info-single-event">
@@ -109,10 +112,12 @@
         <a class="back back-single back-single-event"
            href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
         <a class="button button-single button-single-event button-inscription {{ hasRegister == false ?: "disabled" }}"
-            href="{{ hasRegister == false
-                ? path(template ~ '_registration', {'id': event.id})
-                : '#'
-           }}"
+            href="
+                {% if hasRegister == false or completed == true %}
+                    {{ path(template ~ '_registration', {'id': event.id}) }}
+                {% else %}
+                    #
+                {% endif %}"
         >Inscription
         </a>
         {% if hasRegister == true %}
