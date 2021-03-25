@@ -33,16 +33,16 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
                 ->setNom('NomEleve' . $i)
                 ->setPrenom('PrenomEleve' . $i)
                 ->setRoles('ROLE_USER')
-                ->setCreer(new DateTime('now'))
                 ->setNaissance(new DateTime('now'))
-                ->setModifier(new DateTime('now'))
                 ->setPassword($this->encoder->encodePassword($user, $password))
-                ->setForgottenPassword(false);
+                ->setMdpOublier(false)
+                ->setCreerLe(new DateTime('now'))
+                ->setModifierLe(new DateTime('now'));
 
             /** @var Categorie $uneCateg */
             $uneCateg = $this->getReference("categ$j");
-
             $user->setCategorie($uneCateg);
+
             $manager->persist($user);
             $this->addReference('eleve' . $i, $user);
         }
@@ -52,16 +52,17 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
             ->setNom('adminNom')
             ->setPrenom('adminPrenom')
             ->setRoles('ROLE_ADMIN')
-            ->setCreer(new DateTime('now'))
             ->setNaissance(new DateTime('now'))
-            ->setModifier(new DateTime('now'))
             ->setPassword($this->encoder->encodePassword($admin, $password))
-            ->setForgottenPassword(false);
+            ->setMdpOublier(false)
+            ->setCreerLe(new DateTime('now'))
+            ->setModifierLe(new DateTime('now'));
+
         /** @var Categorie $uneCateg */
         $uneCateg = $this->getReference("categ" . rand(0, 3));
         $admin->setCategorie($uneCateg);
-        $manager->persist($admin);
 
+        $manager->persist($admin);
         $manager->flush();
     }
 

@@ -24,6 +24,7 @@ class TypeFixtures extends Fixture
         foreach (self::TYPE_LIST as $id => $aType):
             $typeElement = new Type();
             $typeElement->setNom($aType);
+
             $manager->persist($typeElement);
             $this->addReference('type' . $id, $typeElement);
         endforeach;

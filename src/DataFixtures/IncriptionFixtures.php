@@ -12,12 +12,13 @@ use Doctrine\Persistence\ObjectManager;
 class IncriptionFixtures extends Fixture implements DependentFixtureInterface
 {
     public const INSCRIPTION_LIST = 24;
+
     public function load(ObjectManager $manager)
     {
         $nbeInscription = 0;
         $nbeUser = 0;
         for ($i = 0; $i <= self::INSCRIPTION_LIST; $i++) {
-            $nbeInscription = $nbeInscription < EvenementFixtures::EVENT_LIST? $nbeInscription + 1 : $nbeInscription = 0;
+            $nbeInscription = $nbeInscription < EvenementFixtures::EVENT_LIST ? $nbeInscription + 1 : $nbeInscription = 0;
             $nbeUser = $nbeUser < UtilisateurFixtures::USER_LIST ? $nbeUser + 1 : $nbeUser = 0;
 
             $inscription = new Inscription();
@@ -28,9 +29,9 @@ class IncriptionFixtures extends Fixture implements DependentFixtureInterface
             $evenement = $this->getReference('evenement' . $nbeInscription);
 
             $inscription
-                ->setCreatedAt()
                 ->setEvenement($evenement)
-                ->setUser($user);
+                ->setUtilisateur($user)
+                ->setCreerLe();
 
             $manager->persist($inscription);
         }

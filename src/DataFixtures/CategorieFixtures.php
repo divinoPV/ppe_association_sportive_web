@@ -20,6 +20,7 @@ class CategorieFixtures extends Fixture
         foreach (self::CATEG_LIST as $id => $categ) {
             $uneCateg = new Categorie();
             $uneCateg->setNom($categ);
+
             $manager->persist($uneCateg);
             $this->addReference('categ' . $id, $uneCateg);
         }

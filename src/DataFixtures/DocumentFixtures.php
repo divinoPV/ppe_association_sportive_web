@@ -32,8 +32,8 @@ class DocumentFixtures extends Fixture implements DependentFixtureInterface
                 ->setNom('document' . $i)
                 ->setDescription('c\'est le document n°' . $i)
                 ->setCategorie($categ)
-                ->setUpdatedAt()
-                ->setCreatedAt()
+                ->setCreerLe()
+                ->setModifierLe()
                 ->setLien('lien document n°' . $i);
 
             /** @var Evenement $evenement */

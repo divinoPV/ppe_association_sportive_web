@@ -36,14 +36,14 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
             $evenement
                 ->setNom($this->faker->sentence(rand(2, 9)))
                 ->setDescription($this->faker->sentence(rand(47, 159)))
-                ->setCreatedAt()
-                ->setUpdatedAt()
-                ->setDebut(new DateTime('now'))
-                ->setFin(new DateTime('now'))
+                ->setDebuterLe(new DateTime('now'))
+                ->setFinirLe(new DateTime('now'))
                 ->setImage($number . '.jpg')
                 ->setVignette($number . '.jpg')
                 ->setNombrePlaces(rand(rand(12, 19), rand(38, 55)))
-                ->setActif((bool)random_int(0, 1));
+                ->setActif((bool)random_int(0, 1))
+                ->setCreerLe()
+                ->setModifierLe();
 
             /** @var Sport $sport */
             $sport = $this->getReference('sport' . $nbeSport);

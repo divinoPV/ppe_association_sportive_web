@@ -33,6 +33,7 @@ class SportFixtures extends Fixture
         foreach (self::SPORT_LIST as $id => $sport):
             $aSport = new Sport();
             $aSport->setNom($sport);
+
             $manager->persist($aSport);
             $this->addReference('sport' . $id, $aSport);
         endforeach;

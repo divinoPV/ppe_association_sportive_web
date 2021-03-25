@@ -14,8 +14,8 @@ class CategDocFixtures extends Fixture
     {
         for ($i = 0; $i <= self::CATEG_DOC_LIST; $i++) {
             $categDoc = new DocumentCategorie();
-
             $categDoc->setNom('categDoc' . $i);
+
             $manager->persist($categDoc);
             $this->addReference('categDoc' . $i, $categDoc);
         }
