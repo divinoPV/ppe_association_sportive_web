@@ -122,6 +122,13 @@ class User implements UserInterface, Serializable
      */
     private Collection $inscriptions;
 
+
+    public function __construct()
+    {
+        $this->setCreerLe();
+        $this->setModifierLe();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -240,9 +247,9 @@ class User implements UserInterface, Serializable
         return $this->creerLe;
     }
 
-    public function setCreerLe(?DateTimeInterface $creerLe): self
+    public function setCreerLe(): self
     {
-        $this->creerLe = $creerLe;
+        $this->creerLe = new DateTime();
 
         return $this;
     }
@@ -252,9 +259,9 @@ class User implements UserInterface, Serializable
         return $this->modifierLe;
     }
 
-    public function setModifierLe(?DateTimeInterface $modifierLe): self
+    public function setModifierLe(): self
     {
-        $this->modifierLe = $modifierLe;
+        $this->modifierLe = new DateTime();
 
         return $this;
     }

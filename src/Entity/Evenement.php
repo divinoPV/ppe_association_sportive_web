@@ -116,8 +116,9 @@ class Evenement
 
     public function __construct()
     {
-        $this->creerLe = new DateTime();
         $this->documents = new ArrayCollection();
+        $this->setCreerLe();
+        $this->setModifierLe();
     }
 
     /**

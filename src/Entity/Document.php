@@ -61,6 +61,12 @@ class Document
      */
     private Evenement $evenement;
 
+    public function __construct()
+    {
+        $this->setCreerLe();
+        $this->setModifierLe();
+    }
+
     /**
      * @return int
      */

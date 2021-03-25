@@ -30,6 +30,10 @@ class Inscription
      */
     private DateTime $creerLe;
 
+    public function __construct()
+    {
+        $this->setCreerLe();
+    }
 
     public function setCreerLe(): self
     {
