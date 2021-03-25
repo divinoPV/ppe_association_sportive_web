@@ -28,7 +28,7 @@ class DocumentCategorie
     /**
      * @ORM\OneToMany(targetEntity=Document::class, mappedBy="categorie", orphanRemoval=true)
      */
-    private Collection $document;
+    private Collection $documents;
 
     /**
      * @return int
@@ -57,28 +57,28 @@ class DocumentCategorie
     /**
      * @return Collection|Document[]
      */
-    public function getInscription(): ?Collection
+    public function getDocument(): ?Collection
     {
-        return $this->document;
+        return $this->documents;
     }
 
-    public function addInscription(Document $document): self
+    public function addDocument(Document $documents): self
     {
-        if (!$this->document->contains($document)) {
-            $this->document[] = $document;
-            $document->setCategorie($this);
+        if (!$this->documents->contains($documents)) {
+            $this->documents[] = $documents;
+            $documents->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeInscription(Document $document): self
+    public function removeDocument(Document $documents): self
     {
-        if ($this->document->contains($document)) {
-            $this->document->remove($document);
+        if ($this->documents->contains($documents)) {
+            $this->documents->remove($documents);
             // set the owning side to null (unless already changed)
-            if ($document->getCategorie() === $this) {
-                $document->setCategorie(null);
+            if ($documents->getCategorie() === $this) {
+                $documents->setCategorie(null);
             }
         }
 

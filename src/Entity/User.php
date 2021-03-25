@@ -52,9 +52,9 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string The hashed plainPassword
-     * @ORM\Column(name="mdp", type="string")
+     * @ORM\Column(name="password", type="string")
      */
-    private string $password;
+    private string $password; //obliger en en à cause de l'interface
 
     /**
      * @var string|null
@@ -67,7 +67,7 @@ class User implements UserInterface, Serializable
      *     une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
      * )
      */
-    private ?string $plainPassword;
+    private ?string $plainPassword; //obliger en en à cause de l'interface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -88,7 +88,7 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $forgottenPassword;
+    private ?bool $mdpOublier;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -101,15 +101,15 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $creerA;
+    private ?DateTime $creerLe;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private ?DateTime $modifierA;
+    private ?DateTime $modifierLe;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="user")
+     * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="utilisateurs")
      * @ORM\JoinColumn(name="categorie", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank(
      *     message = "Veuillez sélectionner une valeur !"
@@ -118,9 +118,9 @@ class User implements UserInterface, Serializable
     private Categorie $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="utilisateur")
      */
-    private Collection $inscription;
+    private Collection $inscriptions;
 
     public function getId(): ?int
     {
@@ -235,26 +235,26 @@ class User implements UserInterface, Serializable
         return $this;
     }
 
-    public function getCreer(): ?DateTimeInterface
+    public function getCreerLe(): ?DateTimeInterface
     {
-        return $this->creerA;
+        return $this->creerLe;
     }
 
-    public function setCreer(?DateTimeInterface $creerA): self
+    public function setCreerLe(?DateTimeInterface $creerLe): self
     {
-        $this->creerA = $creerA;
+        $this->creerLe = $creerLe;
 
         return $this;
     }
 
-    public function getModifier(): ?DateTimeInterface
+    public function getModifierLe(): ?DateTimeInterface
     {
-        return $this->modifierA;
+        return $this->modifierLe;
     }
 
-    public function setModifier(?DateTimeInterface $modifierA): self
+    public function setModifierLe(?DateTimeInterface $modifierLe): self
     {
-        $this->modifierA = $modifierA;
+        $this->modifierLe = $modifierLe;
 
         return $this;
     }
@@ -303,18 +303,18 @@ class User implements UserInterface, Serializable
     /**
      * @return bool|null
      */
-    public function getForgottenPassword(): ?bool
+    public function getMdpOublier(): ?bool
     {
-        return $this->forgottenPassword;
+        return $this->mdpOublier;
     }
 
     /**
-     * @param bool|null $forgottenPassword
+     * @param bool|null $mdpOublier
      * @return User
      */
-    public function setForgottenPassword(?bool $forgottenPassword): self
+    public function setMdpOublier(?bool $mdpOublier): self
     {
-        $this->forgottenPassword = $forgottenPassword;
+        $this->mdpOublier = $mdpOublier;
 
         return $this;
     }
@@ -322,28 +322,28 @@ class User implements UserInterface, Serializable
     /**
      * @return Collection|Inscription[]
      */
-    public function getInscription(): ?Collection
+    public function getInscriptions(): ?Collection
     {
-        return $this->inscription;
+        return $this->inscriptions;
     }
 
-    public function addInscription(Inscription $inscription): self
+    public function addInscriptions(Inscription $inscriptions): self
     {
-        if (!$this->inscription->contains($inscription)) {
-            $this->inscription[] = $inscription;
-            $inscription->setUser($this);
+        if (!$this->inscriptions->contains($inscriptions)) {
+            $this->inscriptions[] = $inscriptions;
+            $inscriptions->setUtilisateur($this);
         }
 
         return $this;
     }
 
-    public function removeInscription(Inscription $inscription): self
+    public function removeInscriptions(Inscription $inscriptions): self
     {
-        if ($this->inscription->contains($inscription)) {
-            $this->inscription->remove($inscription);
+        if ($this->inscriptions->contains($inscriptions)) {
+            $this->inscriptions->remove($inscriptions);
             // set the owning side to null (unless already changed)
-            if ($inscription->getUser() === $this) {
-                $inscription->setUser(null);
+            if ($inscriptions->getUtilisateur() === $this) {
+                $inscriptions->setUtilisateur(null);
             }
         }
 

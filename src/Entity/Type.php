@@ -56,12 +56,12 @@ class Type
     /**
      * @return Collection
      */
-    public function getEvenement(): Collection
+    public function getEvenements(): Collection
     {
         return $this->evenements;
     }
 
-    public function addEvenement(Evenement $evenements): self
+    public function addEvenements(Evenement $evenements): self
     {
         if (!$this->evenements->contains($evenements)) {
             $this->evenements[] = $evenements;
@@ -71,7 +71,7 @@ class Type
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenements): self
+    public function removeEvenements(Evenement $evenements): self
     {
         if ($this->evenements->removeElement($evenements)) {
             // set the owning side to null (unless already changed)

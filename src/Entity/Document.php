@@ -40,15 +40,15 @@ class Document
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $creer;
+    private DateTime $creerLe;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $modifier;
+    private DateTime $modifierLe;
 
     /**
-     * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="document")
+     * @ORM\ManyToOne(targetEntity=DocumentCategorie::class, inversedBy="documents")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      * @Assert\NotBlank()
      */
@@ -123,28 +123,28 @@ class Document
         $this->lien = $lien;
     }
 
-    public function setCreatedAt(): self
+    public function setCreerLe(): self
     {
-        $this->creer = new DateTime();
+        $this->creerLe = new DateTime();
 
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreerLe(): ?DateTime
     {
-        return $this->creer;
+        return $this->creerLe;
     }
 
-    public function setUpdatedAt(): self
+    public function setModifierLe(): self
     {
-        $this->modifier = new DateTime();
+        $this->modifierLe = new DateTime();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?DateTime
+    public function getModifierLe(): ?DateTime
     {
-        return $this->modifier;
+        return $this->modifierLe;
     }
 
     /**

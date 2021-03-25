@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\InscriptionRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,14 +13,14 @@ class Inscription
 {
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="inscription")
-     * @ORM\JoinColumn(name="user", nullable=false, referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="inscriptions")
+     * @ORM\JoinColumn(name="utilisateur", nullable=false, referencedColumnName="id")
      */
-    private User $user;
+    private User $utilisateur;
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="inscription")
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="inscriptions")
      * @ORM\JoinColumn(name="evenement", nullable=false, referencedColumnName="id")
      */
     private Evenement $evenement;
@@ -27,19 +28,19 @@ class Inscription
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTime $creer;
+    private DateTime $creerLe;
 
 
-    public function setCreatedAt(): self
+    public function setCreerLe(): self
     {
-        $this->creer = new \DateTime();
+        $this->creerLe = new DateTime();
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreerLe(): ?DateTime
     {
-        return $this->creer;
+        return $this->creerLe;
     }
 
     public function getEvenement(): ?Evenement
@@ -57,17 +58,18 @@ class Inscription
     /**
      * @return User
      */
-    public function getUser(): User
+    public function getUtilisateur(): User
     {
-        return $this->user;
+        return $this->utilisateur;
     }
 
     /**
-     * @param User $user
+     * @param User $utilisateur
+     * @return Inscription
      */
-    public function setUser(User $user): self
+    public function setUtilisateur(User $utilisateur): self
     {
-        $this->user = $user;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

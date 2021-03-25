@@ -36,33 +36,28 @@ class Evenement
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $debut;
+    private DateTime $debuterLe;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $fin;
+    private DateTime $finirLe;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $creer;
+    private DateTime $creerLe;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $modifier;
+    private DateTime $modifierLe;
 
     /**
      * @ORM\Column(type="integer")
      */
     private int $nombrePlaces;
-
-    /**
-     * @ORM\Column(type="string", length=256)
-     */
-    private ?string $image = null;
-
+    
     /**
      * @ORM\Column(type="boolean")
      */
@@ -71,19 +66,24 @@ class Evenement
     /**
      * @ORM\Column(type="string", length=256)
      */
+    private ?string $image = null;
+
+    /**
+     * @ORM\Column(type="string", length=256)
+     */
     private ?string $vignette = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_image", fileNameProperty="image")
-     * @var File|null $imageFile
+     * @var File|null $imageFichier
      */
-    private ?File $imageFile = null;
+    private ?File $imageFichier = null;
 
     /**
      * @Vich\UploadableField(mapping="evenement_vignette", fileNameProperty="vignette")
-     * @var File|null $vignetteFile
+     * @var File|null $vignetteFichier
      */
-    private ?File $vignetteFile = null;
+    private ?File $vignetteFichier = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Sport::class, inversedBy="evenements")
@@ -100,7 +100,7 @@ class Evenement
     /**
      * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement" , orphanRemoval=true)
      */
-    private Collection $inscription;
+    private Collection $inscriptions;
 
     /**
      *
@@ -116,7 +116,7 @@ class Evenement
 
     public function __construct()
     {
-        $this->creer = new DateTime();
+        $this->creerLe = new DateTime();
         $this->documents = new ArrayCollection();
     }
 
@@ -169,62 +169,62 @@ class Evenement
     /**
      * @return DateTime
      */
-    public function getDebut(): DateTime
+    public function getDebuterLe(): DateTime
     {
-        return $this->debut;
+        return $this->debuterLe;
     }
 
     /**
-     * @param DateTime $debut
+     * @param DateTime $debuterLe
      * @return Evenement
      */
-    public function setDebut(DateTime $debut): self
+    public function setDebuterLe(DateTime $debuterLe): self
     {
-        $this->debut = $debut;
+        $this->debuterLe = $debuterLe;
         return $this;
     }
 
     /**
      * @return DateTime
      */
-    public function getFin(): DateTime
+    public function getFinirLe(): DateTime
     {
-        return $this->fin;
+        return $this->finirLe;
     }
 
     /**
-     * @param DateTime $fin
+     * @param DateTime $finirLe
      * @return Evenement
      */
-    public function setFin(DateTime $fin): self
+    public function setFinirLe(DateTime $finirLe): self
     {
-        $this->fin = $fin;
+        $this->finirLe = $finirLe;
 
         return $this;
     }
 
-    public function setCreatedAt(): self
+    public function setCreerLe(): self
     {
-        $this->creer = new DateTime();
+        $this->creerLe = new DateTime();
 
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreerLe(): ?DateTime
     {
-        return $this->creer;
+        return $this->creerLe;
     }
 
-    public function setUpdatedAt(): self
+    public function setModifierLe(): self
     {
-        $this->modifier = new DateTime();
+        $this->modifierLe = new DateTime();
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?DateTime
+    public function getModifierLe(): ?DateTime
     {
-        return $this->modifier;
+        return $this->modifierLe;
     }
 
     /**
@@ -270,31 +270,31 @@ class Evenement
         return $this;
     }
 
-    public function getImageFile(): ?File
+    public function getImageFichier(): ?File
     {
-        return $this->imageFile;
+        return $this->imageFichier;
     }
 
-    public function setImageFile(File $image): void
+    public function setImageFichier(File $image): void
     {
-        $this->imageFile = $image;
+        $this->imageFichier = $image;
 
         if ($image) {
-            $this->setUpdatedAt();
+            $this->setModifierLe();
         }
     }
 
-    public function getVignetteFile(): ?File
+    public function getVignetteFichier(): ?File
     {
-        return $this->vignetteFile;
+        return $this->vignetteFichier;
     }
 
-    public function setVignetteFile(File $vignetteFile): void
+    public function setVignetteFichier(File $vignetteFichier): void
     {
-        $this->vignetteFile = $vignetteFile;
+        $this->vignetteFichier = $vignetteFichier;
 
-        if ($vignetteFile) {
-            $this->setUpdatedAt();
+        if ($vignetteFichier) {
+            $this->setModifierLe();
         }
     }
 
@@ -322,26 +322,26 @@ class Evenement
      */
     public function getInscription(): ?Collection
     {
-        return $this->inscription;
+        return $this->inscriptions;
     }
 
-    public function addInscription(Inscription $inscription): self
+    public function addInscription(Inscription $inscriptions): self
     {
-        if (!$this->inscription->contains($inscription)) {
-            $this->inscription[] = $inscription;
-            $inscription->setEvenement($this);
+        if (!$this->inscriptions->contains($inscriptions)) {
+            $this->inscriptions[] = $inscriptions;
+            $inscriptions->setEvenement($this);
         }
 
         return $this;
     }
 
-    public function removeInscription(Inscription $inscription): self
+    public function removeInscription(Inscription $inscriptions): self
     {
-        if ($this->inscription->contains($inscription)) {
-            $this->inscription->remove($inscription);
+        if ($this->inscriptions->contains($inscriptions)) {
+            $this->inscriptions->remove($inscriptions);
             // set the owning side to null (unless already changed)
-            if ($inscription->getEvenement() === $this) {
-                $inscription->setEvenement(null);
+            if ($inscriptions->getEvenement() === $this) {
+                $inscriptions->setEvenement(null);
             }
         }
 
@@ -387,12 +387,12 @@ class Evenement
     /**
      * @return Collection
      */
-    public function getDocument(): Collection
+    public function getDocuments(): Collection
     {
         return $this->documents;
     }
 
-    public function addDocument(Document $documents): self
+    public function addDocuments(Document $documents): self
     {
         if (!$this->documents->contains($documents)) {
             $this->documents[] = $documents;
@@ -402,7 +402,7 @@ class Evenement
         return $this;
     }
 
-    public function removeDocument(Document $documents): self
+    public function removeDocuments(Document $documents): self
     {
         if ($this->documents->removeElement($documents)) {
             // set the owning side to null (unless already changed)

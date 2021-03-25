@@ -57,12 +57,12 @@ class Sport
     /**
      * @return Collection|Evenement[]
      */
-    public function getEvenement(): ?Collection
+    public function getEvenements(): ?Collection
     {
         return $this->evenements;
     }
 
-    public function addEvenement(Evenement $evenements): self
+    public function addEvenements(Evenement $evenements): self
     {
         if (!$this->evenements->contains($evenements)) {
             $this->evenements[] = $evenements;
@@ -72,7 +72,7 @@ class Sport
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenements): self
+    public function removeEvenements(Evenement $evenements): self
     {
         if ($this->evenements->contains($evenements)) {
             $this->evenements->remove($evenements);

@@ -30,7 +30,7 @@ class Categorie
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
      */
-    private Collection $user;
+    private Collection $utilisateurs;
 
     /**
      * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie", orphanRemoval=true)
@@ -39,7 +39,7 @@ class Categorie
 
     public function __construct()
     {
-        $this->user = new ArrayCollection();
+        $this->utilisateurs = new ArrayCollection();
         $this->evenements = new ArrayCollection();
     }
 
@@ -70,28 +70,28 @@ class Categorie
     /**
      * @return Collection|Evenement[]
      */
-    public function getEvenement(): ?Collection
+    public function getEvenements(): ?Collection
     {
         return $this->evenements;
     }
 
-    public function addEvenement(Evenement $evenement): self
+    public function addEvenements(Evenement $evenements): self
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements[] = $evenement;
-            $evenement->setCategorie($this);
+        if (!$this->evenements->contains($evenements)) {
+            $this->evenements[] = $evenements;
+            $evenements->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): self
+    public function removeEvenements(Evenement $evenements): self
     {
-        if ($this->evenements->contains($evenement)) {
-            $this->evenements->remove($evenement);
+        if ($this->evenements->contains($evenements)) {
+            $this->evenements->remove($evenements);
             // set the owning side to null (unless already changed)
-            if ($evenement->getCategorie() === $this) {
-                $evenement->setCategorie(null);
+            if ($evenements->getCategorie() === $this) {
+                $evenements->setCategorie(null);
             }
         }
 
@@ -102,29 +102,29 @@ class Categorie
      * @return Collection|User[]
      */
 
-    public function getUser(): ?Collection
+    public function getUtilisateurs(): ?Collection
     {
-        return $this->user;
+        return $this->utilisateurs;
     }
 
-    public function addUser(User $user): self
+    public function addUtilisateurs(User $utilisateurs): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->utilisateurs->contains($utilisateurs)) {
+            $this->utilisateurs[] = $utilisateurs;
 
-            $user->setCategorie($this);
+            $utilisateurs->setCategorie($this);
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUtilisateurs(User $utilisateurs): self
     {
-        if ($this->user->contains($user)) {
-            $this->user->remove($user);
+        if ($this->utilisateurs->contains($utilisateurs)) {
+            $this->utilisateurs->remove($utilisateurs);
 
-            if ($user->getCategorie() === $this) {
-                $user->setCategorie(null);
+            if ($utilisateurs->getCategorie() === $this) {
+                $utilisateurs->setCategorie(null);
             }
         }
 
@@ -134,13 +134,5 @@ class Categorie
     public function __toString()
     {
         return $this->nom;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getEvenements(): Collection
-    {
-        return $this->evenements;
     }
 }
