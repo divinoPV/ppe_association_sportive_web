@@ -37,8 +37,8 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
                 ->setNaissance(new DateTime('now'))
                 ->setPassword($this->encoder->encodePassword($user, $password))
                 ->setMdpOublier(false)
-                ->setCreerLe(new DateTime('now'))
-                ->setModifierLe(new DateTime('now'));
+                ->setCreerLe()
+                ->setModifierLe();
 
             /** @var Categorie $uneCateg */
             $uneCateg = $this->getReference("categ$j");
@@ -56,8 +56,8 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
             ->setNaissance(new DateTime('now'))
             ->setPassword($this->encoder->encodePassword($admin, $password))
             ->setMdpOublier(false)
-            ->setCreerLe(new DateTime('now'))
-            ->setModifierLe(new DateTime('now'));
+            ->setCreerLe()
+            ->setModifierLe();
 
         /** @var Categorie $uneCateg */
         $uneCateg = $this->getReference("categ" . rand(0, 3));
