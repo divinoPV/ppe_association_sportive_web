@@ -14,8 +14,8 @@
             <div class="info-primary info-primary-single info-primary-single-event">
                 <span class="date date-single date-single-event">
                 <i class="far fa-calendar-plus"></i>
-                {% set debut = event.debut|date("m F Y") %}
-                    {% set fin = event.fin|date("m F Y") %}
+                {% set debut = event.debuterLe|date("m F Y") %}
+                    {% set fin = event.finirLe|date("m F Y") %}
                     {{ debut }}
                     {% if debut != fin %}
                         au {{ fin }}
@@ -90,7 +90,7 @@
                             {% set classes = key is odd ? 'odd' : 'even' %}
                             <div class="document-row document-row-single document-row-single-event {{ classes }}">
                                 <span nom class="name">{{ document.nom }}</span>
-                                <span date class="date">{{ document.createdAt|date("m F Y") }}</span>
+                                <span date class="date">{{ document.creerLe|date("m F Y") }}</span>
                                 <span cat class="category">{{ document.categorie.nom }}</span>
                                 <span poids class="weight">A venir dans le sprint 4{# {{ document.poids }} #}</span>
                                 <button action class="button button-single button-single-event button-telecharger">
