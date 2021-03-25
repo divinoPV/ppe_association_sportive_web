@@ -13,16 +13,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class EvenementController extends AbstractController
+/**
+ * @Route("/evenement")
+ */
+final class EvenementController extends AbstractController
 {
+    public const TEMPLATE = 'evenement';
+    /** ROUTE NAME */
+    public const ROUTE_SINGLE = self::TEMPLATE . "_single";
+    public const ROUTE_REGISTRATION = self::TEMPLATE . "_registration";
+
     /**
-     * @Route("/evenement", name="evenement")
+     * @Route("/", name=self::TEMPLATE)
      * @param Request $request
      * @param EvenementRepository $evenementRepository
      * @param PaginatorInterface $paginator
      * @return Response
      */
-
     public function index(Request $request,
                           EvenementRepository $evenementRepository,
                           PaginatorInterface $paginator
@@ -67,7 +74,7 @@ class EvenementController extends AbstractController
             );
         endif;
 
-        return $this->render('evenement/index.html.twig', [
+        return $this->render(self::TEMPLATE . '/index.html.twig', [
             'events' => $result ?? $events,
             'eventCount' => $countEvent[0][1],
             'inscriptionCount' => $countInscription,
@@ -76,7 +83,7 @@ class EvenementController extends AbstractController
     }
 
     /**
-     * @Route("/evenement/{id}", name="single_event")
+     * @Route("/{id}", name=self::ROUTE_SINGLE)
      * @param EvenementRepository $evenementRepository
      * @param int $id
      * @return Response
@@ -103,6 +110,19 @@ class EvenementController extends AbstractController
             'inscriptionCount' => $countInscription,
             'documentCount' => $countDocument,
             'documents' => $documents,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/registration", name=self::ROUTE_REGISTRATION)
+     * @param EvenementRepository $evenementRepository
+     * @param int $id
+     * @return Response
+     */
+    public function registration(EvenementRepository $evenementRepository, int $id): Response
+    {
+        return $this->render(self::TEMPLATE . '/registration.html.twig', [
+            'event' => $evenementRepository->findBy(["id" => $id])[0],
         ]);
     }
 }
