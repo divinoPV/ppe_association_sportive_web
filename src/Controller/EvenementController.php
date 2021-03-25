@@ -8,6 +8,7 @@ use App\Entity\Inscription;
 use App\Form\EvenementSearchType;
 use App\Repository\EvenementRepository;
 use App\Repository\InscriptionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,12 +28,10 @@ final class EvenementController extends AbstractController
     /**
      * @Route("/", name=self::TEMPLATE)
      * @param Request $request
-     * @param EvenementRepository $evenementRepository
      * @param PaginatorInterface $paginator
      * @return Response
      */
     public function index(Request $request,
-                          EvenementRepository $evenementRepository,
                           PaginatorInterface $paginator
     ): Response
     {
@@ -66,7 +65,11 @@ final class EvenementController extends AbstractController
             $searchEventForm->isValid()
         ):
             $criteria = $searchEventForm->getData();
-            $data = $evenementRepository->searchEvenement($criteria);
+
+            $data = $this
+                ->getDoctrine()
+                ->getRepository(Evenement::class)
+                ->searchEvenement($criteria);
 
             $result = $paginator->paginate(
                 $data,
@@ -85,11 +88,10 @@ final class EvenementController extends AbstractController
 
     /**
      * @Route("/{id}", name=self::ROUTE_SINGLE)
-     * @param EvenementRepository $evenementRepository
      * @param int $id
      * @return Response
      */
-    public function single(EvenementRepository $evenementRepository, int $id): Response
+    public function single(int $id): Response
     {
         $countInscription = $this
             ->getDoctrine()
@@ -106,8 +108,21 @@ final class EvenementController extends AbstractController
             ->getRepository(Document::class)
             ->allDocument();
 
+        $event = $this
+            ->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->findOneBy(["id" => $id]);
+
+        $hasRegister = $this
+            ->getDoctrine()
+            ->getRepository(Inscription::class)
+            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+
+        $hasRegister > 0 ? $hasRegister = true : $hasRegister = false;
+
         return $this->render('evenement/single.html.twig', [
-            'event' => $evenementRepository->findBy(["id" => $id])[0],
+            'event' => $event,
+            'hasRegister' => $hasRegister,
             'inscriptionCount' => $countInscription,
             'documentCount' => $countDocument,
             'documents' => $documents,
@@ -116,21 +131,41 @@ final class EvenementController extends AbstractController
 
     /**
      * @Route("/{id}/registration", name=self::ROUTE_REGISTRATION)
-     * @param EvenementRepository $evenementRepository
-     * @param InscriptionRepository $inscriptionRepository
+     * @param EntityManagerInterface $em
      * @param int $id
      * @return Response
      */
-    public function registration(EvenementRepository $evenementRepository,
-                                 InscriptionRepository $inscriptionRepository,
-                                 int $id): Response
+    public function registration(EntityManagerInterface $em,
+                                 int $id
+    ): Response
     {
-        $event = $evenementRepository->findBy(["id" => $id])[0];
-        $checkInscription = $inscriptionRepository->findBy(["evenement" => $id, "user"])[0];
-        dd($event);
+        /** @var Evenement $event */
+        $event = $this
+            ->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->findOneBy(["id" => $id]);
+
+        /** @var Inscription $checkInscription */
+        $checkInscription = $this
+            ->getDoctrine()
+            ->getRepository(Inscription::class)
+            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+
+        if ($checkInscription > 0):
+            $insc = new Inscription();
+            $insc->setUtilisateur($this->container->get('security.token_storage')->getToken()->getUser())
+                ->setEvenement($event)
+                ->setCreerLe();
+
+            $em->persist($insc);
+            $em->flush();
+        else:
+            $err = "Une erreur inconnue est survenue !";
+        endif;
 
         return $this->render(self::TEMPLATE . '/registration.html.twig', [
             'event' => $event,
+            'message' => $err ?? "Félicitation ! Votre inscription c'est bien passée."
         ]);
     }
 }
