@@ -7,7 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 
 class UserAdminController extends EasyAdminController
 {
-    protected function prePersistUserEntity(User $user): void
+   /* protected function prePersistUserEntity(User $user): void
     {
         $encodedPassword = $this->encodePassword($user, $user->getPassword());
         $user->setPassword($encodedPassword);
@@ -29,5 +29,5 @@ class UserAdminController extends EasyAdminController
         $encoder = $passwordEncoderFactory->getEncoder($user);
 
         return $encoder->encodePassword($password, $user->getSalt());
-    }
+    }*/
 }

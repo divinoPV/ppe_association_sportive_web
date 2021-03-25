@@ -1,0 +1,12 @@
+<fieldset>
+    <legend>Objet: {{ option['sujet'] }}</legend>
+    <p>Informations:</p>
+    <ul>
+        <li>email: {{ option['utilisateur'].email }}</li>
+        <li>nom: {{ option['utilisateur'].nom }}</li>
+        <li>prénom: {{ option['utilisateur'].prenom }}</li>
+        <li>date de naissance: {{ option['utilisateur'].naissance|date("m/d/Y") }}</li>
+        <li>catégorie: {{ option['utilisateur'].categorie.nom }}</li>
+    </ul>
+    <p>Message: L'utilisateur souhaitre s'inscire sur la platforme</p>
+</fieldset>

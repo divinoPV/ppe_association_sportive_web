@@ -38,7 +38,8 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
                 ->setPassword($this->encoder->encodePassword($user, $password))
                 ->setMdpOublier(false)
                 ->setCreerLe()
-                ->setModifierLe();
+                ->setModifierLe()
+                ->setStatus(rand(0,1));
 
             /** @var Categorie $uneCateg */
             $uneCateg = $this->getReference("categ$j");
@@ -57,7 +58,8 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
             ->setPassword($this->encoder->encodePassword($admin, $password))
             ->setMdpOublier(false)
             ->setCreerLe()
-            ->setModifierLe();
+            ->setModifierLe()
+            ->setStatus(1);
 
         /** @var Categorie $uneCateg */
         $uneCateg = $this->getReference("categ" . rand(0, 3));

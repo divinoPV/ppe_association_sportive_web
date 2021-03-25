@@ -58,16 +58,13 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string|null
-     * @Assert\NotBlank(
-     *     message = "Veuillez saisir une valeur !"
-     * )
      * @Assert\Regex(
      *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[.\-+!*$@%_])([.\-+!*$@%_\w]{8,32})$/",
      *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule,
      *     une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
      * )
      */
-    private ?string $plainPassword; //obliger en en à cause de l'interface
+    private ?string $plainPassword = null; //obliger en en à cause de l'interface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -89,6 +86,12 @@ class User implements UserInterface, Serializable
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $mdpOublier;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $status = false;
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -372,5 +375,23 @@ class User implements UserInterface, Serializable
             $this->id,
             $this->email,
             $this->password) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param bool|null $status
+     */
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 }

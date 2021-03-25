@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UtilisateurController extends AbstractController
 {
-    /*#[Route('/user', name: 'user')]*/
     /**
      * @Route("/user", name="user")
      */

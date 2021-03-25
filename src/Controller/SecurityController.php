@@ -34,8 +34,9 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error
+        'last_username' => $lastUsername,
+        'error' => $error,
+        'demande' => $message ?? null
         ]);
     }
 
@@ -48,10 +49,12 @@ class SecurityController extends AbstractController
      */
     public function registration(EntityManagerInterface $manager,
                                  Request $request,
-                                 UserPasswordEncoderInterface $encoder
+                                 UserPasswordEncoderInterface $encoder,
+                                 MailerInterface $mailer
     ): Response
     {
         $user = new User();
+        $admin = $manager->getRepository(User::class)->findUserByRole('ROLE_ADMIN');
         $form = $this->createForm(InscriptionType::class, $user);
         $form->handleRequest($request);
 
@@ -63,10 +66,18 @@ class SecurityController extends AbstractController
                 ->setCreerLe(new DateTime('now'))
                 ->setModifierLe(new DateTime('now'));
 
+            $option = [
+                'sujet' => 'Demande d\'inscription',
+                'utilisateur' => $user,
+                'administrateur' => $admin
+            ];
+
+            EmailSender::sendMail($mailer, $user->getEmail(), $admin->getEmail(), 'email/contact_register.html.twig', $option);
+
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('home',);
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('security/registration.html.twig', [
@@ -90,7 +101,7 @@ class SecurityController extends AbstractController
      * @param MailerInterface $mailer
      * @return Response
      */
-    public function forgottenPassword(EntityManagerInterface $em, Request $request, MailerInterface $mailer ): Response
+    public function forgottenPassword(EntityManagerInterface $em, Request $request, MailerInterface $mailer): Response
     {
         $title = " - Mot de passe oublié";
 

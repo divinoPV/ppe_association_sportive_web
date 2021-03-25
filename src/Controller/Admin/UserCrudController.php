@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Service\Mail\EmailSender;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -17,20 +18,26 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController implements EventSubscriberInterface
 {
     private UserPasswordEncoderInterface $passwordEncoder;
+    /**
+     * @var MailerInterface
+     */
+    private MailerInterface $mailer;
 
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->mailer = $mailer;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -62,6 +69,7 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
                 ->onlyOnForms()
                 ->setFormType(PasswordType::class),
             yield BooleanField::new('mdpOublier'),
+            yield BooleanField::new('status')->setCustomOptions(['disabled' => true]),
         ];
     }
 
@@ -73,15 +81,25 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
         ];
     }
 
-    /** @param $event
+    /**
+     * @param $event
      * @internal
      */
     public function encodePassword($event)
     {
         $instance = $event->getEntityInstance();
+
         if (get_class($instance) === get_class(new User())) {
-            if ($instance->getPlainPassword()) {
+            if (!empty($instance->getPlainPassword()) || $instance->getPlainPassword() !== null) {
                 $instance->setPassword($this->passwordEncoder->encodePassword($instance, $instance->getPlainPassword()));
+            }
+            if ($instance->getStatus() === true) {
+                $option = [
+                    'sujet' => 'Validation de compte',
+                    'utilisateur' => $instance->getEmail(),
+                    'message' => 'Votre compte à bien été activé, vous pouvez désormais accéder à la plateforme'
+                ];
+                EmailSender::sendMail($this->mailer, $this->getUser()->getEmail(), $instance->getEmail(), 'email/contact_validate.html.twig', $option);
             }
         }
     }
