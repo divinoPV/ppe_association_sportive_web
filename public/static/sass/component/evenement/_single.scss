@@ -5,9 +5,9 @@
 .button-inscription {
     background: #0d5e42;
 
-    a:hover {
-        background: lighten(#0d5e42, 40);
-        color: #0d5e42;
+    &:hover {
+        background: lighten(#0d5e42, 8);
+        color: #fff;
     }
 }
 

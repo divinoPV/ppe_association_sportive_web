@@ -177,3 +177,10 @@
 .custom-switch {
     @include display(flex, center);
 }
+
+.disabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
