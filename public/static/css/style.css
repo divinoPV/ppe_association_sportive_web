@@ -491,6 +491,10 @@ footer .container .row .col span i:nth-of-type(2) {
 .button-inscription {
   background: #0d5e42;
 }
+.button-inscription a:hover {
+  background: #50e7b3;
+  color: #0d5e42;
+}
 
 .footer-single {
   margin-top: 55px;
