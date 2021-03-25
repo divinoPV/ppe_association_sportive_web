@@ -15,7 +15,7 @@ use Faker\Generator;
 
 class EvenementFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const EVENT_LIST = 354;
+    public const EVENT_LIST = 34;
 
     protected Generator $faker;
 
@@ -26,7 +26,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
         $nbeSport = 0;
         $nbeType = 0;
         $nbeCateg = 0;
-        for ($i = 1; $i < EvenementFixtures::EVENT_LIST; $i++) {
+        for ($i = 0; $i < EvenementFixtures::EVENT_LIST; $i++) {
             $number = rand(1, 6);
             $nbeSport = $nbeSport < sizeof(SportFixtures::SPORT_LIST) - 1 ? $nbeSport + 1 : $nbeSport = 0;
             $nbeType = $nbeType < sizeof(TypeFixtures::TYPE_LIST) - 1 ? $nbeType + 1 : $nbeType = 0;

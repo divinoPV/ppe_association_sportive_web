@@ -12,7 +12,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const USER_LIST = 25;
+    public const USER_LIST = 200;
+
     private UserPasswordEncoderInterface $encoder;
 
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -25,7 +26,7 @@ class UtilisateurFixtures extends Fixture implements DependentFixtureInterface
         $j = 0;
         $password = "'Azerty123&@.";
 
-        for ($i = 1; $i <= self::USER_LIST; $i++) {
+        for ($i = 0; $i <= self::USER_LIST; $i++) {
             $j = $j < sizeof(CategorieFixtures::CATEG_LIST) - 1 ? $j + 1 : $j = 0;
             $user = new User();
             $user
