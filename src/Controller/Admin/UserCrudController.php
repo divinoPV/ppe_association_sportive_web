@@ -64,8 +64,8 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
                 ->setFormType(PasswordType::class),
             yield BooleanField::new('forgottenPassword'),
             yield FormField::addPanel('Date')->hideOnForm(),
-            yield DateTimeField::new('creer')->hideOnForm(),
-            yield DateTimeField::new('modifier')->hideOnForm(),
+            yield DateTimeField::new('creerLe')->hideOnForm(),
+            yield DateTimeField::new('modifierLe')->hideOnForm(),
         ];
     }
 

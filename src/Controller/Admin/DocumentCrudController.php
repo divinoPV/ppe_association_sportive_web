@@ -33,8 +33,8 @@ class DocumentCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('lien'),
             TextField::new('description'),
-            TextField::new('creer')->hideOnForm(),
-            TextField::new('modifier')->hideOnForm(),
+            TextField::new('creerLe')->hideOnForm(),
+            TextField::new('modifierLe')->hideOnForm(),
             AssociationField::new('categorie')->autocomplete()
         ];
     }

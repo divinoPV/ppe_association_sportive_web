@@ -49,16 +49,19 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::subMenu('Profils', 'fa fa-tasks')->setSubItems([
                 MenuItem::linkToCrud('Utilsateurs', 'fas fa-users', User::class),
             ]),
+
             yield MenuItem::subMenu('Gestion événement', 'fa fa-tasks')->setSubItems([
                 MenuItem::linkToCrud('Evénements', 'fas fa-calendar-alt', Evenement::class),
                 MenuItem::linkToCrud('Sports', 'fas fa-futbol', Sport::class),
                 MenuItem::linkToCrud('Types', 'fas fa-project-diagram', Type::class),
                 MenuItem::linkToCrud('Catégories', 'fas fa-project-diagram', Categorie::class),
             ]),
+
             yield MenuItem::subMenu('Gestion document', 'fa fa-tasks')->setSubItems([
                 MenuItem::linkToCrud('Documents', 'fas fa-file-pdf', Document::class),
                 MenuItem::linkToCrud('Document catégories', 'fas fa-project-diagram', DocumentCategorie::class),
             ]),
+
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),
         ];

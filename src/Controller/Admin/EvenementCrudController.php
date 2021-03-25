@@ -39,7 +39,7 @@ class EvenementCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('nom', 'titre de l\'évenement')->setRequired(true),
             TextEditorField::new('description', 'description de l\'évenement')->setRequired(true),
-            ImageField::new('imageFile', 'ajouter une image')
+            ImageField::new('imageFichier', 'ajouter une image')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions(['allow_delete' => false])
                 ->onlyOnForms()
@@ -48,7 +48,7 @@ class EvenementCrudController extends AbstractCrudController
                 ->setBasePath($this->getParameter('app.path.featured_evenement_images'))
                 ->hideOnForm()
                 ->setRequired(true),
-            ImageField::new('vignetteFile', 'ajouter une vignette')
+            ImageField::new('vignetteFichier', 'ajouter une vignette')
                 ->setFormType(VichImageType::class)
                 ->setFormTypeOptions(['allow_delete' => false])
                 ->onlyOnForms()
@@ -57,10 +57,10 @@ class EvenementCrudController extends AbstractCrudController
                 ->setBasePath($this->getParameter('app.path.featured_evenement_vignettes'))
                 ->hideOnForm()
                 ->setRequired(true),
-            DateField::new('debut', 'début de l\'évenement')->setRequired(true),
-            DateField::new('fin', 'fin de l\'évenement')->setRequired(true),
-            DateField::new('creer', 'date création')->hideOnForm(),
-            DateField::new('modifier', 'date modification')->hideOnForm(),
+            DateField::new('debuterLe', 'début de l\'évenement')->setRequired(true),
+            DateField::new('finirLe', 'fin de l\'évenement')->setRequired(true),
+            DateField::new('creerLe', 'date création')->hideOnForm(),
+            DateField::new('modifierLe', 'date modification')->hideOnForm(),
             NumberField::new('nombrePlaces', 'nombre de place')->setRequired(true),
             BooleanField::new('actif', 'actif')->renderAsSwitch(),
             AssociationField::new('type')->setRequired(true),
