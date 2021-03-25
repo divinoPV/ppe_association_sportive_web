@@ -6,8 +6,6 @@ use App\Entity\Document;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
 use App\Form\EvenementSearchType;
-use App\Repository\EvenementRepository;
-use App\Repository\InscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
