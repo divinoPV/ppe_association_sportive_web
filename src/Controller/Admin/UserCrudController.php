@@ -76,8 +76,8 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
     public static function getSubscribedEvents(): array
     {
         return [
-            BeforeEntityPersistedEvent::class => 'encodePassword',
-            BeforeEntityUpdatedEvent::class => 'encodePassword',
+            BeforeEntityPersistedEvent::class => 'event',
+            BeforeEntityUpdatedEvent::class => 'event',
         ];
     }
 
@@ -85,22 +85,33 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
      * @param $event
      * @internal
      */
-    public function encodePassword($event)
+    public function event($event)
     {
         $instance = $event->getEntityInstance();
 
         if (get_class($instance) === get_class(new User())) {
-            if (!empty($instance->getPlainPassword()) || $instance->getPlainPassword() !== null) {
-                $instance->setPassword($this->passwordEncoder->encodePassword($instance, $instance->getPlainPassword()));
-            }
-            if ($instance->getStatus() === true) {
-                $option = [
-                    'sujet' => 'Validation de compte',
-                    'utilisateur' => $instance->getEmail(),
-                    'message' => 'Votre compte à bien été activé, vous pouvez désormais accéder à la plateforme'
-                ];
-                EmailSender::sendMail($this->mailer, $this->getUser()->getEmail(), $instance->getEmail(), 'email/contact_validate.html.twig', $option);
-            }
+            $this->encodePassword($instance);
+            $this->mailValidate($instance);
+        }
+    }
+
+    public function encodePassword($instance)
+    {
+        if (!empty($instance->getPlainPassword()) || $instance->getPlainPassword() !== null) {
+            $instance->setPassword($this->passwordEncoder->encodePassword($instance, $instance->getPlainPassword()));
+        }
+    }
+
+    public function mailValidate($instance)
+    {
+        if ($instance->getStatus() === true) {
+            $option = [
+                'sujet' => 'Validation de compte',
+                'utilisateur' => $instance->getEmail(),
+                'message' => 'Votre compte à bien été activé, vous pouvez désormais accéder à la plateforme'
+            ];
+
+            EmailSender::sendMail($this->mailer, $this->getUser()->getEmail(), $instance->getEmail(), 'email/contact_validate.html.twig', $option);
         }
     }
 }
