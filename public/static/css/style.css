@@ -276,6 +276,22 @@ a, a:hover {
   text-decoration: none;
 }
 
+.button-registration {
+  background: #0d5e42;
+}
+.button-registration:hover {
+  background: #12825b;
+  color: #fff;
+}
+
+.button-unsubsribe {
+  background: #d43f3a;
+}
+.button-unsubsribe:hover {
+  background: #b42c27;
+  color: #fff;
+}
+
 .head-single {
   align-items: start;
   flex-flow: column;
@@ -504,14 +520,6 @@ footer .container .row .col span i:nth-of-type(2) {
 
 .button-telecharger {
   background: #6f87c2;
-}
-
-.button-inscription {
-  background: #0d5e42;
-}
-.button-inscription:hover {
-  background: #12825b;
-  color: #fff;
 }
 
 .footer-single {

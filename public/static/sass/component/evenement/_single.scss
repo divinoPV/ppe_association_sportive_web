@@ -2,15 +2,6 @@
     background: lighten($primary, 40);
 }
 
-.button-inscription {
-    background: #0d5e42;
-
-    &:hover {
-        background: lighten(#0d5e42, 8);
-        color: #fff;
-    }
-}
-
 .footer-single {
     margin-top: 55px;
 }

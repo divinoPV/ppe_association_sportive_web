@@ -111,20 +111,22 @@
     <div class="footer footer-single footer-single-event">
         <a class="back back-single back-single-event"
            href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
-        {% if inscNotPermited != true %}
-            <a class="button button-single button-single-event button-inscription {{ hasRegister == false ?: "disabled" }}"
-                href="
-                    {% if hasRegister == false or completed == true %}
-                        {{ path(template ~ '_registration', {'id': event.id}) }}
-                    {% else %}
-                        #
-                    {% endif %}"
+        {% if hasRegister == false %}
+            <a class="{{ generateClass("button") }} button-registration {{ inscNotPermited == false or completed == true ?: "disabled" }}"
+               href="
+                {% if inscNotPermited == false or completed == true %}
+                    {{ path(template ~ '_registration', {'id': event.id}) }}
+                {% else %}
+                    #
+                {% endif %}"
             >Inscription
             </a>
-            {% if hasRegister == true %}
-                <span>Vous êtes bien inscrit à cet événement.</span>
-                <a href="{{ path(template ~ "_unsubscribe", {"id": event.id}) }}">Se désinscrire</a>
-            {% endif %}
+        {% else %}
+            <a class="{{ generateClass("button") }} button-unsubsribe"
+               href="{{ path(template ~ "_unsubscribe", {"id": event.id}) }}"
+            >Se désinscrire
+            </a>
+            <span>Vous êtes bien inscrit à cet événement.</span>
         {% endif %}
     </div>
 {% endblock body %}

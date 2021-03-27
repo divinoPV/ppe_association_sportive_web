@@ -184,3 +184,21 @@
     opacity: 0.5;
     text-decoration: none;
 }
+
+.button-registration {
+    background: #0d5e42;
+
+    &:hover {
+        background: lighten(#0d5e42, 8);
+        color: #fff;
+    }
+}
+
+.button-unsubsribe {
+    background: #d43f3a;
+
+    &:hover {
+        background: darken(#d43f3a, 10);
+        color: #fff;
+    }
+}
