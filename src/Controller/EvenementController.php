@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
+use App\Entity\User;
 use App\Form\EvenementSearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -21,7 +22,6 @@ use Symfony\Component\Routing\Annotation\Route;
 final class EvenementController extends AbstractController
 {
     public const TEMPLATE = 'evenement';
-    /** ROUTE NAME */
     public const ROUTE_SINGLE = self::TEMPLATE . "_single";
     public const ROUTE_REGISTRATION = self::TEMPLATE . "_registration";
     public const ROUTE_UNSBSCRIBE = self::TEMPLATE . "_unsubscribe";
@@ -96,6 +96,8 @@ final class EvenementController extends AbstractController
      */
     public function single(int $id): Response
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
         $countInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
@@ -119,7 +121,10 @@ final class EvenementController extends AbstractController
         $hasRegister = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+            ->findOneBy(["evenement" => $id, "utilisateur" => $user->getId()]);
+
+        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom())
+            $inscNotPermited = true;
 
         !empty($hasRegister) ? $hasRegister = true : $hasRegister = false;
 
@@ -129,6 +134,7 @@ final class EvenementController extends AbstractController
             'inscriptionCount' => $countInscription,
             'documentCount' => $countDocument,
             'documents' => $documents,
+            'inscNotPermited' => $inscNotPermited ?? false
         ]);
     }
 
@@ -142,21 +148,26 @@ final class EvenementController extends AbstractController
                                  int $id
     ): Response
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
         /** @var Evenement $event */
         $event = $this
             ->getDoctrine()
             ->getRepository(Evenement::class)
             ->findOneBy(["id" => $id]);
 
+        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom())
+            return $this->redirectToRoute(self::TEMPLATE);
+
         /** @var Inscription $checkInscription */
         $checkInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+            ->findOneBy(["evenement" => $id, "utilisateur" => $user->getId()]);
 
         if (empty($checkInscription)):
             $insc = new Inscription();
-            $insc->setUtilisateur($this->container->get('security.token_storage')->getToken()->getUser())
+            $insc->setUtilisateur($user)
                 ->setEvenement($event)
                 ->setCreerLe();
 
@@ -180,6 +191,8 @@ final class EvenementController extends AbstractController
      */
     public function unsubscribe(EntityManagerInterface $em, int $id): Response
     {
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
         /** @var Evenement $event */
         $event = $this
             ->getDoctrine()
@@ -190,7 +203,7 @@ final class EvenementController extends AbstractController
         $checkInscription = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
-            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+            ->findOneBy(["evenement" => $id, "utilisateur" => $user->getId()]);
 
         if (!empty($checkInscription)):
             $em->remove($checkInscription);
