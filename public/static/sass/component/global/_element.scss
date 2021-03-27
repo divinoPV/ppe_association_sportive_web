@@ -1,0 +1,9 @@
+main {
+    min-height: calc(100vh - 364px);
+}
+
+a {
+    &, &:hover {
+        text-decoration: none;
+    }
+}

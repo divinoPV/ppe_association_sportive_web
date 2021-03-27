@@ -20,6 +20,10 @@ nav {
             color: $grey;
             position: relative;
 
+            &:hover {
+                color: lighten($grey, 8);
+            }
+
             &::before {
                 background-color: $grey;
                 bottom: -.4rem;

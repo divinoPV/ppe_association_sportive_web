@@ -62,7 +62,11 @@ table {
 /** $COLOR */
 /** $FONT-SIZE */
 /** $FONT */
-a {
+main {
+  min-height: calc(100vh - 364px);
+}
+
+a, a:hover {
   text-decoration: none;
 }
 
@@ -70,6 +74,10 @@ a {
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   color: #181819;
+}
+
+[bold] {
+  font-weight: 600 !important;
 }
 
 .head {
@@ -310,6 +318,9 @@ nav ul li a {
   color: #c9cdd3;
   position: relative;
 }
+nav ul li a:hover {
+  color: #dfe2e5;
+}
 nav ul li a::before {
   background-color: #c9cdd3;
   bottom: -0.4rem;
@@ -505,6 +516,11 @@ footer .container .row .col span i:nth-of-type(2) {
 
 .footer-single {
   margin-top: 55px;
+}
+
+.head-registration-evenement {
+  align-items: start;
+  flex-flow: column;
 }
 
 .home-header {
