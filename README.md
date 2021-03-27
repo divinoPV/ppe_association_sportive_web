@@ -7,13 +7,13 @@ VERSION SYMFONY :
 
 REQUIS :
 
-	PHP 8.0
+	PHP 7.4
 	PhpMyAdmin 5.0.4
 	Apache 2.4.46
 	MySQL 8.0.22
 	Sass 1.32
 
-ATTENTION extension curl de php si votre serveur symfony est en https voir :
+ATTENTION l'extension curl de php peut poser problème si votre serveur symfony est en https voir :
 	https://docs.bolt.cm/3.7/howto/curl-ca-certificates
 
 INSTALLATION
@@ -25,7 +25,7 @@ INSTALLATION
 		- php bin\console d:d:c
 		- php bin\console d:s:u -f
 		- php bin\console d:fix:l -n
-		Si vous n'avez pas sass aller dans public\static\sass\style.scss et suivi le tuto
+		! Si vous n'avez pas sass aller dans public\static\sass\style.scss et suivez le tuto
 		- sass public/static/sass/style.scss public/static/css/style.css --watch
 	- ajouter un fichier .env.local avec:
 		APP_ENV=dev
@@ -36,7 +36,11 @@ INSTALLATION
 	- créer un compte avec votre vrai adresse mail pour tester le mot de passe oublié
 	- changer votre role en base pour être admin (syntax ["ROLE_ADMIN"])
 	- aller sur \admin pour modifier les utilisateurs
-	- déconnectez-vous et essayez mot de passe oublié (vous devez être le seul admin en base car notre système envoie un mail à un administrateur au hasard)
+	- déconnectez-vous et essayez mot de passe oublié (vous devez être le seul admin en base car notre système envoie un email à un administrateur au hasard)
+	
+	Par défaut le compte administrateur est :
+		- Login : admin@gmail.com
+		- Pass : 'Azerty123&@.
 	
 	Si vous avez une question vous pouvez me contacter à l'adresse suivante : hugomonteiro6021@gmail.com
 	
@@ -48,8 +52,8 @@ ARCHITECTURE
 	
 	- Connexion
 	- Accueil
-		- Evénements
-			- Fiche événements
+		- Archive - Événements
+			- Fiche - Événements
 	- Mon profil
 	- Contact
 	- Oubli de mot de passe
@@ -57,10 +61,10 @@ ARCHITECTURE
 	
 STACK TECHNIQUE
   
-    Symfony
+    Symfony 5.2
     D3JS
     SASS
-    PHP8
+    PHP 7.4
     ES6
 	
 PRODUCTION
