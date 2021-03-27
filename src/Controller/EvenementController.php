@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
-use App\Entity\User;
 use App\Form\EvenementSearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
