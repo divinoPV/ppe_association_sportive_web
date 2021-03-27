@@ -9,6 +9,8 @@ use App\Form\EvenementSearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Exception\LogicException;
+use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,12 +24,15 @@ final class EvenementController extends AbstractController
     /** ROUTE NAME */
     public const ROUTE_SINGLE = self::TEMPLATE . "_single";
     public const ROUTE_REGISTRATION = self::TEMPLATE . "_registration";
+    public const ROUTE_UNSBSCRIBE = self::TEMPLATE . "_unsubscribe";
 
     /**
      * @Route("/", name=self::TEMPLATE)
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
+     * @throws LogicException
+     * @throws RuntimeException
      */
     public function index(Request $request,
                           PaginatorInterface $paginator
@@ -164,6 +169,37 @@ final class EvenementController extends AbstractController
         return $this->render(self::TEMPLATE . '/registration.html.twig', [
             'event' => $event,
             'message' => $err ?? "Félicitation ! Votre inscription c'est bien passée."
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/unsubscribe", name=self::ROUTE_UNSBSCRIBE)
+     * @param EntityManagerInterface $em
+     * @param int $id
+     * @return Response
+     */
+    public function unsubscribe(EntityManagerInterface $em, int $id): Response
+    {
+        /** @var Evenement $event */
+        $event = $this
+            ->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->findOneBy(["id" => $id]);
+
+        /** @var Inscription $checkInscription */
+        $checkInscription = $this
+            ->getDoctrine()
+            ->getRepository(Inscription::class)
+            ->findOneBy(["evenement" => $id, "utilisateur" => $this->getUser()->getId()]);
+
+        if (!empty($checkInscription)):
+            $em->remove($checkInscription);
+            $em->flush();
+        endif;
+
+        return $this->redirectToRoute(self::ROUTE_SINGLE, [
+            "id" => $id,
+            "event" => $event
         ]);
     }
 }

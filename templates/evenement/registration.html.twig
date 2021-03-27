@@ -11,5 +11,6 @@
     <div class="{{ generateClass("head") }}">
         <h1 class="{{ generateClass("title") }}">Inscription à {{ nom }}</h1>
         <span class="{{ generateClass("message") }}">{{ message }}</span>
+        <a href="{{ path(template ~ "_single", {"id": event.id }) }}">{% trans %}Revenir à l'%template% > <strong bold>%nom%</strong>{% endtrans %}</a>
     </div>
 {% endblock body %}
