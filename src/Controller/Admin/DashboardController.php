@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Document;
 use App\Entity\DocumentCategorie;
 use App\Entity\Evenement;
+use App\Entity\Inscription;
 use App\Entity\Sport;
 use App\Entity\Type;
 use App\Entity\User;
@@ -55,6 +56,7 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Sports', 'fas fa-futbol', Sport::class),
                 MenuItem::linkToCrud('Types', 'fas fa-project-diagram', Type::class),
                 MenuItem::linkToCrud('Catégories', 'fas fa-project-diagram', Categorie::class),
+                /*MenuItem::linkToCrud('Inscriptions', 'fas fa-sign-in-alt', Inscription::class), Voir le crud pour plus d'info*/
             ]),
 
             yield MenuItem::subMenu('Gestion document', 'fa fa-tasks')->setSubItems([
