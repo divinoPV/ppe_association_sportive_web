@@ -510,7 +510,6 @@ footer .container .row .col span i:nth-of-type(2) {
   color: #303133;
   line-height: 2rem;
   text-align: justify;
-  text-align-last: center;
   word-break: break-word;
 }
 .ee-content .eec-description, .ee-content .eec-link {
@@ -545,6 +544,47 @@ footer .container .row .col span i:nth-of-type(2) {
 }
 .home-header .home-subtitle {
   font-size: 2rem;
+}
+
+.profil_container {
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: 7px 7px 6px 0 #757575;
+  max-width: 1200px;
+}
+.profil_container_content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 25%;
+  height: 500px;
+  background-color: #1e2a47;
+  box-shadow: 5px 0 5px 0 #535353;
+  z-index: 20;
+}
+.profil_container_content_info {
+  color: #c9cdd3;
+}
+.profil_container_content_info h2 {
+  font-size: 25px;
+}
+.profil_container_content_info h3 {
+  padding-bottom: 10px;
+}
+.profil_container_content_info p {
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+.profil_container_content img {
+  margin: 10px;
+  width: 150px;
+  border-radius: 50%;
+}
+.profil_container_form {
+  width: 75%;
+  height: 500px;
+  background-color: #f1f1f1;
 }
 
 /*# sourceMappingURL=style.css.map */

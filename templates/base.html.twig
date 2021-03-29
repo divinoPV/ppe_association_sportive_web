@@ -52,6 +52,11 @@
                             <a href="{{ path("admin") }}">Administration</a>
                         </li>
                     {% endif %}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a href="{{ path("profil", { 'id' : app.user.id }) }}">Profile</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </li>
             {% if not app.user %}
