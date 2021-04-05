@@ -31,10 +31,10 @@ INSTALLATION
 		APP_ENV=dev
 		APP_SECRET= your secret
 		DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/ppe_asso_sportive_symfony?serverVersion=8.0.22&charset=utf8"
-		MAILER_DSN=gmail://USEREMAIL:PASSWORD@default
-		ATTENTION caractères spéciaux en syntaxe URL (ex : + -> %2B)
-	- créer un compte avec votre vrai adresse mail pour tester le mot de passe oublié
-	- changer votre role en base pour être admin (syntax ["ROLE_ADMIN"])
+		MAILER_DSN=smtp://localhost:1025
+	- pour voir les mails reçus ou envoyés:
+		- lancer le MailLog.exe 
+		- aller sur localhost:8025 pour afficher les mails		
 	- aller sur \admin pour modifier les utilisateurs
 	- déconnectez-vous et essayez mot de passe oublié (vous devez être le seul admin en base car notre système envoie un email à un administrateur au hasard)
 	
