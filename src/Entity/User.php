@@ -121,7 +121,7 @@ class User implements UserInterface, Serializable
     private Categorie $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="utilisateur", orphanRemoval=true)
      */
     private Collection $inscriptions;
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Document;
+use App\Repository\DocumentCategorieRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -11,6 +12,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class DocumentCrudController extends AbstractCrudController
 {
+    /**
+     * @var DocumentCategorieRepository
+     */
+    private $repoDocCateg;
+
+    public function __construct(DocumentCategorieRepository $repoDocCateg)
+    {
+        $this->repoDocCateg = $repoDocCateg;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Document::class;
@@ -33,7 +44,11 @@ class DocumentCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('lien'),
             TextField::new('description'),
-            AssociationField::new('categorie')->autocomplete()
+            AssociationField::new('categorie')
+            ->setRequired(true)
+            ->setFormTypeOptions(['empty_data' => $this->repoDocCateg->findOneBy([
+                "nom" => 'Autre'
+            ])])
         ];
     }
 

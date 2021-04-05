@@ -25,7 +25,7 @@ class Categorie
      * @ORM\Column(type="string", length=256)
      * @Assert\NotBlank()
      */
-    private string $nom;
+    private ?string $nom = null;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="categorie")
@@ -33,7 +33,7 @@ class Categorie
     private Collection $utilisateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="categorie")
      */
     private Collection $evenements;
 
@@ -60,9 +60,9 @@ class Categorie
     }
 
     /**
-     * @param string $nom
+     * @param string|null $nom
      */
-    public function setNom(string $nom): void
+    public function setNom(?string $nom): void
     {
         $this->nom = $nom;
     }

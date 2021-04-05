@@ -19,6 +19,10 @@ class CategDocFixtures extends Fixture
             $manager->persist($categDoc);
             $this->addReference('categDoc' . $i, $categDoc);
         }
+        $defaultCateg = new DocumentCategorie();
+        $defaultCateg->setNom('Autre');
+
+        $manager->persist($defaultCateg);
 
         $manager->flush();
     }

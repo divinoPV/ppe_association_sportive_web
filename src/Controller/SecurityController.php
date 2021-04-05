@@ -127,8 +127,6 @@ class SecurityController extends AbstractController
 
                 EmailSender::sendMail($mailer, $user, $admin->getEmail(), 'email/contact_forgotten.html.twig', $option);
 
-                $this->addFlash("message", "Votre e-mail a bien été envoyé !");
-
                 $data->setMdpOublier(true);
 
                 $em->persist($data);

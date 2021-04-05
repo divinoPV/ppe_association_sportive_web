@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Document;
+use App\Entity\DocumentCategorie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,9 +15,15 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class DocumentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var DocumentCategorieRepository
+     */
+    private $repoDocCateg;
+
+    public function __construct(ManagerRegistry $registry, DocumentCategorieRepository $repoDocCateg)
     {
         parent::__construct($registry, Document::class);
+        $this->repoDocCateg = $repoDocCateg;
     }
 
     public function allDocument(): array
@@ -38,6 +45,17 @@ class DocumentRepository extends ServiceEntityRepository
             ->join('d.evenement', 'e')
             ->where('e.id = d.evenement')
             ->groupBy('d.evenement')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function defautCategDocmument(DocumentCategorie $docCateg)
+    {
+        return $this->createQueryBuilder('d')
+            ->update()
+            ->where('d.categorie = :idCateg')
+            ->setParameter('idCateg', $docCateg->getId())
+            ->set('d.categorie', $this->repoDocCateg->findOneBy(['nom' => 'Autre'])->getId())
             ->getQuery()
             ->getResult();
     }

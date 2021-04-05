@@ -35,7 +35,7 @@ class EvenementFixtures extends Fixture implements DependentFixtureInterface
             $evenement = new Evenement();
             $evenement
                 ->setNom($this->faker->sentence(rand(2, 9)))
-                ->setDescription($this->faker->sentence(rand(47, 159)))
+                ->setDescription($this->faker->text($maxNbChars = 350))
                 ->setDebuterLe(new DateTime('now'))
                 ->setFinirLe(new DateTime('now'))
                 ->setImage($number . '.jpg')

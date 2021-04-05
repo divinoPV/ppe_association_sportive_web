@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Categorie;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -20,9 +21,15 @@ use function get_class;
  */
 class UtilisateurRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var CategorieRepository
+     */
+    private $repoCateg;
+
+    public function __construct(ManagerRegistry $registry, CategorieRepository $repoCateg)
     {
         parent::__construct($registry, User::class);
+        $this->repoCateg = $repoCateg;
     }
 
     /**
@@ -52,5 +59,16 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
             ->setParameter('roles', '%"' . $role . '"%');
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function defautCategUtilisateur(Categorie $categ)
+    {
+        return $this->createQueryBuilder('u')
+            ->update()
+            ->where('u.categorie = :idCateg')
+            ->setParameter('idCateg', $categ->getId())
+            ->set('u.categorie', $this->repoCateg->findOneBy(['nom' => 'Autre'])->getId())
+            ->getQuery()
+            ->getResult();
     }
 }

@@ -24,10 +24,10 @@ class Type
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private string $nom;
+    private ?string $nom = null;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="type", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="type")
      */
     private Collection $evenements;
 
@@ -46,7 +46,7 @@ class Type
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 

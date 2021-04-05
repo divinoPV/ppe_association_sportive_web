@@ -16,7 +16,7 @@ class TypeFixtures extends Fixture
         "Championat",
         "Tournoi",
         "Journée découverte",
-        "Journée associative"
+        "Journée associative",
     ];
 
     public function load(ObjectManager $manager)
@@ -28,6 +28,11 @@ class TypeFixtures extends Fixture
             $manager->persist($typeElement);
             $this->addReference('type' . $id, $typeElement);
         endforeach;
+
+        $defaultType = new Type();
+        $defaultType->setNom('Autre');
+
+        $manager->persist($defaultType);
 
         $manager->flush();
     }

@@ -20,22 +20,22 @@ class Document
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string", length=256)
      * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=256)
      */
-    private string $nom;
+    private ?string $nom = null;
 
     /**
-     * @ORM\Column(type="string", length=256)
      * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=256)
      */
-    private string $lien;
+    private ?string $lien = null;
 
     /**
-     * @ORM\Column(type="string", length=256)
      * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=256)
      */
-    private string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\Column(type="datetime")
@@ -84,10 +84,10 @@ class Document
     }
 
     /**
-     * @param string $nom
+     * @param string|null $nom
      * @return Document
      */
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -111,10 +111,10 @@ class Document
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return Document
      */
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -122,9 +122,9 @@ class Document
     }
 
     /**
-     * @param string $lien
+     * @param string|null $lien
      */
-    public function setLien(string $lien): void
+    public function setLien(?string $lien): void
     {
         $this->lien = $lien;
     }

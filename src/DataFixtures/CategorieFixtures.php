@@ -12,7 +12,7 @@ class CategorieFixtures extends Fixture
         "Cadet",
         "Cadette",
         "Junior fille",
-        "Junior garçcon"
+        "Junior garçcon",
     ];
 
     public function load(ObjectManager $manager)
@@ -24,6 +24,12 @@ class CategorieFixtures extends Fixture
             $manager->persist($uneCateg);
             $this->addReference('categ' . $id, $uneCateg);
         }
+
+        $defaultCateg = new Categorie();
+        $defaultCateg->setNom('Autre');
+
+        $manager->persist($defaultCateg);
+
         $manager->flush();
     }
 }

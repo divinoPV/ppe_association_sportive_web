@@ -23,10 +23,10 @@ class Sport
      * @ORM\Column(type="string", length=256)
      * @Assert\NotBlank()
      */
-    private string $nom;
+    private ?string $nom = null;
 
     /**
-     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="sport", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Evenement::class, mappedBy="sport")
      */
     private Collection $evenements;
 
@@ -47,9 +47,9 @@ class Sport
     }
 
     /**
-     * @param string $nom
+     * @param string|null $nom
      */
-    public function setNom(string $nom): void
+    public function setNom(?string $nom): void
     {
         $this->nom = $nom;
     }

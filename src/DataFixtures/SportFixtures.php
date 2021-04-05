@@ -25,7 +25,7 @@ class SportFixtures extends Fixture
         "Golf",
         "Escrime",
         "Gymnastique",
-        "Ski"
+        "Ski",
     ];
 
     public function load(ObjectManager $manager)
@@ -37,6 +37,11 @@ class SportFixtures extends Fixture
             $manager->persist($aSport);
             $this->addReference('sport' . $id, $aSport);
         endforeach;
+
+        $defaultSport = new Sport();
+        $defaultSport->setNom('Autre');
+
+        $manager->persist($defaultSport);
 
         $manager->flush();
     }

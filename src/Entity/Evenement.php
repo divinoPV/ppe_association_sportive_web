@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -24,21 +25,25 @@ class Evenement
     private ?int $id = null;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=256)
      */
     private string $nom;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=612)
      */
     private string $description;
 
     /**
+     * @Assert\NotNull()
      * @ORM\Column(type="datetime")
      */
     private DateTime $debuterLe;
 
     /**
+     * @Assert\NotNull()
      * @ORM\Column(type="datetime")
      */
     private DateTime $finirLe;
@@ -54,6 +59,7 @@ class Evenement
     private DateTime $modifierLe;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private int $nombrePlaces;
@@ -64,11 +70,13 @@ class Evenement
     private bool $actif;
 
     /**
+     * @Assert\NotBlank(message="Veuillez selectionner une image")
      * @ORM\Column(type="string", length=256)
      */
     private ?string $image = null;
 
     /**
+     * @Assert\NotBlank(message="Veuillez selectionner une vignette")
      * @ORM\Column(type="string", length=256)
      */
     private ?string $vignette = null;
@@ -98,25 +106,26 @@ class Evenement
     private Type $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement" , orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="evenement", orphanRemoval=true)
      */
     private Collection $inscriptions;
 
     /**
-     *
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="evenements")
      * @ORM\JoinColumn(name="categorie", nullable=false, referencedColumnName="id")
      */
     private Categorie $categorie;
 
     /**
-     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="evenement", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Document::class, mappedBy="evenement")
      */
     private Collection $documents;
 
     public function __construct()
     {
         $this->documents = new ArrayCollection();
+        $this->debuterLe = new \DateTime();
+        $this->finirLe = new \DateTime();
         $this->setCreerLe();
         $this->setModifierLe();
     }
@@ -170,7 +179,7 @@ class Evenement
     /**
      * @return DateTime
      */
-    public function getDebuterLe(): DateTime
+    public function getDebuterLe(): ?DateTime
     {
         return $this->debuterLe;
     }
@@ -182,6 +191,7 @@ class Evenement
     public function setDebuterLe(DateTime $debuterLe): self
     {
         $this->debuterLe = $debuterLe;
+
         return $this;
     }
 
@@ -211,7 +221,7 @@ class Evenement
         return $this;
     }
 
-    public function getCreerLe(): ?DateTime
+    public function getCreerLe(): DateTime
     {
         return $this->creerLe;
     }
