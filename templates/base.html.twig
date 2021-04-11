@@ -22,14 +22,15 @@
     <link rel="mask-icon" href="{{ asset("media/favicon/safari-pinned-tab.svg") }}" color="#de2364">
     <meta name="msapplication-TileColor" content="#b91d47">
     <meta name="theme-color" content="#ffffff">
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          crossorigin="anonymous">
-    {% block stylesheets %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('static/css/style.css') }}"/>
     <!-- google Font -->
     <!-- montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 </head>
 <body>
 <header>
@@ -111,14 +112,17 @@
             </div>
         </div>
     </div>
+    <!-- fontawesome kit's code -->
+    <script async src="https://kit.fontawesome.com/57b72ee719.js" crossorigin="anonymous"></script>
     <script async src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             crossorigin="anonymous"></script>
     <script async src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             crossorigin="anonymous"></script>
-    {% block javascripts %}{% endblock %}
-    <!-- fontawesome kit's code -->
-    <script async src="https://kit.fontawesome.com/57b72ee719.js"></script>
+    <script async src="https://d3js.org/d3.v6.min.js" crossorigin="anonymous"></script>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 </footer>
 </body>
 </html>
