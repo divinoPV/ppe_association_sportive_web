@@ -1,74 +1,80 @@
 # ppe_association_sportive_web
-Répertoire du projet association sportive web
 
-VERSION SYMFONY : 
+Développement d'un site web avec Symfony permettant de gérer les inscriptions aux événements sportifs.
 
-	Symfony 5.2.1
+## Symfony : 
 
-REQUIS :
+```text
+Symfony 5.2.5
+```
 
-	PHP 7.4
-	PhpMyAdmin 5.0.4
-	Apache 2.4.46
-	MySQL 8.0.22
-	Sass 1.32
+## Requis :
+
+```text
+Php (7.4)
+Composer (1.*)
+Node
 
 ATTENTION l'extension curl de php peut poser problème si votre serveur symfony est en https voir :
 	https://docs.bolt.cm/3.7/howto/curl-ca-certificates
+```
 
-INSTALLATION
+## Installation
 
-	- git clone https://github.com/divinoPV/ppe_association_sportive_web.git
-	- lancer le projet dans votre IDE
-	- ouvrir un terminal dans le dossier du projet et taper :
-		- composer install
-		- php bin\console d:d:c
-		- php bin\console d:s:u -f
-		- php bin\console d:fix:l -n
-		! Si vous n'avez pas sass aller dans public\static\sass\style.scss et suivez le tuto
-		- sass public/static/sass/style.scss public/static/css/style.css --watch
-	- ajouter un fichier .env.local avec:
-		APP_ENV=dev
-		APP_SECRET= your secret
-		DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/ppe_asso_sportive_symfony?serverVersion=8.0.22&charset=utf8"
-		MAILER_DSN=smtp://localhost:1025
-	- pour voir les mails reçus ou envoyés:
-		- lancer le MailLog.exe 
-		- aller sur localhost:8025 pour afficher les mails		
-	- aller sur \admin pour modifier les utilisateurs
-	- déconnectez-vous et essayez mot de passe oublié (vous devez être le seul admin en base car notre système envoie un email à un administrateur au hasard)
-	
-	Par défaut le compte administrateur est :
-		- Login : admin@gmail.com
-		- Pass : 'Azerty123&@.
-	
-	Si vous avez une question vous pouvez me contacter à l'adresse suivante : hugomonteiro6021@gmail.com
-	
-CONTEXTE
+```bash
+# Créer un dossier et exécuter dans le terminal :
+git clone https://github.com/divinoPV/ppe_association_sportive_web.git
+cd # [nom du fichier]
 
-	Développement d'un site web avec Symfony permettant de gérer les inscriptions aux événements sportifs.
-	
-ARCHITECTURE
-	
-	- Connexion
-	- Accueil
-		- Archive - Événements
-			- Fiche - Événements
-	- Mon profil
-	- Contact
-	- Oubli de mot de passe
-	- Inscription
-	
-STACK TECHNIQUE
-  
-    Symfony 5.2
-    D3JS
-    SASS
-    PHP 7.4
-    ES6
-	
-PRODUCTION
+# Init projet commande
+composer install
+npm install
 
-	Laura Gonçalves
-	Lucas Boganin
-	Hugo Monteiro
+# BDD commande
+php bin\console d:d:c
+php bin\console d:s:u -f
+php bin\console d:fix:l -n
+```
+
+```text
+# Ajouter un fichier .env.local avec :
+APP_ENV=dev
+APP_SECRET= your secret
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/ppe_asso_sportive_symfony?serverVersion=8.0.22&charset=utf8"
+MAILER_DSN=smtp://localhost:1025
+```
+
+```text
+# Pour voir les mails reçus ou envoyés :
+Lancer bin\MailLog.exe
+Aller sur localhost:1025
+Aller sur \admin pour modifier les utilisateurs
+Déconnectez-vous et essayez mot de passe oublié 
+(vous devez être le seul admin en base car notre système envoie un email à un administrateur au hasard)
+
+Par défaut le compte administrateur est :
+	- Login : admin@gmail.com
+	- Pass : 'Azerty123&@.
+```
+
+## Support
+
+Si vous avez besoin d'aide vous pouvez contacter [divinoPV](mailto:monteiro.hugo2001@icloud.com?subject=[GitHub]%20Source%20Han%20Sans)
+	
+## Stacks
+
+```text
+Symfony 5.2
+D3JS
+SASS
+PHP 7.4
+ES6
+```
+	
+## Authors
+
+```text
+Laura Gonçalves
+Lucas Boganin
+Hugo Monteiro
+```
