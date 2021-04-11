@@ -28,7 +28,7 @@ cd # [nom du fichier]
 
 # Init projet commande
 composer install
-npm install
+yarn install && yarn encore dev
 
 # BDD commande
 php bin\console d:d:c
