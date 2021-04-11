@@ -2,13 +2,13 @@
 
 Développement d'un site web avec Symfony permettant de gérer les inscriptions aux événements sportifs.
 
-## Symfony : 
+## Symfony
 
 ```text
 Symfony 5.2.5
 ```
 
-## Requis :
+## Requis
 
 ```text
 Php (7.4)
