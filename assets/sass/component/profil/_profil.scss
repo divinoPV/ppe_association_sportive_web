@@ -41,10 +41,30 @@
       }
     }
 
-    &_form {
+    &_event {
       width: 75%;
       height: 500px;
       background-color: #f1f1f1;
+      overflow-y: scroll;
+
+      span {
+        display: flex;
+        flex-direction: row;
+      }
+
+      h2 {
+        font-size: 25px;
+        margin: 10px;
+      }
+
+      p{
+        margin: 10px 10px;
+      }
+
+      .image{
+        margin: 10px;
+        width: 150px;
+      }
     }
   }
 }
