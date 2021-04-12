@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% set template = 'evenement' %}
+
 {% block body %}
     <div class="profil_container">
         <div class="profil_container_content">
@@ -20,6 +22,11 @@
                         <p> {{ inscription.evenement.nom }}</p>
                         <p> {{ inscription.evenement.debuterLe|date("m/d/Y")}}</p>
                         <p> {{ inscription.evenement.description }}</p>
+                         <a class="link ec-link eec-link"
+                            href="{{
+                            path(template ~ '_single',{'id': inscription.evenement.id}) }}"
+                         >Voir l'événement >
+                    </a>
                     </div>
                 </span>
             {% endfor %}
