@@ -12,7 +12,6 @@
       align-items: center;
       flex-direction: column;
       width: 25%;
-      height: 500px;
       background-color: $primary;
       box-shadow: 5px 0 5px 0 #535353;
       z-index: 20;
@@ -43,7 +42,6 @@
 
     &_event {
       width: 75%;
-      height: 500px;
       background-color: #f1f1f1;
       overflow-y: scroll;
 

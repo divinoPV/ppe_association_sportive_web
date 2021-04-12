@@ -43,7 +43,7 @@ class User implements UserInterface, Serializable
      *     message = "L'email '{{ value }}' n'est pas valide !"
      * )
      */
-    private string $email;
+    private ?string $email = null;
 
     /**
      * @ORM\Column(type="json")
@@ -142,7 +142,7 @@ class User implements UserInterface, Serializable
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -154,7 +154,7 @@ class User implements UserInterface, Serializable
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->email;
     }

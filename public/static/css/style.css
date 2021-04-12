@@ -3,7 +3,7 @@
  Installer node.js pour avoir npm : "https://nodejs.org/fr/download/"
  Installer sass : "npm install -g sass"
  Créer la variable d'environnement pour sass dans le PATH
- Command à exécuter dans le terminal : "sass public/static/sass/_style.scss public/static/css/style.css --watch"
+ Command à exécuter dans le terminal : "sass assets/sass/_style.scss public/static/css/style.css --watch"
  */
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -558,7 +558,6 @@ footer .container .row .col span i:nth-of-type(2) {
   align-items: center;
   flex-direction: column;
   width: 25%;
-  height: 500px;
   background-color: #1e2a47;
   box-shadow: 5px 0 5px 0 #535353;
   z-index: 20;
@@ -583,7 +582,6 @@ footer .container .row .col span i:nth-of-type(2) {
 }
 .profil_container_event {
   width: 75%;
-  height: 500px;
   background-color: #f1f1f1;
   overflow-y: scroll;
 }

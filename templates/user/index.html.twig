@@ -7,10 +7,60 @@
         <div class="profil_container_content">
             <img src="{{ asset('media/images/users/attachment_121087384.jfif') }}" alt="">
             <div class="profil_container_content_info">
-                <h2>{{ user.nom }} <button data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-wrench"></i></button></h2>
-                <h3>{{ user.prenom }}</h3>
-                <p>{{ user.naissance|date("m/d/Y") }}</p>
-                <p>{{ user.categorie.nom }}</p>
+                {{ form_start(form) }}
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.email) }}
+                {{ form_label(form.plainPassword.first) }}
+                {{ form_widget(form.plainPassword.first,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                })}}
+                {{ form_errors(form.plainPassword.first) }}
+                {{ form_label(form.plainPassword.second) }}
+                {{ form_widget(form.plainPassword.second,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.plainPassword.second) }}
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.nom) }}
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.prenom) }}
+                {{ form_label(form.naissance) }}
+                {{ form_widget(form.naissance,{
+                    'attr': {
+                        'class': 'form-control mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.naissance) }}
+                {{ form_label(form.categorie) }}
+                {{ form_widget(form.categorie,{
+                    'attr': {
+                        'class': 'form-control form-select mt-2 mb-4'
+                    }
+                }) }}
+                {{ form_errors(form.categorie) }}
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">valider</button>
+                </div>
+                {{ form_end(form) }}
             </div>
         </div>
         <div class="profil_container_event">
@@ -30,22 +80,6 @@
                     </div>
                 </span>
             {% endfor %}
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}
