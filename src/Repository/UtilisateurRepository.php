@@ -51,14 +51,31 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
         $this->_em->flush();
     }
 
-    public function findUserByRole($role)
+    public function findUserByRole($role = User::ROLE_USER)
     {
-        $qb = $this->createQueryBuilder('u');
-        $qb->select('u')
+        return $this->createQueryBuilder('u')
+            ->select('count(u.id)')
             ->where('u.roles LIKE :roles')
-            ->setParameter('roles', '%"' . $role . '"%');
+            ->setParameter('roles', '%"' . $role . '"%')
+            ->getQuery()
+            ->getResult();
+    }
 
-        return $qb->getQuery()->getOneOrNullResult();
+    public function findUserActif($role = User::ROLE_USER, bool $actif = true)
+    {
+        $actif === true
+            ? $actif = 1
+            : $actif = 0
+        ;
+
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.roles LIKE :roles')
+            ->andWhere('u.status LIKE :actif')
+            ->setParameter('roles', '%"' . $role . '"%')
+            ->setParameter('actif', $actif)
+            ->getQuery()
+            ->getResult();
     }
 
     public function defautCategUtilisateur(Categorie $categ)

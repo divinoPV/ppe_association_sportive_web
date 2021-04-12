@@ -5,3 +5,4 @@ twig:
         - 'form/theme.html.twig'
     paths:
         '%kernel.project_dir%/vendor/knplabs/knp-paginator-bundle/templates': KnpPaginator
+#        '%kernel.project_dir%/assets/d3js': D3js

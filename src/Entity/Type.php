@@ -31,6 +31,11 @@ class Type
      */
     private Collection $evenements;
 
+    /**
+     * @ORM\Column(type="string", length=7)
+     */
+    private string $color;
+
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
@@ -86,5 +91,17 @@ class Type
     public function __toString()
     {
         return $this->nom;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
     }
 }

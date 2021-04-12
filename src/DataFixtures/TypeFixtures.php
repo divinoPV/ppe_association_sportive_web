@@ -23,17 +23,23 @@ class TypeFixtures extends Fixture
     {
         foreach (self::TYPE_LIST as $id => $aType):
             $typeElement = new Type();
-            $typeElement->setNom($aType);
+            $typeElement
+                ->setNom($aType)
+                ->setColor('#' . CategorieFixtures::randHexa())
+            ;
 
             $manager->persist($typeElement);
+
             $this->addReference('type' . $id, $typeElement);
         endforeach;
 
         $defaultType = new Type();
-        $defaultType->setNom('Autre');
+        $defaultType
+            ->setNom('Autre')
+            ->setColor('#' . CategorieFixtures::randHexa())
+        ;
 
         $manager->persist($defaultType);
-
         $manager->flush();
     }
 }

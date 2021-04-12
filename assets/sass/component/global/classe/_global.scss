@@ -49,6 +49,12 @@
     font-size: $title;
 }
 
+.title-2 {
+    color: lighten($text-color, 13);
+    font-size: calc(#{$title} * .87);
+    margin-bottom: 13px;
+}
+
 .subtitle {
     @include display(flex, $justify: center, $gap: 13px);
     color: $text-color-inferior;
