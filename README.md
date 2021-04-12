@@ -65,7 +65,7 @@ Si vous avez besoin d'aide vous pouvez contacter [divinoPV](mailto:monteiro.hugo
 
 ```text
 Symfony 5.2
-D3JS
+ChartJS
 SASS
 PHP 7.4
 ES6

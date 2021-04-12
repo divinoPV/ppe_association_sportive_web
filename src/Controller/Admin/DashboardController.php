@@ -6,7 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Document;
 use App\Entity\DocumentCategorie;
 use App\Entity\Evenement;
-use App\Entity\Inscription;
+//use App\Entity\Inscription;
 use App\Entity\Sport;
 use App\Entity\Type;
 use App\Entity\User;
@@ -63,6 +63,8 @@ class DashboardController extends AbstractDashboardController
                 MenuItem::linkToCrud('Documents', 'fas fa-file-pdf', Document::class),
                 MenuItem::linkToCrud('Document catégories', 'fas fa-project-diagram', DocumentCategorie::class),
             ]),
+
+            yield MenuItem::linktoRoute('Statistique', 'fas fa-info', 'statistique'),
 
             yield MenuItem::linktoRoute('Retour au site', 'fas fa-backward', 'home'),
             yield MenuItem::linkToLogout('Logout', 'fas fa-sign-out-alt'),

@@ -62,6 +62,21 @@ class EvenementRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countEventActif(bool $actif = true): array
+    {
+        $actif === true
+            ? $actif = 1
+            : $actif = 0
+        ;
+
+        return $this->createQueryBuilder('e')
+            ->select('count(e.id)')
+            ->where('e.actif LIKE :actif')
+            ->setParameter('actif', $actif)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function lastEvenements(): array
     {
         return $this->createQueryBuilder('e')

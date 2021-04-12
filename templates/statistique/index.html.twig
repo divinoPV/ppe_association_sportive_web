@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% set template = 'statistique' %}
+{% set type_template = 'archive' %}
+
+{% set h2NbInscParCateg = "Le nombre d’inscriptions aux événements par catégorie" %}
+{% set h2NbInscParType = "Le nombre d’inscriptions aux événements par type" %}
+{% set h2NbInscEleve = "Le nombre d’élèves inscrits" %}
+{% set h2NbEventActif = "Le nombre d’événements actifs" %}
+
+{% block title %}{{ template|capitalize }} -{% endblock title %}
+
+{% block body %}
+    {{ initTemplate(template, type_template) }}
+    <div class="{{ generateClass("head") }}">
+        <h1 class="{{ generateClass("title") }}">{{ template|capitalize }}</h1>
+    </div>
+    <div class="{{ generateClass("body") }}">
+        <div class="{{ generateClass("canvas") }}">
+            <div class="{{ generateClass("canvas-element") }}">
+                <h2 class="{{ generateClass("title-2") }}">{{ h2NbInscParCateg }}</h2>
+                <canvas id="nbInscParCateg"></canvas>
+            </div>
+            <div class="{{ generateClass("canvas-element") }}">
+                <h2 class="{{ generateClass("title-2") }}">{{ h2NbInscParType }}</h2>
+                <canvas id="nbInscParType"></canvas>
+            </div>
+            <div class="{{ generateClass("canvas-element") }}">
+                <h2 class="{{ generateClass("title-2") }}">{{ h2NbInscEleve }}</h2>
+                <canvas id="nbInscEleve"></canvas>
+            </div>
+            <div class="{{ generateClass("canvas-element") }}">
+                <h2 class="{{ generateClass("title-2") }}">{{ h2NbEventActif }}</h2>
+                <canvas id="nbEventActif"></canvas>
+            </div>
+        </div>
+    </div>
+    <style>
+
+    </style>
+{% endblock body %}
+
+{% block javascripts %}
+    <script src="{{ asset('chartJS/statistique.js') }}"></script>
+    <script>
+        generateurChartJS(
+            "nbInscParCateg",
+            {{ categNom|raw }},
+            "{{ h2NbInscParCateg }}",
+            {{ nbInscParCateg|raw }},
+            {{ categColor|raw }}
+        );
+
+        generateurChartJS(
+            "nbInscParType",
+            {{ typesNom|raw }},
+            "{{ h2NbInscParType }}",
+            {{ nbInscParType|raw }},
+            {{ typeColor|raw }}
+        );
+
+        generateurChartJS(
+            "nbInscEleve",
+            ["Nombre d'élèves inscrits"],
+            "{{ h2NbInscEleve }}",
+            [{{ nbElevesInsc|raw }}],
+            ["yellow"]
+        );
+
+        generateurChartJS(
+            "nbEventActif",
+            ["Nombre d'événements actifs"],
+            "{{ h2NbEventActif }}",
+            [{{ nbEventActif|raw }}],
+            ["purple"]
+        );
+    </script>
+{% endblock %}

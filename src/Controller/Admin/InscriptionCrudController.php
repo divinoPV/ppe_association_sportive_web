@@ -11,7 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 /**
  * IMPORTANT !
  * Ce CRUD ne fonctionne pas car EasyAdmin ne supporte pas les clés composite
- * EasyAdmin prévoit de supporter ses clés prochainement
+ * EasyAdmin prévoit de supporter ces clés prochainement
  */
 class InscriptionCrudController extends AbstractCrudController
 {
