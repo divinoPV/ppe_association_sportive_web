@@ -25,7 +25,7 @@ class StatistiqueController extends AbstractController
     {
         $categories = $this->getRepo(new Categorie(), "findAll");
         $types = $this->getRepo(new Type(), "findAll");
-        $nbElevesInsc = count($this->getRepo(new User(), "findUserByRole"));
+        $nbElevesInsc = $this->getRepo(new User(), "findUserByRole")[0][1];
         $nbEventActif = $this->getRepo(new Evenement(), "countEventActif")[0][1];
 
         // oui c'est du multiple assignement et c'est correct (voir avec divinoPV)
@@ -77,7 +77,7 @@ class StatistiqueController extends AbstractController
     {
         return $this
             ->getDoctrine()
-            ->getRepository($class::class) // pas touche ça fonctionne très bien ;)
+            ->getRepository(get_class($class)) // pas touche ça fonctionne très bien ;)
             ->$method(); // idem ;P
     }
 }
