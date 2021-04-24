@@ -25,13 +25,11 @@ class Evenement
     private ?int $id = null;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=256)
      */
     private string $nom;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=612)
      */
     private string $description;
@@ -59,7 +57,6 @@ class Evenement
     private DateTime $modifierLe;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private int $nombrePlaces;
@@ -70,13 +67,11 @@ class Evenement
     private bool $actif;
 
     /**
-     * @Assert\NotBlank(message="Veuillez selectionner une image")
      * @ORM\Column(type="string", length=256)
      */
     private ?string $image = null;
 
     /**
-     * @Assert\NotBlank(message="Veuillez selectionner une vignette")
      * @ORM\Column(type="string", length=256)
      */
     private ?string $vignette = null;
