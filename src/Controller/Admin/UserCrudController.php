@@ -108,7 +108,7 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
             $option = [
                 'sujet' => 'Validation de compte',
                 'utilisateur' => $instance->getEmail(),
-                'message' => 'Votre compte à bien été activé, vous pouvez désormais accéder à la plateforme'
+                'message' => 'Votre compte a bien été activé, vous pouvez désormais accéder à la plateforme'
             ];
 
             EmailSender::sendMail($this->mailer, $this->getUser()->getEmail(), $instance->getEmail(), 'email/contact_validate.html.twig', $option);

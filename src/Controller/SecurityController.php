@@ -56,7 +56,7 @@ class SecurityController extends AbstractController
         $user = new User();
 
         /** @var User $admin */
-        $admin = $manager->getRepository(User::class)->findUserByRole('ROLE_ADMIN');
+        $admin = $manager->getRepository(User::class)->getUserByRole('ROLE_ADMIN');
         $form = $this->createForm(InscriptionType::class, $user);
         $form->handleRequest($request);
 
@@ -107,7 +107,7 @@ class SecurityController extends AbstractController
         $title = " - Mot de passe oublié";
 
         if (!empty($request->get("submit"))):
-            $admin = $em->getRepository(User::class)->findUserByRole('ROLE_ADMIN');
+            $admin = $em->getRepository(User::class)->getUserByRole('ROLE_ADMIN');
             $user = $request->get("fogetten_password_first");
             $data = $em->getRepository(User::class)->findOneBy([
                 "email" => $user
