@@ -55,10 +55,15 @@
         </div>
     </div>
     <div class="body body-single body-single-event">
-        <img alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}"
-             class="image image-single image-single-event"
-             src="{{ asset('media/images/featured/images/' ~ event.image) }}"
-        >
+        {% if event.image is null or event.image is empty %}
+            <img class="image eei-image" src="{{ asset('media/images/featured/images/no-image.jpg')  }}"
+                 alt="{% trans %}no-image{% endtrans %}">
+        {% else %}
+            <img alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}"
+                 class="image image-single image-single-event"
+                 src="{{ asset('media/images/featured/images/' ~ event.image) }}"
+            >
+        {% endif %}
         <div class="description description-single description-single-event">
             <h2>Description</h2>
             <p>{{ event.description }}</p>

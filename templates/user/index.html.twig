@@ -67,7 +67,12 @@
             <h2>Vos événement :</h2>
             {% for inscription in inscriptions %}
                 <span>
-                    <img class="image" src="{{ asset('media/images/featured/vignettes/' ~ inscription.evenement.vignette) }}">
+                    {% if inscription.evenement.vignette is null or inscription.evenement.vignette is empty %}
+                        <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/no-vignette.jpg')  }}"
+                             alt="{% trans %}no-vignette{% endtrans %}">
+                    {% else %}
+                        <img class="image" src="{{ asset('media/images/featured/vignettes/' ~ inscription.evenement.vignette) }}">
+                    {% endif %}
                     <div class="content">
                         <p> {{ inscription.evenement.nom }}</p>
                         <p> {{ inscription.evenement.debuterLe|date("m/d/Y")}}</p>

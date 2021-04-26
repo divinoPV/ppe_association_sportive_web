@@ -66,7 +66,7 @@ class User implements UserInterface, Serializable
      *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule, une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
      * )
      */
-    private ?string $plainPassword = null; //obliger en en à cause de l'interface
+    private ?string $plainPassword = null; //obliger à cause de l'interface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

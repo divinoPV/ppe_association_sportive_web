@@ -14,8 +14,13 @@
                 {% set nom = event.nom %}
                 <div class="element event-element">
                     <div class="e-image ee-image">
-                        <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
-                             alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
+                        {% if event.vignette is null or event.vignette is empty %}
+                            <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/no-vignette.jpg')  }}"
+                                 alt="{% trans %}no-vignette{% endtrans %}">
+                        {% else %}
+                            <img class="image eei-image" src="{{ asset('media/images/featured/vignettes/' ~ event.vignette)  }}"
+                                 alt="{% trans %}La vignette de l'événement %nom%{% endtrans %}">
+                        {% endif %}
                     </div>
                     <div class="e-content ee-content">
                         <span class="titre ec-titre eec-titre">{{ nom|trim('.') }}</span>

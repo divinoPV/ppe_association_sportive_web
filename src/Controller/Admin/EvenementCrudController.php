@@ -8,6 +8,7 @@ use App\Repository\SportRepository;
 use App\Repository\TypeRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -15,10 +16,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Constraints\File;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class EvenementCrudController extends AbstractCrudController
+class EvenementCrudController extends AbstractCrudController implements EventSubscriberInterface
 {
     private TypeRepository $repoType;
     /**
@@ -122,5 +125,29 @@ class EvenementCrudController extends AbstractCrudController
                     "nom" => 'Autre'
                 ])]),
         ];
+    }
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            BeforeEntityPersistedEvent::class => 'eventDelete',
+        ];
+    }
+
+    /**
+     * @param $event
+     * @internal
+     */
+    public function eventDelete($event)
+    {
+        $instance = $event->getEntityInstance();
+
+        if (get_class($instance) === get_class(new Evenement())) {
+            if ((!empty($instance->getVignette()) && $instance->getVignette() !== null)
+                && (!empty($instance->getImage()) && $instance->getImage() !== null)) {
+                dd($instance);
+            }else {
+                $this->addFlash('info', 'test');
+            }
+        }
     }
 }

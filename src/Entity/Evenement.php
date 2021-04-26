@@ -25,11 +25,13 @@ class Evenement
     private ?int $id = null;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir un titre")
      * @ORM\Column(type="string", length=256)
      */
     private string $nom;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir une description")
      * @ORM\Column(type="string", length=612)
      */
     private string $description;
@@ -57,9 +59,14 @@ class Evenement
     private DateTime $modifierLe;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir un nombre entier positif.")
+     * @Assert\Regex(
+     *     pattern = "/^\+?\d+$/",
+     *     message = "Veuillez saisir un nombre entier positif."
+     * )
      * @ORM\Column(type="integer")
      */
-    private int $nombrePlaces;
+    private ?int $nombrePlaces = null;
     
     /**
      * @ORM\Column(type="boolean")
@@ -67,12 +74,12 @@ class Evenement
     private bool $actif;
 
     /**
-     * @ORM\Column(type="string", length=256)
+     * @ORM\Column(type="string", length=256, nullable=true)
      */
     private ?string $image = null;
 
     /**
-     * @ORM\Column(type="string", length=256)
+     * @ORM\Column(type="string", length=256, nullable=true)
      */
     private ?string $vignette = null;
 
@@ -245,7 +252,7 @@ class Evenement
      * @param int $nombrePlaces
      * @return Evenement
      */
-    public function setNombrePlaces(int $nombrePlaces): self
+    public function setNombrePlaces(?int $nombrePlaces = null): self
     {
         $this->nombrePlaces = $nombrePlaces;
 
