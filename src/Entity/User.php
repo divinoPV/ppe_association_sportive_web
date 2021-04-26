@@ -62,9 +62,8 @@ class User implements UserInterface, Serializable
     /**
      * @var string|null
      * @Assert\Regex(
-     *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[.\-+!*$@&%_])([.\-+!*$@&%_\w]{8,32})$/",
-     *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule,
-     *     une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
+     *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\p{P}\p{S}])([\p{P}\p{S}\w]{8,32})$/",
+     *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule, une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
      * )
      */
     private ?string $plainPassword = null; //obliger en en à cause de l'interface
