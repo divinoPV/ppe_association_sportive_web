@@ -54,6 +54,8 @@ class SecurityController extends AbstractController
     ): Response
     {
         $user = new User();
+
+        /** @var User $admin */
         $admin = $manager->getRepository(User::class)->findUserByRole('ROLE_ADMIN');
         $form = $this->createForm(InscriptionType::class, $user);
         $form->handleRequest($request);
@@ -71,7 +73,6 @@ class SecurityController extends AbstractController
                 'utilisateur' => $user,
                 'administrateur' => $admin
             ];
-
             EmailSender::sendMail($mailer, $user->getEmail(), $admin->getEmail(), 'email/contact_register.html.twig', $option);
 
             $manager->persist($user);

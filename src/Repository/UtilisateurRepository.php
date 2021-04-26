@@ -54,11 +54,11 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
     public function findUserByRole($role = User::ROLE_USER)
     {
         return $this->createQueryBuilder('u')
-            ->select('count(u.id)')
+            ->select('u')
             ->where('u.roles LIKE :roles')
             ->setParameter('roles', '%"' . $role . '"%')
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 
     public function findUserActif($role = User::ROLE_USER, bool $actif = true)

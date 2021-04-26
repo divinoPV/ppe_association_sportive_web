@@ -47,7 +47,7 @@ MAILER_DSN=smtp://localhost:1025
 ```text
 # Pour voir les mails reçus ou envoyés :
 Lancer bin\MailLog.exe
-Aller sur localhost:1025
+Aller sur localhost:8025
 Aller sur \admin pour modifier les utilisateurs
 Déconnectez-vous et essayez mot de passe oublié 
 (vous devez être le seul admin en base car notre système envoie un email à un administrateur au hasard)
