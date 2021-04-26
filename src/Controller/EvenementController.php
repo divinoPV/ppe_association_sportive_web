@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
+use App\Entity\User;
 use App\Form\EvenementSearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -122,7 +123,11 @@ final class EvenementController extends AbstractController
             ->getRepository(Inscription::class)
             ->findOneBy(["evenement" => $id, "utilisateur" => $user->getId()]);
 
-        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom())
+        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom() or
+            in_array(User::ROLE_ADMIN, $user->getRoles()) or
+            $event->getActif() === false or
+            $event->getNombrePlaces() <= 0
+        )
             $inscNotPermited = true;
 
         !empty($hasRegister) ? $hasRegister = true : $hasRegister = false;
@@ -155,7 +160,11 @@ final class EvenementController extends AbstractController
             ->getRepository(Evenement::class)
             ->findOneBy(["id" => $id]);
 
-        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom())
+        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom() or
+            in_array(User::ROLE_ADMIN, $user->getRoles()) or
+            $event->getActif() === false or
+            $event->getNombrePlaces() <= 0
+        )
             return $this->redirectToRoute(self::TEMPLATE);
 
         /** @var Inscription $checkInscription */
