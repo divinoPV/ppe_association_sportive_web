@@ -14,8 +14,9 @@
             <div class="info-primary info-primary-single info-primary-single-event">
                 <span class="date date-single date-single-event">
                 <i class="far fa-calendar-plus"></i>
-                {% set debut = event.debuterLe|date("m F Y") %}
-                    {% set fin = event.finirLe|date("m F Y") %}
+                {% set maintenant = "now"|date("d M Y") %}
+                {% set debut = event.debuterLe|date("d M Y") %}
+                    {% set fin = event.finirLe|date("d M Y") %}
                     {{ debut }}
                     {% if debut != fin %}
                         au {{ fin }}
@@ -116,22 +117,34 @@
     <div class="footer footer-single footer-single-event">
         <a class="back back-single back-single-event"
            href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
-        {% if hasRegister == false %}
-            <a class="{{ generateClass("button") }} button-registration {{ inscNotPermited == false or completed == true ?: "disabled" }}"
-               href="
-                {% if inscNotPermited == false or completed == true %}
-                    {{ path(template ~ '_registration', {'id': event.id}) }}
-                {% else %}
-                    #
-                {% endif %}"
-            >Inscription
-            </a>
+        {% if fin < maintenant %}
+            <span class="span-information end">L'événement est terminé</span>
         {% else %}
-            <a class="{{ generateClass("button") }} button-unsubsribe"
-               href="{{ path(template ~ "_unsubscribe", {"id": event.id}) }}"
-            >Se désinscrire
-            </a>
-            <span>Vous êtes bien inscrit à cet événement.</span>
+            {% if hasRegister == false %}
+                {% if completed == false %}
+                <a class="{{ generateClass("button") }} button-registration {{ inscNotPermited == false ?: "disabled" }}"
+                   href="
+                    {% if inscNotPermited == false and completed == false %}
+                        {{ path(template ~ '_registration', {'id': event.id}) }}
+                    {% else %}
+                        #
+                    {% endif %}"
+                >Inscription
+                </a>
+                {% else %}
+                    <span class="span-information valide">L'événement est complet</span>
+                {% endif %}
+            {% else %}
+                {% if debut <= maintenant and fin >= maintenant %}
+                    <span class="span-information current">L'événement est en cours</span>
+                {% else %}
+                    <a class="{{ generateClass("button") }} button-unsubsribe"
+                       href="{{ path(template ~ "_unsubscribe", {"id": event.id}) }}"
+                    >Se désinscrire
+                    </a>
+                    <span>Vous êtes bien inscrit à cet événement.</span>
+                {% endif %}
+            {% endif %}
         {% endif %}
     </div>
 {% endblock body %}

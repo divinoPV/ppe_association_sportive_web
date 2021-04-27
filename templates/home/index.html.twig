@@ -27,8 +27,8 @@
                         <div class="subgroup ec-subgroup eec-subgroup">
                         <span class="date ecs-date eecs-date">
                             <i class="far fa-calendar-plus"></i>
-                            {% set debut = event.debuterLe|date("m F Y") %}
-                            {% set fin = event.finirLe|date("m F Y") %}
+                            {% set debut = event.debuterLe|date("d M Y") %}
+                            {% set fin = event.finirLe|date("d M Y") %}
                             {{ debut }}
                             {% if debut != fin %}
                                 au {{ fin }}

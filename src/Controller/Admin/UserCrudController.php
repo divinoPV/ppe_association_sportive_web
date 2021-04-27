@@ -69,7 +69,7 @@ class UserCrudController extends AbstractCrudController implements EventSubscrib
                 ->onlyOnForms()
                 ->setFormType(PasswordType::class),
             yield BooleanField::new('mdpOublier'),
-            yield BooleanField::new('status')->setCustomOptions(['disabled' => true]),
+            yield BooleanField::new('status'),
         ];
     }
 

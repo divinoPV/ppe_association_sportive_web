@@ -18,6 +18,10 @@ class HomeController extends AbstractController
      */
     public function index(EntityManagerInterface $manager): Response
     {
+        if ($this->getUser() === null) {
+            return $this->redirectToRoute('login');
+        }
+
         $events = $manager
             ->getRepository(Evenement::class)
             ->lastEvenements();

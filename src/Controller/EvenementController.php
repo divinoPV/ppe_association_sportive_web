@@ -123,12 +123,13 @@ final class EvenementController extends AbstractController
             ->getRepository(Inscription::class)
             ->findOneBy(["evenement" => $id, "utilisateur" => $user->getId()]);
 
-        if ($event->getCategorie()->getNom() !== $user->getCategorie()->getNom() or
-            in_array(User::ROLE_ADMIN, $user->getRoles()) or
-            $event->getActif() === false or
-            $event->getNombrePlaces() <= 0
-        )
+        if (($event->getCategorie()->getNom() !== $user->getCategorie()->getNom()) ||
+            (in_array(User::ROLE_ADMIN, $user->getRoles())) ||
+            ($event->getActif() === false) ||
+            ($event->getNombrePlaces()) <= 0
+        ){
             $inscNotPermited = true;
+        }
 
         !empty($hasRegister) ? $hasRegister = true : $hasRegister = false;
 

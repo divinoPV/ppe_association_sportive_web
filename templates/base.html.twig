@@ -60,7 +60,7 @@
                     {% endif %}
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li>
-                            <a href="{{ path("profil", { 'id' : app.user.id }) }}">Profile</a>
+                            <a href="{{ path("profile", { 'id' : app.user.id }) }}">Profile</a>
                         </li>
                     {% endif %}
                 </ul>

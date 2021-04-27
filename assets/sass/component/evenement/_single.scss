@@ -4,4 +4,24 @@
 
 .footer-single {
     margin-top: 55px;
+
+    &-event {
+        .span-information {
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .end {
+            background-color: $important;
+        }
+
+        .current {
+            background-color: $current;
+        }
+
+        .valide {
+            background-color: #1ea471;
+        }
+    }
 }

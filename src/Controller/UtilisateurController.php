@@ -15,10 +15,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UtilisateurController extends AbstractController
 {
     /**
-     * @Route("/user/{id}", name="profil")
+     * @Route("/user/{id}", name="profile")
      */
     public function profil(User $user, Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager): Response
     {
+        if (($user !== $this->getUser()) || ($this->getUser() === null) ) {
+            return $this->redirectToRoute('home');
+        }
+
         $inscriptions = $this
             ->getDoctrine()
             ->getRepository(Inscription::class)
@@ -31,6 +35,7 @@ class UtilisateurController extends AbstractController
             if ($user->getPlainPassword()) {
                 $user->setPassword($encoder->encodePassword($user, $user->getPlainPassword()));
             }
+
             $user->setModifierLe(new \DateTime());
 
             $manager->persist($user);

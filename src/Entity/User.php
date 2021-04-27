@@ -34,7 +34,7 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(
-     *     message = "Veuillez saisir une valeur !"
+     *     message = "Veuillez saisir un mail !"
      * )
      * @Assert\Length(
      *     min=10,
@@ -61,6 +61,7 @@ class User implements UserInterface, Serializable
 
     /**
      * @var string|null
+     * @Assert\NotBlank(message="Veuillez saisir un mot de passe")
      * @Assert\Regex(
      *     pattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\p{P}\p{S}])([\p{P}\p{S}\w]{8,32})$/",
      *     message = "Votre mot de passe doit contenir un caractère spécial, une lettre minuscule, une majuscule, 8 caractères et 32 caractères maximum et un chiffre."
@@ -71,7 +72,7 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(
-     *     message = "Veuillez sélectionner une valeur !"
+     *     message = "Veuillez saisir un nom !"
      * )
      */
     private ?string $nom;
@@ -79,7 +80,7 @@ class User implements UserInterface, Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(
-     *     message = "Veuillez sélectionner une valeur !"
+     *     message = "Veuillez saisir un prénom !"
      * )
      */
     private ?string $prenom;
