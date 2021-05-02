@@ -41,7 +41,7 @@ class UtilisateurController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('profil',['id' => $user->getId()]);
+            return $this->redirectToRoute('profile',['id' => $user->getId()]);
         }
 
         return $this->render('user/index.html.twig', [

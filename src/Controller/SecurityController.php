@@ -57,7 +57,9 @@ class SecurityController extends AbstractController
 
         /** @var User $admin */
         $admin = $manager->getRepository(User::class)->getUserByRole('ROLE_ADMIN');
-        $form = $this->createForm(InscriptionType::class, $user);
+        $form = $this->createForm(InscriptionType::class, $user,[
+            'validation_groups' => ['Default','inscription'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
