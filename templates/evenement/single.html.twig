@@ -117,7 +117,8 @@
     <div class="footer footer-single footer-single-event">
         <a class="back back-single back-single-event"
            href="{{ path(template) }}">{% trans %}< Retour aux événements{% endtrans %}</a>
-        {% if fin < maintenant %}
+
+        {% if event.finirLe|date() < "now"|date() %}
             <span class="span-information end">L'événement est terminé</span>
         {% else %}
             {% if hasRegister == false %}
@@ -135,7 +136,7 @@
                     <span class="span-information valide">L'événement est complet</span>
                 {% endif %}
             {% else %}
-                {% if debut <= maintenant and fin >= maintenant %}
+                {% if event.debuterLe|date() <= "now"|date() and event.finirLe|date() >= "now"|date() %}
                     <span class="span-information current">L'événement est en cours</span>
                 {% else %}
                     <a class="{{ generateClass("button") }} button-unsubsribe"

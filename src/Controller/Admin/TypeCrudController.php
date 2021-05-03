@@ -65,6 +65,7 @@ class TypeCrudController extends AbstractCrudController implements EventSubscrib
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom', 'Nom du type'),
+            TextField::new('color', 'Nom de la couleur'),
         ];
     }
 

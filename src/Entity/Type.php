@@ -32,6 +32,7 @@ class Type
     private Collection $evenements;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir une couleur")
      * @ORM\Column(type="string", length=7)
      */
     private string $color;

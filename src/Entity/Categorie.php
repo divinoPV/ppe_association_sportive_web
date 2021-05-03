@@ -38,6 +38,7 @@ class Categorie
     private Collection $evenements;
 
     /**
+     * @Assert\NotBlank(message="Veuillez saisir une couleur")
      * @ORM\Column(type="string", length=7)
      */
     private string $color;
@@ -51,7 +52,7 @@ class Categorie
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

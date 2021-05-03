@@ -65,6 +65,7 @@ class CategorieCrudController extends AbstractCrudController implements EventSub
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom', 'Nom de la catégorie'),
+            TextField::new('color', 'Nom de la couleur'),
         ];
     }
 
