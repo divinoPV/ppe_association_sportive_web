@@ -25,25 +25,25 @@ class Evenement
     private ?int $id = null;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir un titre")
+     * @Assert\NotBlank(message="Veuillez saisir un titre", groups={"creation"})
      * @ORM\Column(type="string", length=256)
      */
     private string $nom;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir une description")
+     * @Assert\NotBlank(message="Veuillez saisir une description", groups={"creation"})
      * @ORM\Column(type="string", length=612)
      */
     private string $description;
 
     /**
-     * @Assert\NotNull()
+     * @Assert\NotNull(groups={"creation"})
      * @ORM\Column(type="datetime")
      */
     private DateTime $debuterLe;
 
     /**
-     * @Assert\NotNull()
+     * @Assert\NotNull(groups={"creation"})
      * @ORM\Column(type="datetime")
      */
     private DateTime $finirLe;
@@ -59,10 +59,11 @@ class Evenement
     private DateTime $modifierLe;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir un nombre entier positif.")
+     * @Assert\NotBlank(message="Veuillez saisir un nombre entier positif.", groups={"creation"})
      * @Assert\Regex(
      *     pattern = "/^\+?\d+$/",
-     *     message = "Veuillez saisir un nombre entier positif."
+     *     message = "Veuillez saisir un nombre entier positif.",
+     *     groups={"creation"}
      * )
      * @ORM\Column(type="integer")
      */

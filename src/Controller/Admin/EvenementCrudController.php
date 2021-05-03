@@ -50,7 +50,9 @@ class EvenementCrudController extends AbstractCrudController
             ->setTimezone('Europe/Paris')
             ->setPageTitle('index', 'Admin - Evenements')
             ->setPageTitle('edit', 'Admin - Editer Evenement')
-            ->setPageTitle('new', 'Admin - Ajouter Evenement');
+            ->setPageTitle('new', 'Admin - Ajouter Evenement')
+            ->setFormOptions(["validation_groups" => ["creation"]])
+            ;
     }
 
     public function configureFields(string $pageName): iterable
