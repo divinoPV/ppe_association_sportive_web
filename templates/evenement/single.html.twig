@@ -136,7 +136,7 @@
                     <span class="span-information valide">L'événement est complet</span>
                 {% endif %}
             {% else %}
-                {% if event.debuterLe|date() <= "now"|date() or event.finirLe|date() >= "now"|date() %}
+                {% if event.debuterLe|date() <= "now"|date() or event.finirLe|date() == "now"|date() %}
                     <span class="span-information current">L'événement est en cours</span>
                 {% else %}
                     <a class="{{ generateClass("button") }} button-unsubsribe"
